@@ -1,0 +1,41 @@
+name: InfiniteFunProject
+version: '${project.version}'
+main: survivaltweaks.infinitefunproject.InfiniteFunProject
+api-version: 1.20
+commands:
+  setday:
+    description: Sets the current day
+    usage: /setday <day number>
+  spawn:
+    description: Teleports you to your bed spawn location
+    usage: /spawn
+  items:
+    description: Shows all custom items added with the ability to give them to yourself
+    usage: /items <page>
+  setmodifier:
+    description: Sets the world modifier
+    usage: /setmodifier <modifier name>
+  event:
+    description: Triggers a random event
+    usage: /event
+  anomaly:
+    description: Triggers an anomaly
+    usage: /anomaly
+  settimer:
+    description: Sets a timer's value
+    usage: /settimer <m/e> <value>
+  spawnchampion:
+    description: Spawns a champion of a mob
+    usage: /spawnchampion <entity_type> (Must be a monster)
+  removemonsters:
+    description: Removes all monsters currently alive
+    usage: /removemonsters
+  addbonusmodifier:
+    description: Adds an active bonus modifier
+    usage: /addbonusmodifier <modifier name>
+  modifier:
+    description: Picks a new world modifier or set of modifiers
+    usage: /modifier
+  removechallenges:
+    description: Deactivates all challenges
+    usage: /removechallenges
