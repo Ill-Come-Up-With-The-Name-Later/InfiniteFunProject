@@ -15,6 +15,13 @@ import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
 public class SpawnCrystal implements Listener {
 
+    /**
+     * Spawn the special crystal
+     * periodically and set
+     * it to attack.
+     *
+     * @param event: Crystal spawning
+     */
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
         Entity spawned = event.getEntity();
@@ -35,7 +42,7 @@ public class SpawnCrystal implements Listener {
                         double y = dragon.getWorld().getEnderDragonBattle().getEndPortalLocation().getY() + 5;
                         double z = dragon.getWorld().getEnderDragonBattle().getEndPortalLocation().getZ() + 0.5;
 
-                        EnderCrystal crystal = (EnderCrystal) dragon.getWorld().spawnEntity(new Location(dragon.getWorld(), x, y, z), EntityType.ENDER_CRYSTAL);
+                        EnderCrystal crystal = (EnderCrystal) dragon.getWorld().spawnEntity(new Location(dragon.getWorld(), x, y, z), EntityType.END_CRYSTAL);
                         crystal.setShowingBottom(false);
 
                         for(Player player : Bukkit.getOnlinePlayers()) {
@@ -52,7 +59,12 @@ public class SpawnCrystal implements Listener {
     }
 }
 
+/**
+ * Sets an ender crystal
+ * to attack the player
+ */
 class AttackValue implements MetadataValue {
+
     @Override
     public Object value() {
         return "Attacker";

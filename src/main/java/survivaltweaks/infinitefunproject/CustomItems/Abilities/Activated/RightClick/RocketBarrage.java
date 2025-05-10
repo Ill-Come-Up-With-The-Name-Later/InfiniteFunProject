@@ -23,10 +23,10 @@ public class RocketBarrage implements ActivatedAbility {
     public void activate(Player player) {
         for(int i = 1; i < 100; i++) {
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
-                drawCircle(player.getLocation(), radius, Particle.CRIT_MAGIC, 90);
+                drawCircle(player.getLocation(), radius, Particle.ENCHANTED_HIT, 90);
                 drawCircle(player.getLocation(), radius, Particle.CRIT, 90);
-                drawCircle(player.getLocation(), radius, Particle.SPELL_WITCH, 90);
-                drawCircle(player.getLocation(), radius, Particle.SMOKE_NORMAL, 90);
+                drawCircle(player.getLocation(), radius, Particle.WITCH, 90);
+                drawCircle(player.getLocation(), radius, Particle.SMOKE, 90);
 
                 Arrow arrow = player.launchProjectile(Arrow.class);
                 arrow.setGravity(false);
@@ -53,8 +53,8 @@ public class RocketBarrage implements ActivatedAbility {
                             return;
                         }
 
-                        arrow.getLocation().getWorld().spawnParticle(Particle.SMOKE_NORMAL, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
-                        arrow.getLocation().getWorld().spawnParticle(Particle.FIREWORKS_SPARK, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
+                        arrow.getLocation().getWorld().spawnParticle(Particle.SMOKE, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
+                        arrow.getLocation().getWorld().spawnParticle(Particle.FIREWORK, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
                         arrow.getLocation().getWorld().spawnParticle(Particle.CRIT, arrow.getLocation(), 5, 0.1, 0.1, 0.1, 0.02);
                     }
                 }.runTaskTimer(InfiniteFunProject.plugin, 0, 1);

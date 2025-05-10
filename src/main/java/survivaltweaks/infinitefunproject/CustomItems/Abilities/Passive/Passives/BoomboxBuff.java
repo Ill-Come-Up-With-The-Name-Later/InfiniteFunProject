@@ -24,10 +24,10 @@ public class BoomboxBuff implements Passive {
         if(item.hasItemMeta()) {
             if(item.getItemMeta().getDisplayName().equals(ItemManager.boombox.getItemMeta().getDisplayName())) {
                 drawCircle(player.getLocation(), 6, Particle.NOTE, 90);
-                drawCircle(player.getLocation(), 6, Particle.VILLAGER_HAPPY, 90);
+                drawCircle(player.getLocation(), 6, Particle.HAPPY_VILLAGER, 90);
 
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 80, 0, false, false, false));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 80, 0, false, false, false));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 80, 0, false, false, false));
 
                 ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(player, 6);
 
@@ -36,7 +36,7 @@ public class BoomboxBuff implements Passive {
                         Player other = (Player) entity;
 
                         other.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 80, 0, false, false, false));
-                        other.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 80, 0, false, false, false));
+                        other.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 80, 0, false, false, false));
                     }
                 }
 

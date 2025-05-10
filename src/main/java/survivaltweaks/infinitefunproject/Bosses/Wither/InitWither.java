@@ -1,10 +1,7 @@
 package survivaltweaks.infinitefunproject.Bosses.Wither;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Wither;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 import survivaltweaks.infinitefunproject.Bosses.Wither.Attacks.WitherAttacks;
 import survivaltweaks.infinitefunproject.Bosses.Wither.Attacks.WitherRebirth;
@@ -13,6 +10,9 @@ import survivaltweaks.infinitefunproject.Bosses.Wither.Attacks.WitherUltimateAtt
 
 public class InitWither {
 
+    /**
+     * Establish event listeners
+     */
     public static void init() {
         Bukkit.getServer().getPluginManager().registerEvents(new WitherAttacks(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new WitherRebirth(), InfiniteFunProject.plugin);
@@ -21,6 +21,10 @@ public class InitWither {
         Bukkit.getServer().getPluginManager().registerEvents(new WitherUltimateAttack(), InfiniteFunProject.plugin);
     }
 
+    /**
+     * Set enemy as wither spawn
+     * @param entity: An entity
+     */
     public static void setWitherSpawn(LivingEntity entity) {
         entity.setMetadata("WitherSpawn", new WitherSpawn());
     }

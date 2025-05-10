@@ -18,7 +18,7 @@ public class SpiderSwordRecipe {
 
         ItemStack spiderEyes = new ItemStack(Material.SPIDER_EYE, 2);
 
-        recipe.setIngredient('E', spiderEyes.getData());
+        recipe.setIngredient('E', spiderEyes);
         recipe.setIngredient('I', Material.IRON_SWORD);
 
         Bukkit.getServer().addRecipe(recipe);

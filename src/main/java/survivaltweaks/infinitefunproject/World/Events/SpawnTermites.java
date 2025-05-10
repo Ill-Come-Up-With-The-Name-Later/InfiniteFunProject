@@ -13,7 +13,6 @@ import java.util.Random;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.color;
 import static survivaltweaks.infinitefunproject.Mobs.MobInit.setNoLevel;
 
-
 public class SpawnTermites implements Listener {
 
     @EventHandler

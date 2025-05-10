@@ -20,6 +20,11 @@ import static survivaltweaks.infinitefunproject.InfiniteFunProject.*;
 
 public class AttackPlayers implements Listener {
 
+    /**
+     * Special central crystal creation
+     *
+     * @param event: Entity spawn event
+     */
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
         Entity spawn = event.getEntity();
@@ -28,6 +33,7 @@ public class AttackPlayers implements Listener {
             EnderCrystal crystal = (EnderCrystal) spawn;
 
             new BukkitRunnable() {
+
                 @Override
                 public void run() {
                     if(crystal.isDead()) {
@@ -35,9 +41,9 @@ public class AttackPlayers implements Listener {
                     }
 
                     if(crystal.hasMetadata("Attacker")) {
-                        drawCircle(crystal.getLocation().subtract(new Vector(0, 4, 0)), 8.1, Particle.CRIT_MAGIC, 90);
+                        drawCircle(crystal.getLocation().subtract(new Vector(0, 4, 0)), 8.1, Particle.ENCHANTED_HIT, 90);
 
-                        drawCircle(crystal.getLocation().subtract(new Vector(0, 4, 0)), 26.3, Particle.SPELL_WITCH, 180);
+                        drawCircle(crystal.getLocation().subtract(new Vector(0, 4, 0)), 26.3, Particle.WITCH, 180);
                         drawCircle(crystal.getLocation().subtract(new Vector(0, 4, 0)), 26.3, Particle.DRAGON_BREATH, 180);
                     }
                 }
@@ -47,12 +53,14 @@ public class AttackPlayers implements Listener {
                 if(crystal.hasMetadata("Attacker")) {
                     crystal.setGlowing(true);
                     new BukkitRunnable() {
+
                         @Override
                         public void run() {
                             if(crystal.isDead()) {
                                 cancel();
                                 return;
                             }
+
                             ArrayList<Entity> entities = (ArrayList<Entity>) circularNearbyEntities(crystal, 26);
 
                             for(Entity entity : entities) {
@@ -63,7 +71,7 @@ public class AttackPlayers implements Listener {
                                     if(distanceBetween(player.getLocation().toVector(), crystal.getLocation().toVector()) > 8) {
                                         crystal.setBeamTarget(loc);
                                         player.damage(4, crystal);
-                                        drawCircle(player.getLocation().add(new Vector(0, 1, 0)), 1.4, Particle.CRIT_MAGIC, 90);
+                                        drawCircle(player.getLocation().add(new Vector(0, 1, 0)), 1.4, Particle.ENCHANTED_HIT, 90);
                                     }
                                     Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> crystal.setBeamTarget(null), 10);
                                 }

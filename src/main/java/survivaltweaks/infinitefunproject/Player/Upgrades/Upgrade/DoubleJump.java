@@ -12,14 +12,12 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.util.Vector;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.PassiveAbility;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.TriggeredAbility;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 import survivaltweaks.infinitefunproject.Player.Upgrades.Metadata.DoubleJumpMeta;
 import survivaltweaks.infinitefunproject.Player.Upgrades.PlayerUpgrade;
 
 import static survivaltweaks.infinitefunproject.CustomItems.Abilities.InitAbilities.hasCooldown;
-import static survivaltweaks.infinitefunproject.CustomItems.Abilities.InitAbilities.setCooldown;
 import static survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.TriggeredAbility.triggerAbility;
 import static survivaltweaks.infinitefunproject.Player.Upgrades.InitUpgrades.getUpgradeLevel;
 

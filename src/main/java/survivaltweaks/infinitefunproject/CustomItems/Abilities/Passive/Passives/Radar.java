@@ -24,7 +24,7 @@ public class Radar implements Passive {
             int finalI = i;
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 ArrayList<Entity> entities = (ArrayList<Entity>) circularNearbyEntities(player, finalI);
-                drawCircle(player.getLocation(), finalI, Particle.CRIT_MAGIC, 90);
+                drawCircle(player.getLocation(), finalI, Particle.ENCHANTED_HIT, 90);
 
                 for(Entity entity : entities) {
                     if(entity instanceof LivingEntity && !entity.equals(player)) {

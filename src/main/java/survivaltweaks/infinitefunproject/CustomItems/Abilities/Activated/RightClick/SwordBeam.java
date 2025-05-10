@@ -13,12 +13,20 @@ import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
 import java.util.ArrayList;
 
+import static survivaltweaks.infinitefunproject.InfiniteFunProject.addProjectileTrail;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.circularNearbyEntities;
 
 public class SwordBeam implements ActivatedAbility {
 
     @Override
     public void activate(Player player) {
+        ArrayList<Particle> swordParticles = new ArrayList<>() {
+            {
+                add(Particle.SWEEP_ATTACK);
+                add(Particle.ENCHANTED_HIT);
+            }
+        };
+
         SpectralArrow arrow = player.launchProjectile(SpectralArrow.class);
         arrow.setVisibleByDefault(false);
         arrow.setVelocity(arrow.getVelocity().normalize().multiply(8));
@@ -29,6 +37,8 @@ public class SwordBeam implements ActivatedAbility {
 
         arrow.setMetadata("RemoveOnGround", new RemoveOnGroundMeta());
         arrow.setMetadata("PierceShield", new PierceShieldMeta());
+
+        addProjectileTrail(arrow, swordParticles);
 
         new BukkitRunnable() {
 
@@ -52,9 +62,6 @@ public class SwordBeam implements ActivatedAbility {
                         living.damage(30, (Entity) arrow.getShooter());
                     }
                 }
-
-                arrow.getLocation().getWorld().spawnParticle(Particle.SWEEP_ATTACK, arrow.getLocation(), 2, 0.1, 0.1, 0.1, 0.02);
-                arrow.getLocation().getWorld().spawnParticle(Particle.CRIT_MAGIC, arrow.getLocation(), 3, 0.1, 0.1, 0.1, 0.02);
             }
         }.runTaskTimer(InfiniteFunProject.plugin, 0, 1);
     }

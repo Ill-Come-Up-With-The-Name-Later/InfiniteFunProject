@@ -15,7 +15,7 @@ public class BerserkSwordRecipe {
                      " I ",
                      " B ");
 
-        recipe.setIngredient('B', ItemManager.weaponHandle.getData());
+        recipe.setIngredient('B', ItemManager.weaponHandle);
         recipe.setIngredient('I', Material.IRON_BLOCK);
 
         Bukkit.getServer().addRecipe(recipe);

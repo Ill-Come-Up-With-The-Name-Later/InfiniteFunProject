@@ -3,7 +3,6 @@ package survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.Passives
 import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.entity.AbstractArrow;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -16,6 +15,10 @@ import survivaltweaks.infinitefunproject.CustomItems.Metadata.ExplosiveMeta;
 import survivaltweaks.infinitefunproject.CustomItems.Metadata.RemoveOnGroundMeta;
 import survivaltweaks.infinitefunproject.CustomItems.Metadata.SeekingMetadata;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
+
+import java.util.ArrayList;
+
+import static survivaltweaks.infinitefunproject.InfiniteFunProject.addProjectileTrail;
 
 public class CallistoArrows implements Passive, Listener {
 
@@ -62,17 +65,6 @@ public class CallistoArrows implements Passive, Listener {
                     arrow.remove();
                 }
             }, 199);
-
-            Bukkit.getScheduler().runTaskTimer(InfiniteFunProject.plugin, () -> {
-                if(!projectile.isDead() && !projectile.isOnGround()) {
-                    projectile.getWorld().spawnParticle(Particle.SPELL_WITCH, projectile.getLocation(),
-                            4, 0.2, 0.2, 0.2, 0.05);
-                    projectile.getWorld().spawnParticle(Particle.SMOKE_NORMAL, projectile.getLocation(),
-                            4, 0.2, 0.2, 0.2, 0.05);
-                    projectile.getWorld().spawnParticle(Particle.CRIT_MAGIC, projectile.getLocation(),
-                            4, 0.2, 0.2, 0.2, 0.05);
-                }
-            }, 1, 1);
         }
     }
 }

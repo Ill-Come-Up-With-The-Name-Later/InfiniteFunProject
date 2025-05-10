@@ -2,7 +2,7 @@ package survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RightC
 
 import org.bukkit.entity.Player;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.ActivatedAbility;
-import survivaltweaks.infinitefunproject.Player.ChallengeMode.UI.ChallengeModeUI;
+import survivaltweaks.infinitefunproject.ChallengeMode.UI.ChallengeModeUI;
 
 public class BrowseChallenges implements ActivatedAbility {
 

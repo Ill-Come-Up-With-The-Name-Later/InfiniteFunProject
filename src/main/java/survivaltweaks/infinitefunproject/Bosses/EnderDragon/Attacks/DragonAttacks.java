@@ -26,6 +26,12 @@ import static survivaltweaks.infinitefunproject.Mobs.MobInit.setNoLevel;
 
 public class DragonAttacks implements Listener {
 
+    /**
+     * Trigger Ender Dragon's attacks when
+     * attacked
+     *
+     * @param event: Entity damaged event
+     */
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
         Entity damaged = event.getEntity();
@@ -39,6 +45,12 @@ public class DragonAttacks implements Listener {
         }
     }
 
+    /**
+     * Trigger Ender Dragon's attacks when
+     * phase changes
+     *
+     * @param event: Dragon changing phase
+     */
     @EventHandler
     public void onPhaseChange(EnderDragonChangePhaseEvent event) {
         EnderDragon dragon = event.getEntity();
@@ -48,6 +60,12 @@ public class DragonAttacks implements Listener {
         }
     }
 
+    /**
+     * Trigger Ender Dragon's attacks when
+     * crystal is destroyed
+     *
+     * @param event: Entity explode event
+     */
     @EventHandler
     public void onCrystalDestruction(EntityExplodeEvent event) {
         Entity dead = event.getEntity();
@@ -69,6 +87,11 @@ public class DragonAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon pick attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void pickAttack(EnderDragon dragon) {
         int attack = new Random().nextInt(0, 11);
 
@@ -152,6 +175,11 @@ public class DragonAttacks implements Listener {
         }, 35);
     }
 
+    /**
+     * Dragon charge attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void chargePlayer(EnderDragon dragon) {
         ArrayList<Player> endPlayers = (ArrayList<Player>) dragon.getWorld().getPlayers();
 
@@ -182,6 +210,11 @@ public class DragonAttacks implements Listener {
         }.runTaskTimer(plugin, 1, 1);
     }
 
+    /**
+     * Dragon spawn phantom attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void summonPhantom(EnderDragon dragon) {
         Phantom phantom = dragon.getWorld().spawn(new Location(dragon.getWorld(), 0, 75, 0), Phantom.class);
         setNoLevel(phantom);
@@ -189,10 +222,15 @@ public class DragonAttacks implements Listener {
         phantom.setSize(9);
         phantom.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(40);
         phantom.setHealth(phantom.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-        phantom.getWorld().spawnParticle(Particle.SMOKE_LARGE, phantom.getLocation(), 500, 6, 3, 6, 0.3);
+        phantom.getWorld().spawnParticle(Particle.SMOKE, phantom.getLocation(), 500, 6, 3, 6, 0.3);
         phantom.setTarget(dragon.getTarget());
     }
 
+    /**
+     * Dragon fireball rain attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void fireballRain(EnderDragon dragon) {
         for(int i = 0; i < 10; i++) {
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
@@ -212,6 +250,11 @@ public class DragonAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon slam attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void bodySlam(EnderDragon dragon) {
         Collection<? extends Player> players = Bukkit.getOnlinePlayers();
         ArrayList<Player> endPlayers = new ArrayList<>();
@@ -227,6 +270,11 @@ public class DragonAttacks implements Listener {
         dragon.setVelocity(new Vector(0, -4, 0));
     }
 
+    /**
+     * Dragon lightning strike attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void lightningAttack(EnderDragon dragon) {
         dragon.getWorld().strikeLightning(dragon.getEyeLocation());
 
@@ -239,6 +287,11 @@ public class DragonAttacks implements Listener {
         }, 35);
     }
 
+    /**
+     * Dragon bites attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void biteAttack(EnderDragon dragon) {
         ArrayList<Player> endPlayers = (ArrayList<Player>) dragon.getWorld().getPlayers();
 
@@ -249,12 +302,17 @@ public class DragonAttacks implements Listener {
         player.addPotionEffect(PotionEffectType.POISON.createEffect(100, 0));
 
         player.getWorld().spawnParticle(Particle.DRAGON_BREATH, player.getLocation().add(0, 0.3, 0), 30, 0.3, 0.1, 0.3, 0.04);
-        player.getWorld().spawnParticle(Particle.SMOKE_NORMAL, player.getLocation().add(0, 0.3, 0), 30, 0.3, 0.1, 0.3, 0.04);
-        player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation().add(0, 0.3, 0), 30, 0.3, 0.1, 0.3, 0.04);
+        player.getWorld().spawnParticle(Particle.SMOKE, player.getLocation().add(0, 0.3, 0), 30, 0.3, 0.1, 0.3, 0.04);
+        player.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, player.getLocation().add(0, 0.3, 0), 30, 0.3, 0.1, 0.3, 0.04);
 
         dragon.setPhase(EnderDragon.Phase.CIRCLING);
     }
 
+    /**
+     * Dragon levitate players attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void levitateAttack(EnderDragon dragon) {
         Collection<? extends Player> players = Bukkit.getOnlinePlayers();
 
@@ -266,6 +324,11 @@ public class DragonAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon spawn disciple attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void spawnDisciple(EnderDragon dragon) {
         Collection<? extends Player> players = Bukkit.getOnlinePlayers();
 
@@ -295,6 +358,11 @@ public class DragonAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon spawn shulker attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void shulkerSpawn(EnderDragon dragon) {
         Collection<? extends Player> players = Bukkit.getOnlinePlayers();
 
@@ -308,6 +376,11 @@ public class DragonAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon shoot fireball attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void fireball(EnderDragon dragon) {
         Collection<? extends Player> players = dragon.getWorld().getPlayers();
 
@@ -320,16 +393,21 @@ public class DragonAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon noxious blast attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void noxiousBlast(EnderDragon dragon) {
         dragon.getWorld().spawnParticle(Particle.DRAGON_BREATH, dragon.getLocation(), 500, 6, 3, 6, 0.3);
-        dragon.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, dragon.getLocation(), 1, 6, 3, 6, 1);
+        dragon.getWorld().spawnParticle(Particle.EXPLOSION_EMITTER, dragon.getLocation(), 1, 6, 3, 6, 1);
         Collection<? extends Player> players = Bukkit.getOnlinePlayers();
 
         for(Player player : players) {
             if(player.getWorld().equals(dragon.getWorld())) {
                 player.getWorld().spawnParticle(Particle.DRAGON_BREATH, player.getLocation(), 30, 0.3, 0.3, 0.3, 0.3);
                 player.addPotionEffect(PotionEffectType.WEAKNESS.createEffect(320, 1));
-                player.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
+                player.addPotionEffect(PotionEffectType.NAUSEA.createEffect(200, 1));
             }
         }
     }

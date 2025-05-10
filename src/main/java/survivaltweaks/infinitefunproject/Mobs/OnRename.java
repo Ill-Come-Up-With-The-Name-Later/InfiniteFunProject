@@ -11,6 +11,8 @@ import survivaltweaks.infinitefunproject.InfiniteFunProject;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.color;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.fixCaps;
 
+
+@Deprecated
 public class OnRename implements Listener {
 
     @EventHandler

@@ -2,14 +2,12 @@ package survivaltweaks.infinitefunproject.Mobs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Ageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import survivaltweaks.infinitefunproject.Bosses.EnderDragon.InitDragon;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
@@ -17,12 +15,13 @@ import java.util.ArrayList;
 
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.color;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.fixCaps;
+import static survivaltweaks.infinitefunproject.Periodic.Events.Anomalies.MakePlayersInvincible.grantInvulnerability;
 
 public class OnSpawn implements Listener {
 
     public static ArrayList<EntityType> levelers = new ArrayList<>();
 
-    public static int maxLevel = 150;
+    public static int maxLevel = 200;
 
     public static void createList() {
         levelers.add(EntityType.BLAZE);
@@ -58,18 +57,25 @@ public class OnSpawn implements Listener {
         levelers.add(EntityType.BREEZE);
         levelers.add(EntityType.ELDER_GUARDIAN);
         levelers.add(EntityType.GUARDIAN);
-        // TODO: ADD BOGGED WHEN IT IS RELEASED
+        levelers.add(EntityType.BOGGED);
     }
 
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
         Entity e = event.getEntity();
 
+        if(e instanceof LivingEntity) {
+            LivingEntity livingEntity = (LivingEntity) e;
+
+            grantInvulnerability(livingEntity, 6);
+        }
+
         int finalLevel = getLevel(e);
         Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
-            if(levelers.contains(e.getType()) && e instanceof LivingEntity && !e.hasMetadata("NoLevel") && !e.hasMetadata("WitherSpawn")) {
+            if(e instanceof Enemy && !(e instanceof Boss) && !e.hasMetadata("NoLevel") && !e.hasMetadata("WitherSpawn")) {
                 LivingEntity entity = (LivingEntity) e;
-                entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + (finalLevel * 3));
+                entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue((entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() * 0.8)
+                        + (finalLevel * 3));
                 entity.setHealth(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                 entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).
                         setBaseValue(entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue() * 1 + (finalLevel * 0.75));
@@ -82,23 +88,15 @@ public class OnSpawn implements Listener {
 
                 if(InitDragon.dragonDead()) {
                     entity.setCustomName(null);
-                    entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() * 1.75);
+                    entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() * 1.66);
                     entity.setHealth(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                     entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).
                             setBaseValue(entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue() * 1.5);
                     entity.setCustomName(color("&6[&rLevel &b" + finalLevel + "&6] &e" + fixCaps(e.getType().toString())));
                 }
 
-                if(!InitDragon.dragonDead()) {
-                    if(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() >
-                            entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + finalLevel) {
-                        entity.remove();
-                    }
-                } else {
-                    if(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() >
-                            (entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + finalLevel) * 1.75) {
-                        entity.remove();
-                    }
+                if(entity.getHealth() > 2500) {
+                    entity.remove();
                 }
 
                 Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
@@ -106,11 +104,21 @@ public class OnSpawn implements Listener {
                         Ageable ageable = (Ageable) entity;
                         if(!ageable.isAdult()) {
                             ageable.getAttribute(Attribute.GENERIC_MAX_HEALTH).
-                                    setBaseValue(ageable.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.8);
+                                    setBaseValue(ageable.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.75);
                             ageable.setHealth(ageable.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
                         }
                     }
                 }, 1);
+
+                new BukkitRunnable() {
+
+                    @Override
+                    public void run() {
+                        if(entity.getHealth() <= 0) {
+                            entity.remove();
+                        }
+                    }
+                }.runTaskTimer(InfiniteFunProject.plugin, 1, 1);
             }
         }, 2);
     }

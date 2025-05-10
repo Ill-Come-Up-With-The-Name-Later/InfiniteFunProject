@@ -17,7 +17,7 @@ public class Vinestaff {
 
         recipe.setIngredient('N', Material.TORCHFLOWER_SEEDS);
         recipe.setIngredient('A', Material.SPORE_BLOSSOM);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('S', Material.DIAMOND_HOE);
 
         Bukkit.getServer().addRecipe(recipe);

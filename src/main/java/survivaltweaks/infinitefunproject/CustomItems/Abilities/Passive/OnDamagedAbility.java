@@ -4,7 +4,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Ability;
+import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.OnDamaged.FireThorns;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.OnDamaged.RetaliationRush;
+import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.OnDamaged.SoulHarvest;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,8 @@ public enum OnDamagedAbility implements Ability {
 
     RETALIATION_RUSH(new RetaliationRush(), "Retaliatory Rush", new RetaliationRush().getDescription(),
             new RetaliationRush().getCooldown()),
+    SOUL_HARVEST(new SoulHarvest(), "Soul Harvest", new SoulHarvest().getDescription(), new SoulHarvest().getCooldown()),
+    FLAMING_THORN(new FireThorns(), "Flaming Thorns", new FireThorns().getDescription(), new FireThorns().getCooldown()),
     ;
 
     private final OnAttackedAbility ability;
@@ -113,10 +117,6 @@ public enum OnDamagedAbility implements Ability {
             return;
         }
 
-        if(!item.hasItemMeta()) {
-            return;
-        }
-
         ArrayList<String> lore = new ArrayList<>();
         ItemMeta meta = item.getItemMeta();
 
@@ -137,7 +137,7 @@ public enum OnDamagedAbility implements Ability {
             lore.add(color("&7- &eCooldown&7: &b" + String.format("%.2f", ability.getCooldown() / 20) + " Second(s)"));
         }
         if(!ability.getAbility().cooldownModifiable() && ability.getCooldown() > 0) {
-            lore.add(color("&7- &cNon-Reducible Cooldown"));
+            lore.add(color("&7- &cNot affected by modifier."));
         }
         if(ability.getAbility().oneTimeUse()) {
             lore.add(color("&7- &cOne Time Use"));

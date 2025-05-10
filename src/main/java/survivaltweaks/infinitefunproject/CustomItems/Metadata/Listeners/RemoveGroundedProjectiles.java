@@ -1,6 +1,7 @@
 package survivaltweaks.infinitefunproject.CustomItems.Metadata.Listeners;
 
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,6 +24,12 @@ public class RemoveGroundedProjectiles implements Listener {
                     
                     if(arrow.getPierceLevel() < 2) {
                         projectile.remove();
+
+                        if(!arrow.getPassengers().isEmpty()) {
+                            for(Entity passenger : arrow.getPassengers()) {
+                                passenger.remove();
+                            }
+                        }
                     }
                 }
             }

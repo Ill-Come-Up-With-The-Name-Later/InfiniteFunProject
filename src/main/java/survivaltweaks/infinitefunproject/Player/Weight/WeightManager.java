@@ -62,6 +62,9 @@ public class WeightManager {
             if(translationKeyContains(item, "nugget")) {
                 weight -= 8 * Math.max(item.getAmount() / 5, 1);
             }
+            if(translationKeyContains(item, "mace")) {
+                weight += 27;
+            }
 
             for(Enchantment enchantment : item.getEnchantments().keySet()) {
                 weight += item.getEnchantmentLevel(enchantment);
@@ -91,41 +94,41 @@ public class WeightManager {
     public static void applyWeightEffects(Player player) {
         double weight = calculateWeight(player);
 
-        if(weight >= 350) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30, 0, false, false, false));
-        }
         if(weight >= 1000) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30, 1, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 30, 0, false, false, false));
         }
         if(weight >= 1750) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30, 2, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 30, 1, false, false, false));
         }
-        if(weight >= 2400) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30, 3, false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 30, 0, false, false, false));
+        if(weight >= 2500) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 30, 2, false, false, false));
         }
-        if(weight >= 3000) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30, 3, false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 30, 1, false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 30, 0, false, false, false));
+        if(weight >= 3500) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 30, 3, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, 30, 0, false, false, false));
         }
-        if(weight >= 4200) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30, 3, false, false, false));
+        if(weight >= 4800) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 30, 3, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, 30, 1, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 30, 0, false, false, false));
+        }
+        if(weight >= 6000) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 30, 3, false, false, false));
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 30, 2, false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 30, 1, false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 30, 0, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, 30, 1, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 30, 0, false, false, false));
         }
-        if(weight >= 5300) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30, 3, false, false, false));
+        if(weight >= 7200) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 30, 3, false, false, false));
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 30, 3, false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 30, 2, false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 30, 0, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, 30, 2, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 30, 0, false, false, false));
         }
-        if(weight >= 6500) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30, 4, false, false, false));
+        if(weight >= 8400) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 30, 4, false, false, false));
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 30, 4, false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 30, 4, false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 30, 0, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, 30, 4, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 30, 0, false, false, false));
         }
     }
 }

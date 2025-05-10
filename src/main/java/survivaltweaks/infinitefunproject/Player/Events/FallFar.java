@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 
 public class FallFar implements Listener {
 
@@ -20,8 +19,8 @@ public class FallFar implements Listener {
             float fallDist = player.getFallDistance();
 
             if(fallDist > 8 && !player.getWorld().getBlockAt(player.getLocation().subtract(0, 1, 0)).isEmpty()) {
-                player.addPotionEffect(PotionEffectType.SLOW.createEffect(400, 4));
-                player.addPotionEffect(PotionEffectType.JUMP.createEffect(400, 240));
+                player.addPotionEffect(PotionEffectType.SLOWNESS.createEffect(400, 4));
+                player.addPotionEffect(PotionEffectType.JUMP_BOOST.createEffect(400, 240));
                 player.sendMessage(ChatColor.RED + "You broke your leg!");
             }
 

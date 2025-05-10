@@ -20,6 +20,12 @@ import static survivaltweaks.infinitefunproject.InfiniteFunProject.plugin;
 
 public class CrystalCallHelp implements Listener {
 
+    /**
+     * Call dragon when player is
+     * near a crystal
+     *
+     * @param event: Entity spawn
+     */
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
         Entity entity = event.getEntity();
@@ -29,6 +35,7 @@ public class CrystalCallHelp implements Listener {
 
             if(!(crystal.hasMetadata("PlayerPlace") || crystal.hasMetadata("Attacker"))) {
                 new BukkitRunnable() {
+
                     @Override
                     public void run() {
                         if(crystal.isDead()) {

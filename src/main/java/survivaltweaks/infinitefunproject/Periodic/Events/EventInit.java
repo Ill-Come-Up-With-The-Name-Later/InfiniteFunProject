@@ -1,8 +1,8 @@
 package survivaltweaks.infinitefunproject.Periodic.Events;
 
+import org.bukkit.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -21,6 +21,7 @@ import java.util.Random;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.*;
 
 public class EventInit {
+
     private static final int[] countdown = { 240 };
     public static int delay = 240;
 
@@ -58,10 +59,19 @@ public class EventInit {
                     } else if(getCountdown()[0] > 10) {
                         events.setColor(BarColor.YELLOW);
                         events.setTitle(color("&eNext Event In: &r&l" + getCountdown()[0] + " &eSeconds"));
-                    } else {
+                    } else if(getCountdown()[0] > 5) {
                         events.setColor(BarColor.RED);
                         events.setTitle(color("&cNext Event In: &r&l" + getCountdown()[0] + " &cSeconds"));
+                    } else {
+                        if(getCountdown()[0] % 2 == 1) {
+                            events.setColor(BarColor.RED);
+                        } else {
+                            events.setColor(BarColor.WHITE);
+                        }
+
+                        events.setTitle(color("&cNext Event In: &r&l" + getCountdown()[0] + " &cSeconds"));
                     }
+
                     if(!visible.contains(player)) {
                         events.addPlayer(player);
                     }
@@ -75,7 +85,7 @@ public class EventInit {
     }
 
     public static void pickEvent() {
-        int random = new Random().nextInt(0, 18);
+        int random = new Random().nextInt(0, 19);
 
         if(WorldModInit.modifierActive(WorldModifier.LUCK_MANIPULATION)) {
             pickAnomaly();
@@ -140,11 +150,14 @@ public class EventInit {
             case 17:
                 pickAnomaly();
                 break;
+            case 18:
+                new GiveRandomSpecialItem().trigger();
+                break;
         }
     }
 
     public static void pickAnomaly() {
-        int anomaly = new Random().nextInt(0, 14);
+        int anomaly = new Random().nextInt(0, 15);
         Bukkit.spigot().broadcast(new TextComponent(ChatColor.LIGHT_PURPLE + "An anomaly has occurred!"));
 
         switch (anomaly) {
@@ -189,6 +202,9 @@ public class EventInit {
                 break;
             case 13:
                 new BonusModifiers().trigger();
+                break;
+            case 14:
+                new GiveSpecialItems().trigger();
                 break;
         }
     }

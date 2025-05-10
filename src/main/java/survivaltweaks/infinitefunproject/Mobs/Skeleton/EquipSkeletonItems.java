@@ -1,6 +1,7 @@
 package survivaltweaks.infinitefunproject.Mobs.Skeleton;
 
 import org.bukkit.Material;
+import org.bukkit.entity.AbstractSkeleton;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
@@ -15,8 +16,8 @@ public class EquipSkeletonItems implements Listener {
     public void onSpawn(EntitySpawnEvent event) {
         Entity entity = event.getEntity();
 
-        if(entity instanceof Skeleton) {
-            Skeleton skeleton = (Skeleton) entity;
+        if(entity instanceof AbstractSkeleton) {
+            AbstractSkeleton skeleton = (AbstractSkeleton) entity;
             skeleton.getEquipment().setItem(EquipmentSlot.HEAD, new ItemStack(Material.DIAMOND_HELMET));
             skeleton.getEquipment().setItem(EquipmentSlot.CHEST, new ItemStack(Material.IRON_CHESTPLATE));
             skeleton.getEquipment().setItem(EquipmentSlot.FEET, new ItemStack(Material.IRON_BOOTS));

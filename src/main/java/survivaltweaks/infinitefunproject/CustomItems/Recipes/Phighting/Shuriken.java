@@ -15,9 +15,9 @@ public class Shuriken {
                 "NCA",
                 " S ");
 
-        recipe.setIngredient('N', Material.SCUTE);
+        recipe.setIngredient('N', Material.TURTLE_SCUTE);
         recipe.setIngredient('A', Material.TORCHFLOWER_SEEDS);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('S', Material.FLINT);
 
         Bukkit.getServer().addRecipe(recipe);

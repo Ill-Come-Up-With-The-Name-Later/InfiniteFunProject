@@ -14,7 +14,7 @@ import static survivaltweaks.infinitefunproject.InfiniteFunProject.drawCircle;
 public class BerserkSword implements ActivatedAbility {
     @Override
     public void activate(Player player) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 300, 1, false, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 300, 1, false, false, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 0, false, false, false));
         giveCrits(player, 300);
 

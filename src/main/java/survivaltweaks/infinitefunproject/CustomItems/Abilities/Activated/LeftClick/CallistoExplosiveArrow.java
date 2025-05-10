@@ -10,8 +10,9 @@ public class CallistoExplosiveArrow implements ActivatedAbility {
 
     @Override
     public void activate(Player player) {
-        SpectralArrow arrow = player.launchProjectile(SpectralArrow.class, player.getLocation().getDirection().normalize().multiply(3));
-        arrow.setVelocity(arrow.getVelocity().multiply(4));
+        SpectralArrow arrow = player.launchProjectile(SpectralArrow.class);
+        //arrow.setVelocity(arrow.getVelocity().normalize().multiply(12));
+
         arrow.setMetadata("Explosive", new ExplosiveMeta(12, false, false));
         arrow.setMetadata("RemoveOnGround", new RemoveOnGroundMeta());
     }

@@ -10,6 +10,12 @@ import java.util.ArrayList;
 
 public class BlockDragonPerch implements Listener {
 
+    /**
+     * Prevent the dragon from landing and
+     * destroying the center crystal
+     *
+     * @param event: Dragon phase change
+     */
     @EventHandler
     public void onDragonPhaseChange(EnderDragonChangePhaseEvent event) {
         EnderDragon dragon = event.getEntity();

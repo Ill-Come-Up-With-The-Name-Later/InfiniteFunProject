@@ -10,11 +10,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import survivaltweaks.infinitefunproject.CustomItems.ItemManager;
-import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -48,7 +46,7 @@ public class AllChampions implements Listener {
                     if(living.isDead() && damager instanceof Player) {
                         Player player = (Player) damager;
 
-                        player.giveExp(175);
+                        player.giveExp(250, true);
                     }
                 }
             }
@@ -64,8 +62,8 @@ public class AllChampions implements Listener {
                 Monster m = (Monster) entity;
                 if(!m.hasMetadata("Champion")) {
                     if(!m.hasPotionEffect(PotionEffectType.SPEED)) {
-                        drawCircle(m.getLocation(), 1.5, Particle.CRIT_MAGIC, 90);
-                        m.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 300, 0, false, false, false));
+                        drawCircle(m.getLocation(), 1.5, Particle.ENCHANTED_HIT, 90);
+                        m.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 300, 0, false, false, false));
                         m.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 1, false, false, false));
                         m.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 300, 1, false, false, false));
                     }

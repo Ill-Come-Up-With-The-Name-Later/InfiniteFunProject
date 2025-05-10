@@ -24,8 +24,8 @@ public class Litigation implements ActivatedAbility {
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(player, radius);
 
-                drawCircle(player.getLocation(), radius, Particle.CRIT_MAGIC, 90);
-                drawCircle(player.getLocation(), radius, Particle.SPELL_WITCH, 90);
+                drawCircle(player.getLocation(), radius, Particle.ENCHANTED_HIT, 90);
+                drawCircle(player.getLocation(), radius, Particle.WITCH, 90);
                 drawCircle(player.getLocation(), radius, Particle.SWEEP_ATTACK, 45);
 
                 for(Entity entity : nearby) {

@@ -13,17 +13,21 @@ public class Tea implements ActivatedAbility {
     public void activate(Player player) {
         ArrayList<PotionEffectType> negativeEffects = new ArrayList<>();
         negativeEffects.add(PotionEffectType.BLINDNESS);
-        negativeEffects.add(PotionEffectType.SLOW_DIGGING);
-        negativeEffects.add(PotionEffectType.SLOW);
+        negativeEffects.add(PotionEffectType.MINING_FATIGUE);
+        negativeEffects.add(PotionEffectType.SLOWNESS);
         negativeEffects.add(PotionEffectType.HUNGER);
         negativeEffects.add(PotionEffectType.POISON);
         negativeEffects.add(PotionEffectType.WEAKNESS);
         negativeEffects.add(PotionEffectType.WITHER);
-        negativeEffects.add(PotionEffectType.CONFUSION);
+        negativeEffects.add(PotionEffectType.NAUSEA);
         negativeEffects.add(PotionEffectType.DARKNESS);
         negativeEffects.add(PotionEffectType.BAD_OMEN);
         negativeEffects.add(PotionEffectType.LEVITATION);
         negativeEffects.add(PotionEffectType.UNLUCK);
+        negativeEffects.add(PotionEffectType.WIND_CHARGED);
+        negativeEffects.add(PotionEffectType.OOZING);
+        negativeEffects.add(PotionEffectType.INFESTED);
+        negativeEffects.add(PotionEffectType.WEAVING);
 
         for(PotionEffect effect : player.getActivePotionEffects()) {
             if(negativeEffects.contains(effect.getType())) {

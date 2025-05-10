@@ -49,6 +49,21 @@ public enum RCAbility implements Ability {
     ETHERWARP(new Etherwarp(), "Ether Warp", new Etherwarp().getDescription(), new Etherwarp().getCooldown()),
     ENABLE_ONE_HIT_MODE(new EnableOneHitMode(), "Armageddon", new EnableOneHitMode().getDescription(), new EnableOneHitMode().getCooldown()),
     BROWSE_CHALLENGES(new BrowseChallenges(), "Browse", new BrowseChallenges().getDescription(), new BrowseChallenges().getCooldown()),
+    GRANT_INVULNERABILITY(new GrantInvulnerability(), "Salvation", new GrantInvulnerability().getDescription(),
+            new GrantInvulnerability().getCooldown()),
+    ELECTRIC_PULSE(new ElectricPulse(), "Static Pulse", new ElectricPulse().getDescription(), new ElectricPulse().getCooldown()),
+    SUPERNOVA(new Supernova(), "Supernova", new Supernova().getDescription(), new Supernova().getCooldown()),
+    SUPER_CRIT_POTION(new SuperCritSerum(), "Super Charge", new SuperCritSerum().getDescription(), new SuperCritSerum().getCooldown()),
+    CONTROL_ENEMIES(new ControlEnemies(), "Overtake the Mind", new ControlEnemies().getDescription(), new ControlEnemies().getCooldown()),
+    CURSE_ENEMY(new CurseEnemy(), "Targeted Curse", new CurseEnemy().getDescription(), new CurseEnemy().getCooldown()),
+    CRIT_POTION(new CritPotion(), "Crit Boost", new CritPotion().getDescription(), new CritPotion().getCooldown()),
+    SHOW_UNUSUALS(new ShowUnusuals(), "Show Unusuals", new ShowUnusuals().getDescription(), new ShowUnusuals().getCooldown()),
+    SELECT_UNUSUAL(new SetUnusual(), "Select Effect", new SetUnusual().getDescription(), new SetUnusual().getCooldown()),
+    UNBOX_WEARABLE(new UnboxArmor(), "Unbox Wearable", new UnboxArmor().getDescription(), new UnboxArmor().getCooldown()),
+    UNBOX_WEAPON(new UnboxWeapon(), "Unbox Weapon", new UnboxWeapon().getDescription(), new UnboxWeapon().getCooldown()),
+    UNBOX_CUSTOM_ITEM(new UnboxCustomItem(), "Unbox Special Item", new UnboxCustomItem().getDescription(), new UnboxCustomItem().getCooldown()),
+    TRIPLE_SHOT(new TripleShot(), "Tripe Shot", new TripleShot().getDescription(), new TripleShot().getCooldown()),
+    LAUNCH_NUKE(new LaunchNuke(), "Nuclear Launch", new LaunchNuke().getDescription(), new LaunchNuke().getCooldown()),
     ;
 
     private final ActivatedAbility ability;
@@ -148,10 +163,6 @@ public enum RCAbility implements Ability {
             return;
         }
 
-        if(!item.hasItemMeta()) {
-            return;
-        }
-
         ArrayList<String> lore = new ArrayList<>();
         ItemMeta meta = item.getItemMeta();
 
@@ -173,7 +184,7 @@ public enum RCAbility implements Ability {
         }
 
         if(!ability.getAbility().cooldownModifiable() && ability.getCooldown() > 0) {
-            lore.add(color("&7- &cNon-Reducible Cooldown"));
+            lore.add(color("&7- &cNot affected by modifier."));
         }
         if(ability.getAbility().oneTimeUse()) {
             lore.add(color("&7- &cOne Time Use"));

@@ -1,5 +1,6 @@
 package survivaltweaks.infinitefunproject.Bosses.Wither.Attacks;
 
+import org.bukkit.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -11,13 +12,17 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
-import survivaltweaks.infinitefunproject.Bosses.Wither.WitherSpawn;
 
-import static survivaltweaks.infinitefunproject.InfiniteFunProject.drawCircle;
 import static survivaltweaks.infinitefunproject.Bosses.Wither.InitWither.setWitherSpawn;
+import static survivaltweaks.infinitefunproject.InfiniteFunProject.drawExpandingCircle;
 
 public class WitherUltimateAttack implements Listener {
 
+    /**
+     * Wither ultimate attack loop
+     *
+     * @param event: Entity spawn event
+     */
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
         Entity entity = event.getEntity();
@@ -38,6 +43,11 @@ public class WitherUltimateAttack implements Listener {
         }
     }
 
+    /**
+     * Wither ultimate attack
+     *
+     * @param wither: The attacking Wither
+     */
     public void heartStopper(Wither wither) {
         Bukkit.spigot().broadcast(new TextComponent(ChatColor.DARK_RED + "The beating of all hearts ceases..."));
 
@@ -45,11 +55,11 @@ public class WitherUltimateAttack implements Listener {
             world.setGameRule(GameRule.NATURAL_REGENERATION, false);
         }
 
+        drawExpandingCircle(wither, 2, 19, 1, 15, Particle.DAMAGE_INDICATOR);
+
         for(int i = 1; i < 20; i++) {
             int finalI = i;
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
-                drawCircle(wither.getLocation(), finalI + 1, Particle.DAMAGE_INDICATOR, 90);
-
                 for(Entity entity : InfiniteFunProject.circularNearbyEntities(wither, finalI + 1)) {
                     if(entity instanceof LivingEntity) {
                         LivingEntity livingEntity = (LivingEntity) entity;

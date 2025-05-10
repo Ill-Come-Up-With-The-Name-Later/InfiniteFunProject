@@ -1,8 +1,8 @@
 package survivaltweaks.infinitefunproject.Periodic.WorldModifiers;
 
+import org.bukkit.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -18,6 +18,7 @@ import java.util.Random;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.*;
 
 public class WorldModInit {
+
     private static final int[] countdown = { 99999 };
     public static int delay = 500;
 
@@ -79,11 +80,21 @@ public class WorldModInit {
                         modifiers.setColor(BarColor.YELLOW);
                         modifiers.setTitle(color("&eNext Modifier In: &r&l" + getCountdown()[0] + " &eSeconds &r- &dCurrent&r: &d" +
                                 getModifierTitle()));
-                    } else {
+                    } else if(getCountdown()[0] > 5) {
                         modifiers.setColor(BarColor.RED);
                         modifiers.setTitle(color("&cNext Modifier In: &r&l" + getCountdown()[0] + " &cSeconds &r- &dCurrent&r: &d" +
                                 getModifierTitle()));
+                    } else {
+                        if(getCountdown()[0] % 2 == 1) {
+                            modifiers.setColor(BarColor.RED);
+                        } else {
+                            modifiers.setColor(BarColor.WHITE);
+                        }
+
+                        modifiers.setTitle(color("&cNext Modifier In: &r&l" + getCountdown()[0] + " &cSeconds &r- &dCurrent&r: &d" +
+                                getModifierTitle()));
                     }
+
                     if(!visible.contains(player)) {
                         modifiers.addPlayer(player);
                     }

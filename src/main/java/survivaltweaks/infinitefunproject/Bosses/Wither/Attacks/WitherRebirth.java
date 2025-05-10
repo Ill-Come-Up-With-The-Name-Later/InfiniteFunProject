@@ -10,6 +10,11 @@ import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
 public class WitherRebirth implements Listener {
 
+    /**
+     * Wither rebirth loop
+     *
+     * @param event: Entity spawn event
+     */
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
         Entity entity = event.getEntity();
@@ -26,7 +31,7 @@ public class WitherRebirth implements Listener {
                     }
 
                     if(wither.hasAI()) {
-                        wither.setInvulnerabilityTicks(300);
+                        wither.setInvulnerableTicks(300);
                     }
                 }
             }.runTaskTimer(InfiniteFunProject.plugin, 6000, 6000);

@@ -22,6 +22,11 @@ import static survivaltweaks.infinitefunproject.InfiniteFunProject.*;
 
 public class DragonSecondaryAttacks implements Listener {
 
+    /**
+     * Dragon spawn and attack loop
+     *
+     * @param event: Entity spawn event
+     */
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
         Entity entity = event.getEntity();
@@ -54,6 +59,11 @@ public class DragonSecondaryAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon picking attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void pickAttack(EnderDragon dragon) {
         int attack = new Random().nextInt(0, 7);
         double dragonHpPercent = (dragon.getHealth() / dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) * 100;
@@ -89,6 +99,11 @@ public class DragonSecondaryAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon endermite bomb attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void miteBombs(EnderDragon dragon) {
         Location loc = dragon.getLocation().subtract(0, 7, 0);
 
@@ -110,6 +125,11 @@ public class DragonSecondaryAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon bite attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void biteAttack(EnderDragon dragon) {
         ArrayList<Player> endPlayers = (ArrayList<Player>) dragon.getWorld().getPlayers();
 
@@ -118,7 +138,7 @@ public class DragonSecondaryAttacks implements Listener {
         dragon.teleport(player);
         player.sendMessage(ChatColor.LIGHT_PURPLE + "Ouch.");
         dragon.setPhase(EnderDragon.Phase.CIRCLING);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 150, 0, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 150, 0, false, false));
 
         new BukkitRunnable() {
             int bleedNum = 1;
@@ -135,6 +155,11 @@ public class DragonSecondaryAttacks implements Listener {
         }.runTaskTimer(InfiniteFunProject.plugin, 30, 30);
     }
 
+    /**
+     * Dragon breath fire attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void fireBreath(EnderDragon dragon) {
         Player player = dragon.getWorld().getPlayers().get(new Random().nextInt(0, dragon.getWorld().getPlayers().size()));
         player.sendMessage(ChatColor.GOLD + "The air around you is heating up...");
@@ -169,6 +194,11 @@ public class DragonSecondaryAttacks implements Listener {
         }.runTaskTimer(InfiniteFunProject.plugin, 1, 1);
     }
 
+    /**
+     * Dragon spawn healing crystals attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void spawnHealers(EnderDragon dragon) {
         Location portal = dragon.getWorld().getEnderDragonBattle().getEndPortalLocation();
 
@@ -194,6 +224,11 @@ public class DragonSecondaryAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon shoot fireball attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void shootFireball(EnderDragon dragon) {
         Location portal = dragon.getWorld().getEnderDragonBattle().getEndPortalLocation().add(0, 40, 0);
         dragon.teleport(portal);
@@ -226,6 +261,11 @@ public class DragonSecondaryAttacks implements Listener {
         }, 20);
     }
 
+    /**
+     * Dragon rain fireball attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void dragonFireEveryone(EnderDragon dragon) {
         Location portal = dragon.getWorld().getEnderDragonBattle().getEndPortalLocation().add(0, 40, 0);
         dragon.teleport(portal);
@@ -250,30 +290,35 @@ public class DragonSecondaryAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon magic grab attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void grab(EnderDragon dragon) {
         ArrayList<Player> players = (ArrayList<Player>) dragon.getWorld().getPlayers();
 
         for(Player player : players) {
             Location playerLoc = player.getLocation();
 
-            drawCircle(playerLoc, 2.5, Particle.SPELL_WITCH, 90);
+            drawCircle(playerLoc, 2.5, Particle.WITCH, 90);
             drawCircle(playerLoc, 2.7, Particle.DRAGON_BREATH, 90);
 
             player.getWorld().spawnParticle(Particle.DRAGON_BREATH, playerLoc.add(0, 0.3, 0), 30, 0.3, 0.1, 0.3, 0.04);
-            player.getWorld().spawnParticle(Particle.SPELL_WITCH, playerLoc.add(0, 0.3, 0), 30, 0.3, 0.1, 0.3, 0.04);
-            player.getWorld().spawnParticle(Particle.SMOKE_NORMAL, playerLoc.add(0, 0.3, 0), 20, 0.3, 0.1, 0.3, 0.04);
+            player.getWorld().spawnParticle(Particle.WITCH, playerLoc.add(0, 0.3, 0), 30, 0.3, 0.1, 0.3, 0.04);
+            player.getWorld().spawnParticle(Particle.SMOKE, playerLoc.add(0, 0.3, 0), 20, 0.3, 0.1, 0.3, 0.04);
             player.getWorld().spawnParticle(Particle.ELECTRIC_SPARK, playerLoc.add(0, 0.3, 0), 20, 0.3, 0.1, 0.3, 0.04);
 
             player.sendMessage(ChatColor.LIGHT_PURPLE + "Look out below!");
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 Location newLoc = player.getLocation();
 
-                drawCircle(playerLoc, 2.5, Particle.SPELL_WITCH, 90);
+                drawCircle(playerLoc, 2.5, Particle.WITCH, 90);
                 drawCircle(playerLoc, 2.7, Particle.DRAGON_BREATH, 90);
 
                 player.getWorld().spawnParticle(Particle.DRAGON_BREATH, playerLoc.add(0, 0.3, 0), 30, 0.3, 0.1, 0.3, 0.04);
-                player.getWorld().spawnParticle(Particle.SPELL_WITCH, playerLoc.add(0, 0.3, 0), 20, 0.3, 0.1, 0.3, 0.04);
-                player.getWorld().spawnParticle(Particle.SMOKE_NORMAL, playerLoc.add(0, 0.3, 0), 20, 0.3, 0.1, 0.3, 0.04);
+                player.getWorld().spawnParticle(Particle.WITCH, playerLoc.add(0, 0.3, 0), 20, 0.3, 0.1, 0.3, 0.04);
+                player.getWorld().spawnParticle(Particle.WITCH, playerLoc.add(0, 0.3, 0), 20, 0.3, 0.1, 0.3, 0.04);
 
                 if(InfiniteFunProject.distanceBetween(playerLoc.toVector(), newLoc.toVector()) <= 3) {
                     player.teleport(newLoc.subtract(0, 2, 0));
@@ -283,6 +328,11 @@ public class DragonSecondaryAttacks implements Listener {
         }
     }
 
+    /**
+     * Dragon launch into the air attack
+     *
+     * @param dragon: the attacking dragon
+     */
     private void specialAttack(EnderDragon dragon) {
         Location portal = dragon.getWorld().getEnderDragonBattle().getEndPortalLocation().add(0, 40, 0);
         dragon.teleport(portal);

@@ -1,9 +1,9 @@
 package survivaltweaks.infinitefunproject.StatusMeters;
 
+import org.bukkit.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 import survivaltweaks.infinitefunproject.StatusMeters.Cold.ColdInit;
@@ -40,9 +40,9 @@ public class StatusInit {
                 () -> {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                         new TextComponent("Thirst: " + ChatColor.BLUE + getThirst(player) +
-                                ChatColor.RESET + "   |   Heat: " + ChatColor.RED + getHeat(player) + ChatColor.RESET + "   |   Cold: " +
-                                ChatColor.AQUA + getCold(player) + ChatColor.RESET + "   |   Weight: " + ChatColor.GOLD +
-                                String.format("%.2f", calculateWeight(player)) + ChatColor.RESET + " lbs."));
+                                ChatColor.WHITE + "   |   Heat: " + ChatColor.RED + getHeat(player) + ChatColor.WHITE + "   |   Cold: " +
+                                ChatColor.AQUA + getCold(player) + ChatColor.WHITE + "   |   Weight: " + ChatColor.GOLD +
+                                String.format("%.2f", calculateWeight(player)) + ChatColor.WHITE + " lbs."));
 
                     applyWeightEffects(player);
             }, 1, 1);

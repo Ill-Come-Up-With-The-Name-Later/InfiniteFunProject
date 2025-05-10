@@ -42,7 +42,7 @@ public class RejuvenationRing implements ActivatedAbility, Listener {
                     return;
                 }
 
-                arrow.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
+                arrow.getLocation().getWorld().spawnParticle(Particle.HAPPY_VILLAGER, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
                 arrow.getLocation().getWorld().spawnParticle(Particle.ELECTRIC_SPARK, arrow.getLocation(), 5, 0.1, 0.1, 0.1, 0.02);
             }
         }.runTaskTimer(InfiniteFunProject.plugin, 0, 1);
@@ -54,9 +54,9 @@ public class RejuvenationRing implements ActivatedAbility, Listener {
             {
                 add(PotionEffectType.WITHER);
                 add(PotionEffectType.POISON);
-                add(PotionEffectType.SLOW);
-                add(PotionEffectType.SLOW_DIGGING);
-                add(PotionEffectType.CONFUSION);
+                add(PotionEffectType.SLOWNESS);
+                add(PotionEffectType.MINING_FATIGUE);
+                add(PotionEffectType.NAUSEA);
                 add(PotionEffectType.BLINDNESS);
                 add(PotionEffectType.DARKNESS);
                 add(PotionEffectType.HUNGER);
@@ -67,7 +67,7 @@ public class RejuvenationRing implements ActivatedAbility, Listener {
         Projectile projectile = event.getEntity();
 
         if(projectile.hasMetadata("RejuvRing")) {
-            drawCircle(projectile.getLocation(), radius, Particle.VILLAGER_HAPPY, 90);
+            drawCircle(projectile.getLocation(), radius, Particle.HAPPY_VILLAGER, 90);
             drawCircle(projectile.getLocation(), radius, Particle.HEART, 90);
             ArrayList<Entity> entities = (ArrayList<Entity>) circularNearbyEntities(projectile.getLocation(), radius);
 

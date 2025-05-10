@@ -17,7 +17,7 @@ public class ShootDoubleBarrel implements ActivatedAbility {
     public void activate(Player player) {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
-                add(Particle.SMOKE_NORMAL);
+                add(Particle.SMOKE);
             }
         };
 

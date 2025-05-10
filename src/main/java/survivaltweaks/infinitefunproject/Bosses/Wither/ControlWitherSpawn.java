@@ -19,6 +19,12 @@ import static survivaltweaks.infinitefunproject.InfiniteFunProject.distanceBetwe
 
 public class ControlWitherSpawn implements Listener {
 
+    /**
+     * Teleport wither spawn when they are far
+     * away
+     *
+     * @param event: Entity spawn event
+     */
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
         Entity entity = event.getEntity();
@@ -30,6 +36,7 @@ public class ControlWitherSpawn implements Listener {
                 Wither wither = withers.toArray(new Wither[]{})[0];
 
                 new BukkitRunnable() {
+
                     @Override
                     public void run() {
                         if(entity.isDead() || wither.isDead()) {
@@ -49,6 +56,11 @@ public class ControlWitherSpawn implements Listener {
         }, 2);
     }
 
+    /**
+     * Prevent wither from damaging its spawn
+     *
+     * @param event: Entity damage by entity event
+     */
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
         Entity damaged = event.getEntity();
@@ -59,6 +71,7 @@ public class ControlWitherSpawn implements Listener {
                 if(damaged.hasMetadata("WitherSpawn")) {
                     event.setDamage(0);
                     event.setCancelled(true);
+
                     if(damaged instanceof Monster) {
                         ((Monster) damaged).setTarget(null);
                     }

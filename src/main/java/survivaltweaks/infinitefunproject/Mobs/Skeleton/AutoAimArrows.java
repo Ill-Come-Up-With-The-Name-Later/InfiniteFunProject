@@ -20,7 +20,7 @@ public class AutoAimArrows implements Listener {
         Projectile projectile = event.getEntity();
         Entity shooter = (Entity) projectile.getShooter();
 
-        if(projectile instanceof Arrow && shooter instanceof Skeleton) {
+        if(projectile instanceof Arrow && shooter instanceof AbstractSkeleton) {
             long day = shooter.getWorld().getFullTime() / 24000;
             int level = (int) Math.min(Math.floor((double) day / 10), 50);
 

@@ -1,7 +1,8 @@
 package survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -13,10 +14,11 @@ import org.bukkit.inventory.ItemStack;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 import survivaltweaks.infinitefunproject.Periodic.WorldModifiers.WorldModInit;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import static survivaltweaks.infinitefunproject.CustomItems.Abilities.InitAbilities.hasCooldown;
 import static survivaltweaks.infinitefunproject.CustomItems.Abilities.InitAbilities.setCooldown;
+import static survivaltweaks.infinitefunproject.InfiniteFunProject.contains;
 
 public class ActivatePassive implements Listener {
 
@@ -42,6 +44,14 @@ public class ActivatePassive implements Listener {
                     continue;
                 }
 
+                if(item.getType().getEquipmentSlot().isArmor()) {
+                    ItemStack[] a = player.getInventory().getArmorContents();
+
+                    if(!contains(a, item)) {
+                        continue;
+                    }
+                }
+
                 if(OnDamagedAbility.hasAbility(item)) {
                     ArrayList<OnDamagedAbility> abilities = OnDamagedAbility.getAbilities(item);
 
@@ -52,6 +62,7 @@ public class ActivatePassive implements Listener {
 
                         ability.getAbility().activate(player, entity);
                         ability.getAbility().activate(player);
+                        ability.getAbility().activate(event);
 
                         switch (WorldModInit.getActiveModifier()) {
                             case INSTANT_COOLDOWNS:
@@ -142,6 +153,14 @@ public class ActivatePassive implements Listener {
                     continue;
                 }
 
+                if(item.getType().getEquipmentSlot().isArmor()) {
+                    ItemStack[] a = player.getInventory().getArmorContents();
+
+                    if(!contains(a, item)) {
+                        continue;
+                    }
+                }
+
                 if(OnDamagedAbility.hasAbility(item)) {
                     ArrayList<OnDamagedAbility> abilities = OnDamagedAbility.getAbilities(item);
 
@@ -152,6 +171,7 @@ public class ActivatePassive implements Listener {
 
                         ability.getAbility().activate(player, entity);
                         ability.getAbility().activate(player);
+                        ability.getAbility().activate(event);
 
                         switch (WorldModInit.getActiveModifier()) {
                             case INSTANT_COOLDOWNS:
@@ -221,9 +241,21 @@ public class ActivatePassive implements Listener {
                     continue;
                 }
 
+                if(player.getGameMode() == GameMode.SPECTATOR) {
+                    continue;
+                }
+
                 for(ItemStack item : player.getInventory()) {
                     if(item == null) {
                         continue;
+                    }
+
+                    if(item.getType().getEquipmentSlot().isArmor()) {
+                        ItemStack[] a = player.getInventory().getArmorContents();
+
+                        if(!contains(a, item)) {
+                            continue;
+                        }
                     }
 
                     if(PassiveAbility.hasAbility(item)) {
@@ -290,7 +322,7 @@ public class ActivatePassive implements Listener {
                                     break;
                             }
 
-                            if(ability.getCooldown() > 40) {
+                            if(ability.getCooldown() > 60) {
                                 player.sendMessage(ChatColor.GREEN + "Activated " + ChatColor.YELLOW +
                                         ability.getAbilityName() + ChatColor.GREEN + "!");
                             }

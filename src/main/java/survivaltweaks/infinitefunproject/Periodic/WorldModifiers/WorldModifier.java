@@ -12,7 +12,7 @@ public enum WorldModifier {
     DOUBLE_DOWN("Attacks deal double damage."), // Double damage attacks
     CRIT_FRENZY("Random critical hits are guaranteed."), // 100% random critical hits
     DAMAGE_BARGAIN("Attacks are now half-off."), // Attacks do half damage
-    SUPER_GEARED("Some enemies have enhanced gear."), // Zombies and piglins have sharpness 3 diamond swords and skeletons have power 3 bows
+    SUPER_GEARED("Some enemies have enhanced gear."), // Zombies and Piglins have sharpness 3 diamond swords and skeletons have power 3 bows
     THORNS("Attacks damage the attacker."), // When an entity is attacked, the attacker takes half damage
     EXTREME_FORTUNE("Double block drops."), // Blocks broken drop double the items
     SHADOW_CLONES("Mobs spawn a clone of themselves."), // When a mob spawns, a second one spawns
@@ -27,14 +27,16 @@ public enum WorldModifier {
     INSTANT_COOLDOWNS("Ability cooldowns. What are those?"), // Abilities have a 1-second cooldown
     TRIPLE_COOLDOWNS("Waiting for abilities was fun, right?"), // Ability cooldowns tripled
     SICKNESS("Mobs have a 3.33% chance to spawn infected with Coronavirus."), // 3.33% chance to spawn infected mobs
-    ULTIMATE_POWER("Double chance for mobs to spawn as Champions."), // 1/135 chance for a champion
+    ULTIMATE_POWER("Double chance for mobs to spawn as Champions."), // 1/150 chance for a champion
     BLOCK_SENTIENCE("Blocks fight back on being broken."), // Blocks will fight back on breaking
     TAX_BREAK("No damage tax will be deducted from attacks."), // No damage tax
     TAXMAN(ChatColor.ITALIC + "\"There's one for you, nineteen for me.\""), // Increase damage tax to 95%
     BOOM_SHOT("All projectiles become explosive."), // Projectiles explode when hitting something
     LIMP_SHOT("Projectiles' velocity is halved on firing."), // Projectiles have half velocity once shot
     INACCURACY("Projectiles now have inaccuracy."), // Projectiles are given spread similar to shotguns
-    AIMBOT("Projectiles automatically aim at nearby targets."),
+    AIMBOT("Projectiles automatically aim at nearby targets."), // Projectiles auto-aim
+    ETHEREAL_AUGMENTATION("Mobs have a 25% chance to have special abilities."), // 25% chance for mobs to spawn with abilities
+    SLIMY_SHOTS("Some projectiles become bouncy when shot."), // Some projectiles can bounce
     CALM_BEFORE_THE_STORM("Peace... somewhat."), // Downgrades enemies and is the first modifier
     ANOMALOUS("???"), // Special modifier from only the anomaly, combines a lot of modifiers
     NONE("Nothing happens.") // Nothing changes

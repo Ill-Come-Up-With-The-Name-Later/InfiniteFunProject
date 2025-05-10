@@ -12,14 +12,15 @@ import survivaltweaks.infinitefunproject.CustomItems.Metadata.ProjectileShieldMe
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-import static survivaltweaks.infinitefunproject.InfiniteFunProject.circularNearbyEntities;
-import static survivaltweaks.infinitefunproject.InfiniteFunProject.drawCircle;
+import static survivaltweaks.infinitefunproject.InfiniteFunProject.*;
 
 public class ProjectileShieldManager {
 
     public static void init() {
         new BukkitRunnable() {
+
             @Override
             public void run() {
                 for(World world : Bukkit.getWorlds()) {
@@ -36,8 +37,9 @@ public class ProjectileShieldManager {
                                 if(e instanceof Projectile && !e.hasMetadata("PierceShield")) {
                                     Projectile projectile = (Projectile) e;
 
-                                    if(!projectile.getShooter().equals(e)) {
+                                    if(!Objects.equals(projectile.getShooter(), entity)) {
                                         projectile.remove();
+
                                         for(Particle particle : metadata.getDeflectEffect()) {
                                             e.getWorld().spawnParticle(particle, projectile.getLocation(), 6, 0.2, 0.2, 0.2, 0.04);
                                         }
@@ -54,14 +56,7 @@ public class ProjectileShieldManager {
     public static void destroyShield(LivingEntity entity) {
         ProjectileShieldMetadata meta = (ProjectileShieldMetadata) entity.getMetadata("ProjShield").get(0);
 
-        for(int i = 1; i < 7; i++) {
-            int finalI = i;
-            Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
-                for(Particle p : meta.getAura()) {
-                    drawCircle(entity.getLocation(), meta.getRadius() + finalI, p, 90);
-                }
-            }, i * 5);
-        }
+        drawExpandingCircle(entity, meta.getRadius(), 7, 1, 5, meta.getAura());
         entity.removeMetadata("ProjShield", InfiniteFunProject.plugin);
     }
 }

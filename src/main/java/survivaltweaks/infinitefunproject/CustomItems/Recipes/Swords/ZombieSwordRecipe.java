@@ -18,7 +18,7 @@ public class ZombieSwordRecipe {
 
         ItemStack flesh = new ItemStack(Material.ROTTEN_FLESH, 2);
 
-        recipe.setIngredient('R', flesh.getData());
+        recipe.setIngredient('R', flesh);
         recipe.setIngredient('I', Material.IRON_SWORD);
 
         Bukkit.getServer().addRecipe(recipe);

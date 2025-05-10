@@ -16,7 +16,7 @@ public class SubspaceMine {
                      " S ");
 
         recipe.setIngredient('E', Material.ECHO_SHARD);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('S', Material.NETHER_STAR);
 
         Bukkit.getServer().addRecipe(recipe);

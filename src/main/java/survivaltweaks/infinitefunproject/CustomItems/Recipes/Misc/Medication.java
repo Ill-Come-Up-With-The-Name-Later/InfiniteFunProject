@@ -36,7 +36,7 @@ public class Medication {
                 "SPS");
 
         recipe.setIngredient('P', Material.PAPER);
-        recipe.setIngredient('S', ItemManager.specialSugar.getData());
+        recipe.setIngredient('S', ItemManager.specialSugar);
         Bukkit.getServer().addRecipe(recipe);
     }
 }

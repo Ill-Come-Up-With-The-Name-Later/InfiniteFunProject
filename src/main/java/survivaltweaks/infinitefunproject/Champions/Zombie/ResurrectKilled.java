@@ -31,7 +31,7 @@ public class ResurrectKilled implements Listener {
                     if(zombie.hasMetadata("Champion")) {
                         if(new Random().nextBoolean()) {
                             necromancy(entity);
-                            zombie.getWorld().spawnParticle(Particle.SPELL_WITCH, zombie.getLocation().add(0, 1, 0),
+                            zombie.getWorld().spawnParticle(Particle.WITCH, zombie.getLocation().add(0, 1, 0),
                                     20, 0.3, 0.3, 0.3, 0.03);
                         }
                     }
@@ -46,7 +46,7 @@ public class ResurrectKilled implements Listener {
 
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 revived.setMetadata("Revived", new RevivedMeta());
-                drawCircle(revived.getLocation(), 2, Particle.TOTEM, 180);
+                drawCircle(revived.getLocation(), 2, Particle.TOTEM_OF_UNDYING, 180);
                 revived.setHealth(revived.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.75);
             }, 10);
         }

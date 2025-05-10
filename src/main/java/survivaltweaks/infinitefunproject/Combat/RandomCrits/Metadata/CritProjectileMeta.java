@@ -4,7 +4,9 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
+@Deprecated
 public class CritProjectileMeta implements MetadataValue {
+
     @Override
     public Object value() {
         return "EntityCrit";

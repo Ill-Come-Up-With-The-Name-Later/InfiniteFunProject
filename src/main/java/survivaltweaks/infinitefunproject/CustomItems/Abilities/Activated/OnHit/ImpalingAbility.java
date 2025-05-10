@@ -38,9 +38,9 @@ public class ImpalingAbility implements AttackAbility {
             if(player.isInWater()) {
                 ArrayList<Particle> particles = new ArrayList<>() {
                     {
-                        add(Particle.WATER_BUBBLE);
-                        add(Particle.WATER_WAKE);
-                        add(Particle.CRIT_MAGIC);
+                        add(Particle.BUBBLE);
+                        add(Particle.SPLASH);
+                        add(Particle.ENCHANTED_HIT);
                         add(Particle.END_ROD);
                     }
                 };

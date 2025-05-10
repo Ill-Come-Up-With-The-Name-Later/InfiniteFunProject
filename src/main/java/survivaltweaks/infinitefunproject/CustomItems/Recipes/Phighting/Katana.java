@@ -16,7 +16,7 @@ public class Katana {
                 " I ");
 
         recipe.setIngredient('E', Material.RED_DYE);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('S', Material.SKULL_POTTERY_SHERD);
         recipe.setIngredient('I', Material.IRON_SWORD);
 

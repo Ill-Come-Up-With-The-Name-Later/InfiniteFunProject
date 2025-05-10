@@ -14,8 +14,8 @@ public class ShootRailGun implements ActivatedAbility {
     public void activate(Player player) {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
-                add(Particle.SMOKE_NORMAL);
-                add(Particle.CRIT_MAGIC);
+                add(Particle.SMOKE);
+                add(Particle.ENCHANTED_HIT);
             }
         };
 

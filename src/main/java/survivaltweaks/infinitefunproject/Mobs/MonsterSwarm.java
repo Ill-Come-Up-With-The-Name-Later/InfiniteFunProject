@@ -1,9 +1,7 @@
 package survivaltweaks.infinitefunproject.Mobs;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.Projectile;
+import org.bukkit.GameMode;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -32,6 +30,14 @@ public class MonsterSwarm implements Listener {
             LivingEntity entity = (LivingEntity) damager;
             Monster hit = (Monster) damaged;
 
+            if(entity instanceof Player) {
+                Player player = (Player) entity;
+
+                if(player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) {
+                    return;
+                }
+            }
+
             ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(hit, searchRadius(hit));
 
             if(hit.getType() == entity.getType()) {
@@ -54,6 +60,14 @@ public class MonsterSwarm implements Listener {
 
             LivingEntity entity = (LivingEntity) ((Projectile) damager).getShooter();
             Monster hit = (Monster) damaged;
+
+            if(entity instanceof Player) {
+                Player player = (Player) entity;
+
+                if(player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) {
+                    return;
+                }
+            }
 
             ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(hit, searchRadius(hit));
 

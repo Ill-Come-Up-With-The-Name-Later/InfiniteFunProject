@@ -18,7 +18,7 @@ public class WeaponHandle {
 
         ItemStack blazeRod = new ItemStack(Material.BLAZE_ROD, 16);
 
-        recipe.setIngredient('B', blazeRod.getData());
+        recipe.setIngredient('B', blazeRod);
 
         Bukkit.getServer().addRecipe(recipe);
     }

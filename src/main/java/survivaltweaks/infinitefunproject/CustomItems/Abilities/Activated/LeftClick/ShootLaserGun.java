@@ -15,9 +15,9 @@ public class ShootLaserGun implements ActivatedAbility {
     public void activate(Player player) {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
-                add(Particle.CRIT_MAGIC);
-                add(Particle.FIREWORKS_SPARK);
-                add(Particle.SPELL_WITCH);
+                add(Particle.ENCHANTED_HIT);
+                add(Particle.FIREWORK);
+                add(Particle.WITCH);
             }
         };
 

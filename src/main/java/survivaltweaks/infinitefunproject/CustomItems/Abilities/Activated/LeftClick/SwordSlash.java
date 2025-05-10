@@ -15,7 +15,7 @@ public class SwordSlash implements ActivatedAbility {
     public void activate(Player player) {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
-                add(Particle.CRIT_MAGIC);
+                add(Particle.ENCHANTED_HIT);
                 add(Particle.SWEEP_ATTACK);
             }
         };

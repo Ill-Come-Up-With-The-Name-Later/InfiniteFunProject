@@ -18,11 +18,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import survivaltweaks.infinitefunproject.CustomItems.Metadata.BounceProjectiles;
 import survivaltweaks.infinitefunproject.CustomItems.Metadata.ExplosiveMeta;
 import survivaltweaks.infinitefunproject.CustomItems.Metadata.SeekingMetadata;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 import survivaltweaks.infinitefunproject.Mobs.RevivedMeta;
 import survivaltweaks.infinitefunproject.Mobs.ShadowCloneMeta;
+import survivaltweaks.infinitefunproject.MonsterAbilities.OnMobAttackedAbility;
+import survivaltweaks.infinitefunproject.MonsterAbilities.OnMobAttacksAbility;
 
 import java.util.*;
 
@@ -87,12 +90,29 @@ public class AddModifiers implements Listener {
                     case SICKNESS:
                         sickness((LivingEntity) spawned);
                         break;
+                    case ETHEREAL_AUGMENTATION:
+                        etherealAugmentation((LivingEntity) spawned);
+                        break;
                 }
             }
         }
     }
 
-    public void goo(LivingEntity entity) {
+    public static void etherealAugmentation(LivingEntity entity) {
+        if(entity instanceof Monster monster) {
+            if(new Random().nextInt(0, 4) == 1) {
+                OnMobAttacksAbility.addAbility(monster, OnMobAttacksAbility.values()
+                        [new Random().nextInt(0, OnMobAttacksAbility.values().length)]);
+            }
+
+            if(new Random().nextInt(0, 4) == 1) {
+                OnMobAttackedAbility.addAbility(monster, OnMobAttackedAbility.values()
+                        [new Random().nextInt(0, OnMobAttackedAbility.values().length)]);
+            }
+        }
+    }
+
+    public static void goo(LivingEntity entity) {
         if(new Random().nextInt(0, 4) == 1) {
             if (!entity.getPassengers().isEmpty()) return;
             if (!(entity instanceof Monster)) return;
@@ -108,20 +128,17 @@ public class AddModifiers implements Listener {
         }
     }
 
-    public void calmBeforeStorm(LivingEntity entity) {
+    public static void calmBeforeStorm(LivingEntity entity) {
         entity.setHealth(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.75);
-        if(entity instanceof Creeper) {
-            Creeper creeper = (Creeper) entity;
+        if(entity instanceof Creeper creeper) {
             creeper.setPowered(false);
         }
-        if(entity instanceof Zombie) {
-            Zombie zombie = (Zombie) entity;
+        if(entity instanceof Zombie zombie) {
             zombie.getEquipment().setItem(EquipmentSlot.HAND, new ItemStack(Material.STONE_SWORD));
             zombie.getEquipment().setItem(EquipmentSlot.HEAD, new ItemStack(Material.CHAINMAIL_HELMET));
             zombie.getEquipment().setItem(EquipmentSlot.FEET, new ItemStack(Material.GOLDEN_BOOTS));
         }
-        if(entity instanceof AbstractSkeleton) {
-            AbstractSkeleton skeleton = (AbstractSkeleton) entity;
+        if(entity instanceof AbstractSkeleton skeleton) {
             skeleton.getEquipment().setItem(EquipmentSlot.HEAD, new ItemStack(Material.CHAINMAIL_HELMET));
             skeleton.getEquipment().setItem(EquipmentSlot.FEET, new ItemStack(Material.GOLDEN_BOOTS));
         }
@@ -130,28 +147,28 @@ public class AddModifiers implements Listener {
         }
     }
 
-    public void shieldMob(LivingEntity entity) {
-        entity.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 12000, 0, false, false, false));
+    public static void shieldMob(LivingEntity entity) {
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 12000, 0, false, false, false));
     }
 
-    public void warpSpeed(LivingEntity entity) {
+    public static void warpSpeed(LivingEntity entity) {
         entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 2400, 1, false, false, false));
     }
 
-    public void slashedHealth(LivingEntity entity) {
+    public static void slashedHealth(LivingEntity entity) {
         entity.setHealth(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2);
     }
 
-    public void empoweredEnemies(LivingEntity entity) {
-        entity.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 4800, 0, false, false, false));
+    public static void empoweredEnemies(LivingEntity entity) {
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 4800, 0, false, false, false));
     }
 
-    public void superGeared(LivingEntity entity) {
+    public static void superGeared(LivingEntity entity) {
         if(entity.getEquipment().getItemInMainHand().getType() == Material.BOW) {
             ItemStack bow = new ItemStack(Material.BOW);
             ItemMeta bowMeta = bow.getItemMeta();
 
-            bowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, false);
+            bowMeta.addEnchant(Enchantment.POWER, 3, false);
 
             bow.setItemMeta(bowMeta);
             entity.getEquipment().setItem(EquipmentSlot.HAND, bow);
@@ -160,7 +177,7 @@ public class AddModifiers implements Listener {
             ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
             ItemMeta swordMeta = sword.getItemMeta();
 
-            swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, false);
+            swordMeta.addEnchant(Enchantment.SHARPNESS, 3, false);
 
             sword.setItemMeta(swordMeta);
             entity.getEquipment().setItem(EquipmentSlot.HAND, sword);
@@ -173,7 +190,7 @@ public class AddModifiers implements Listener {
             ItemMeta tridentMeta = trident.getItemMeta();
 
             tridentMeta.addEnchant(Enchantment.IMPALING, 3, true);
-            tridentMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+            tridentMeta.addEnchant(Enchantment.SHARPNESS, 3, true);
             tridentMeta.addEnchant(Enchantment.CHANNELING, 3, true);
 
             trident.setItemMeta(tridentMeta);
@@ -187,7 +204,7 @@ public class AddModifiers implements Listener {
         }
     }
 
-    public void shadowClone(LivingEntity entity) {
+    public static void shadowClone(LivingEntity entity) {
         if(!(entity instanceof Slime)) {
             LivingEntity clone = (LivingEntity) entity.getWorld().spawnEntity(entity.getLocation(), entity.getType());
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
@@ -197,13 +214,13 @@ public class AddModifiers implements Listener {
         }
     }
 
-    public void sickness(LivingEntity entity) {
+    public static void sickness(LivingEntity entity) {
         if(new Random().nextInt(0, 33) == 2) {
             infectEntity(entity);
         }
     }
 
-    public void anomalousSpawn(LivingEntity entity) {
+    public static void anomalousSpawn(LivingEntity entity) {
         goo(entity);
 
         if(!entity.hasMetadata("ShadowClone")) {
@@ -215,6 +232,7 @@ public class AddModifiers implements Listener {
         warpSpeed(entity);
         shieldMob(entity);
         sickness(entity);
+        etherealAugmentation(entity);
     }
 
     @EventHandler
@@ -249,21 +267,21 @@ public class AddModifiers implements Listener {
         }
     }
 
-    public void shardOfGlass(LivingEntity entity) {
+    public static void shardOfGlass(LivingEntity entity) {
         entity.setHealth(0);
     }
 
-    public void doubleDown(EntityDamageByEntityEvent event) {
+    public static void doubleDown(EntityDamageByEntityEvent event) {
         event.setDamage(event.getDamage() * 2);
     }
 
-    public void damageBargain(EntityDamageByEntityEvent event) { event.setDamage(event.getDamage() / 2); }
+    public static void damageBargain(EntityDamageByEntityEvent event) { event.setDamage(event.getDamage() / 2); }
 
-    public void thorns(LivingEntity entity, double damage) {
+    public static void thorns(LivingEntity entity, double damage) {
         entity.damage(damage / 3);
     }
 
-    public void anomalousDamage(LivingEntity entity, double damage, EntityDamageByEntityEvent event) {
+    public static void anomalousDamage(LivingEntity entity, double damage, EntityDamageByEntityEvent event) {
         doubleDown(event);
         thorns(entity, damage);
     }
@@ -298,7 +316,7 @@ public class AddModifiers implements Listener {
         }
     }
 
-    public void blockFightBack(Material material, Location location) {
+    public static void blockFightBack(Material material, Location location) {
         location.getWorld().setBlockData(location, Material.AIR.createBlockData());
         Zombie zombie = (Zombie) location.getWorld().spawnEntity(location, EntityType.ZOMBIE);
 
@@ -319,7 +337,7 @@ public class AddModifiers implements Listener {
         zombie.getEquipment().setHelmetDropChance(1);
     }
 
-    public void doubleUp(Player player, Location spawnLoc, Block block) {
+    public static void doubleUp(Player player, Location spawnLoc, Block block) {
         Collection<ItemStack> drops = block.getDrops();
 
         for(ItemStack drop : drops) {
@@ -327,11 +345,11 @@ public class AddModifiers implements Listener {
         }
     }
 
-    public void blockProtection(Player player, Block block) {
+    public static void blockProtection(Player player, Block block) {
         player.damage(block.getType().getHardness());
     }
 
-    public void anomalousBreak(Player player, Location spawnLoc, Block block, BlockBreakEvent event) {
+    public static void anomalousBreak(Player player, Location spawnLoc, Block block, BlockBreakEvent event) {
         doubleUp(player, spawnLoc, block);
         blockProtection(player, block);
 
@@ -373,24 +391,24 @@ public class AddModifiers implements Listener {
         }
     }
 
-    public void necromancy(LivingEntity entity) {
+    public static void necromancy(LivingEntity entity) {
         if(!(entity instanceof Slime)) {
             LivingEntity revived = (LivingEntity) entity.getWorld().spawnEntity(entity.getLocation(), entity.getType());
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 revived.setMetadata("Revived", new RevivedMeta());
-                drawCircle(revived.getLocation(), 2, Particle.TOTEM, 180);
+                drawCircle(revived.getLocation(), 2, Particle.TOTEM_OF_UNDYING, 180);
                 revived.setHealth(revived.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.75);
             }, 1);
         }
     }
 
-    public void extremeFortune(LivingEntity entity, List<ItemStack> drops) {
+    public static void extremeFortune(LivingEntity entity, List<ItemStack> drops) {
         for(ItemStack drop : drops) {
             entity.getWorld().dropItem(entity.getLocation(), drop);
         }
     }
 
-    public void anomalousKill(LivingEntity entity, List<ItemStack> drops) {
+    public static void anomalousKill(LivingEntity entity, List<ItemStack> drops) {
         extremeFortune(entity, drops);
         if(new Random().nextInt(0, 4) == 1) {
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin,
@@ -398,7 +416,7 @@ public class AddModifiers implements Listener {
         }
     }
 
-    public void explosiveCorpse(LivingEntity entity) {
+    public static void explosiveCorpse(LivingEntity entity) {
         entity.getWorld().createExplosion(entity.getLocation(), 2.7f, false, false, entity);
     }
 
@@ -429,11 +447,14 @@ public class AddModifiers implements Listener {
                 case AIMBOT:
                     aimbot(projectile);
                     break;
+                case SLIMY_SHOTS:
+                    slimyShots(projectile);
+                    break;
             }
         }
     }
 
-    public void boomShot(Projectile projectile) {
+    public static void boomShot(Projectile projectile) {
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             if(!(projectile.isDead() || projectile.hasMetadata("Explosive"))) {
                 projectile.setMetadata("Explosive", new ExplosiveMeta(3f, false, false));
@@ -441,19 +462,19 @@ public class AddModifiers implements Listener {
         }, 2);
     }
 
-    public void limpShot(Projectile projectile) {
+    public static void limpShot(Projectile projectile) {
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             projectile.setVelocity(projectile.getVelocity().multiply(0.5));
         }, 1);
     }
 
-    public void anomalousProjectileShot(Projectile projectile) {
+    public static void anomalousProjectileShot(Projectile projectile) {
         boomShot(projectile);
         inaccuracy(projectile);
         aimbot(projectile);
     }
 
-    public void inaccuracy(Projectile projectile) {
+    public static void inaccuracy(Projectile projectile) {
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             Vector velocity = projectile.getVelocity();
             velocity.add(new Vector(new Random().nextDouble(-0.1, 0.1),
@@ -465,9 +486,15 @@ public class AddModifiers implements Listener {
         }, 1);
     }
 
-    public void aimbot(Projectile projectile) {
+    public static void aimbot(Projectile projectile) {
         if(!(projectile.isDead() || projectile.hasMetadata("Seeking"))) {
             projectile.setMetadata("Seeking", new SeekingMetadata(8, 200, any()));
+        }
+    }
+
+    public static void slimyShots(Projectile projectile) {
+        if(!(projectile.isDead() || projectile.hasMetadata("Bouncy"))) {
+            projectile.setMetadata("Bouncy", new BounceProjectiles(7, 300));
         }
     }
 }

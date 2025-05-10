@@ -21,7 +21,7 @@ public class EndlessPearl {
                      " E ");
 
         recipe.setIngredient('E', Material.ENDER_EYE);
-        recipe.setIngredient('N', ItemManager.enchantedPearl.getData());
+        recipe.setIngredient('N', ItemManager.enchantedPearl);
 
         Bukkit.getServer().addRecipe(recipe);
     }

@@ -23,7 +23,7 @@ public class BurnoutTorch implements Listener {
 
         if(torches.contains(block.getType())) {
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () ->
-                    block.getWorld().setBlockData(block.getLocation(), Material.AIR.createBlockData()), 2400);
+                    block.getWorld().setBlockData(block.getLocation(), Material.AIR.createBlockData()), 600);
         }
     }
 }

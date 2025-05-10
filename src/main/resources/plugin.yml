@@ -1,7 +1,7 @@
 name: InfiniteFunProject
 version: '${project.version}'
 main: survivaltweaks.infinitefunproject.InfiniteFunProject
-api-version: 1.20
+api-version: 1.21
 commands:
   setday:
     description: Sets the current day
@@ -39,3 +39,21 @@ commands:
   removechallenges:
     description: Deactivates all challenges
     usage: /removechallenges
+  removeprojectiles:
+    description: Removes all projectiles
+    usage: /removeprojectiles
+  sethealth:
+    description: Sets the player's health
+    usage: /sethealth <number>
+  startmeteors:
+    description: Starts a meteor shower
+    usage: /startmeteors
+  endmeteors:
+    description: Ends an active meteor shower
+    usage: /endmeteors
+  addrandomunusual:
+    description: Adds a random Unusual Effect to a helmet
+    usage: /addrandomunusual
+  setunusual:
+    description: Sets an Unusual Effect on a helmet
+    usage: /setunusual <effect>

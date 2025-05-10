@@ -25,9 +25,9 @@ public class RevolverRapidShot implements ActivatedAbility {
     public void activate(Player player) {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
-                add(Particle.CRIT_MAGIC);
-                add(Particle.FIREWORKS_SPARK);
-                add(Particle.VILLAGER_HAPPY);
+                add(Particle.ENCHANTED_HIT);
+                add(Particle.FIREWORK);
+                add(Particle.HAPPY_VILLAGER);
             }
         };
 
@@ -48,7 +48,7 @@ public class RevolverRapidShot implements ActivatedAbility {
                             triggerAbility(player, TriggeredAbility.CRYSTALLIZE);
                         }
 
-                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 1, false, false, false));
+                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 40, 1, false, false, false));
                     }
                 }
             }, i * 3);

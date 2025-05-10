@@ -5,8 +5,10 @@ import survivaltweaks.infinitefunproject.CustomItems.ItemManager;
 
 public enum PlayerUpgrade {
 
-    DAMAGE("damage", false, 100, InitUpgrades.damageUpgradeCost, ItemManager.createDamageUpgradeIcon()), // 0.5 damage per level
-    ARMOR("armor", false, 50, InitUpgrades.armorUpgradeCost, ItemManager.createArmorUpgradeIcon()), // 0.35 armor per level
+    DAMAGE("damage", false, 150, InitUpgrades.damageUpgradeCost,
+            ItemManager.createDamageUpgradeIcon()), // 0.7 damage per level
+    ARMOR("armor", false, 50, InitUpgrades.armorUpgradeCost,
+            ItemManager.createArmorUpgradeIcon()), // 0.35 armor per level
     ATTACK_SPEED("attack_speed", false, 50, InitUpgrades.attackSpeedUpgradeCost,
             ItemManager.createAttackSpeedUpgradeIcon()), // 0.32 attack speed per level
     KNOCKBACK_RESISTANCE("knockback_resistance", false, 50, InitUpgrades.knockbackResistanceUpgradeCost,
@@ -15,6 +17,14 @@ public enum PlayerUpgrade {
             ItemManager.createHealthUpgradeIcon()), // 0.5 health per level
     DOUBLE_JUMP("double_jump", true, 1, InitUpgrades.doubleJumpCost,
             ItemManager.createDoubleJumpUpgradeIcon()), // allows a double jump
+    REACH("reach_distance", false, 20, InitUpgrades.reachDistCost,
+            ItemManager.createReachDistanceUpgradeIcon()), // 0.2 blocks reach per level
+    MULTI_HIT("multi_hit_chance", false, 25, InitUpgrades.multiHitCost,
+            ItemManager.createMultiHitUpgradeIcon()), // 10% multi-hit chance per level
+    ABILITY_COOLDOWNS("ability_cooldown_reduction", false, 15, InitUpgrades.cooldownCost,
+            ItemManager.createCooldownUpgradeIcon()), // 2.5% ability cooldown reduction per level
+    DAMAGE_REDUCTION("damage_reduction", false, 20, InitUpgrades.damageReductionCost,
+            ItemManager.createDamageReductionUpgradeIcon()), // 2.5% damage reduction per level
     ;
 
     private final String upgradeName;
@@ -33,6 +43,7 @@ public enum PlayerUpgrade {
         if(isOneTimeUnlock()) {
             maxLvl = 1;
         }
+
         this.maxLevel = maxLvl;
     }
 

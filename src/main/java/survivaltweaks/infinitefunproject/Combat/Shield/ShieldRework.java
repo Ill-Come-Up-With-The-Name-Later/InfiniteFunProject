@@ -1,7 +1,7 @@
 package survivaltweaks.infinitefunproject.Combat.Shield;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
@@ -48,7 +48,7 @@ public class ShieldRework implements Listener {
             shielded.add(player);
 
             giveProjectileShield(player, 110, new ArrayList<>(), new ArrayList<>(), 5);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 2, true, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, 2, true, false, true));
 
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 shielded.remove(player);
@@ -69,14 +69,11 @@ public class ShieldRework implements Listener {
                 event.setDamage(event.getDamage() / 3);
                 player.setVelocity(new Vector(0, 0 , 0));
 
-                for(int i = 1; i <= 9; i += 2) {
-                    int finalI = i;
-                    Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
-                        drawCircle(player.getLocation(), finalI, Particle.CRIT_MAGIC, 90);
-                        drawCircle(player.getLocation().add(new Vector(0, 1, 0)), finalI, Particle.CRIT_MAGIC, 90);
-                        drawCircle(player.getLocation().add(new Vector(0, 2, 0)), finalI, Particle.CRIT_MAGIC, 90);
-                    }, i * 2L);
-                }
+                drawExpandingCircle(player.getLocation(), 1, 4, 2, 2, Particle.ENCHANTED_HIT);
+                drawExpandingCircle(player.getLocation().add(new Vector(0, 1, 0)), 1,
+                        4, 2, 2, Particle.ENCHANTED_HIT);
+                drawExpandingCircle(player.getLocation().add(new Vector(0, 2, 0)), 1,
+                        4, 2, 2, Particle.ENCHANTED_HIT);
 
                 if(distanceBetween(player.getLocation().toVector(), damager.getLocation().toVector()) <= 5
                         && damager instanceof LivingEntity) {

@@ -16,7 +16,7 @@ public class Sword {
                 " S ");
 
         recipe.setIngredient('E', Material.IRON_INGOT);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('S', Material.IRON_SWORD);
 
         Bukkit.getServer().addRecipe(recipe);

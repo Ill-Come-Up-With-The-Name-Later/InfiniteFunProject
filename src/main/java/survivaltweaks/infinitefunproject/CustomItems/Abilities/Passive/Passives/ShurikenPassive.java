@@ -9,7 +9,7 @@ public class ShurikenPassive implements Passive {
     @Override
     public void activate(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 0, false, false, false));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 20, 0, false, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP_BOOST, 20, 0, false, false, false));
     }
 
     @Override

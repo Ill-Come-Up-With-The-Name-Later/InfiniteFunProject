@@ -8,6 +8,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidSpawnWaveEvent;
+import survivaltweaks.infinitefunproject.ItemSelector;
 
 import java.util.Random;
 
@@ -36,35 +37,20 @@ public class AddExtraEnemies implements Listener {
 
             Bukkit.spigot().broadcast(new TextComponent(color("&c&lThe wave is stronger than expected...")));
 
-            Illusioner illusioner = event.getWorld().spawn(spawnLoc, Illusioner.class);
-            illusioner.setCanJoinRaid(true);
-            illusioner.setGlowing(true);
+            ItemSelector<EntityType> entities = new ItemSelector<>();
 
-            if(new Random().nextInt(0, 3) == 1) {
-                Illusioner illusioner2 = event.getWorld().spawn(spawnLoc, Illusioner.class);
-                illusioner2.setCanJoinRaid(true);
-                illusioner2.setGlowing(true);
-            }
+            entities.addEntry(EntityType.ILLUSIONER, 6);
+            entities.addEntry(EntityType.PILLAGER, 7);
+            entities.addEntry(EntityType.VINDICATOR, 5);
+            entities.addEntry(EntityType.EVOKER, 4);
+            entities.addEntry(EntityType.RAVAGER, 2);
 
-            for(int i = 0; i < 3; i++) {
-                Pillager pillager = event.getWorld().spawn(spawnLoc, Pillager.class);
-                pillager.setCanJoinRaid(true);
-                pillager.setGlowing(true);
+            int rolls = new Random().nextInt(6, 13);
 
-                Vindicator vindicator = event.getWorld().spawn(spawnLoc, Vindicator.class);
-                vindicator.setCanJoinRaid(true);
-                vindicator.setGlowing(true);
-
-                if(new Random().nextInt(0, 6) == 1) {
-                    Evoker evoker = event.getWorld().spawn(spawnLoc, Evoker.class);
-                    evoker.setCanJoinRaid(true);
-                    evoker.setGlowing(true);
-                }
-                if(new Random().nextInt(0, 9) == 1) {
-                    Ravager ravager = event.getWorld().spawn(spawnLoc, Ravager.class);
-                    ravager.setCanJoinRaid(true);
-                    ravager.setGlowing(true);
-                }
+            for(EntityType type : entities.rollItems(rolls)) {
+                Raider raider = (Raider) spawnLoc.getWorld().spawnEntity(spawnLoc, type);
+                raider.setGlowing(true);
+                raider.setRaid(raid);
             }
         }
     }

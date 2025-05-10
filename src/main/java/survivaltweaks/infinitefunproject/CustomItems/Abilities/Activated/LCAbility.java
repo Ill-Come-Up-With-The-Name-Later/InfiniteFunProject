@@ -3,14 +3,8 @@ package survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.Vine;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Ability;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.LeftClick.*;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RightClick.Flashbang;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RightClick.RocketBarrage;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RightClick.SoulSplicer;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.Passives.CallistoArrows;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.Passives.ShurikenPassive;
 
 import java.util.ArrayList;
 
@@ -43,6 +37,20 @@ public enum LCAbility implements Ability {
             new CallistoExplosiveArrow().getCooldown()),
     TRITON_BURST(new TritonBurst(), "Rapid Fire", new TritonBurst().getDescription(), new TritonBurst().getCooldown()),
     RAILGUN_SHOT(new ShootRailGun(), "Rail Blast", new ShootRailGun().getDescription(), new ShootRailGun().getCooldown()),
+    HEAL_USER(new HealUser(), "Self Heal", new HealUser().getDescription(), new HealUser().getCooldown()),
+    IMPREGNATION_RAY(new ImpregnationShot(), "Impregnating Ray", new ImpregnationShot().getDescription(),
+            new ImpregnationShot().getCooldown()),
+    ROCKET_JUMP(new RocketJump(), "Rocket Jump", new RocketJump().getDescription(), new RocketJump().getCooldown()),
+    ARROW_FLURRY(new ArrowFlurry(), "Arrow Flurry", new ArrowFlurry().getDescription(), new ArrowFlurry().getCooldown()),
+    SOLAR_FLARE(new Flare(), "Solar Flare", new Flare().getDescription(), new Flare().getCooldown()),
+    DIRECT_HIT_ROCKET(new DirectHitRocket(), "High Velocity Rocket", new DirectHitRocket().getDescription(),
+            new DirectHitRocket().getCooldown()),
+    BLAST_PULSE(new BlastPulse(), "Magic Pulse", new BlastPulse().getDescription(), new BlastPulse().getCooldown()),
+    GUIDED_MISSILE(new GuidedMissileLaunch(), "Missile Barrage", new GuidedMissileLaunch().getDescription(),
+            new GuidedMissileLaunch().getCooldown()),
+    INTERCEPT_METEORS(new InterceptMeteors(), "Meteor Interception", new InterceptMeteors().getDescription(),
+            new InterceptMeteors().getCooldown()),
+    SALVATION(new Salvation(), "Salvation", new Salvation().getDescription(), new Salvation().getCooldown()),
     ;
 
     private final ActivatedAbility ability;
@@ -142,10 +150,6 @@ public enum LCAbility implements Ability {
             return;
         }
 
-        if(!item.hasItemMeta()) {
-            return;
-        }
-
         ArrayList<String> lore = new ArrayList<>();
         ItemMeta meta = item.getItemMeta();
 
@@ -167,7 +171,7 @@ public enum LCAbility implements Ability {
         }
 
         if(!ability.getAbility().cooldownModifiable() && ability.getCooldown() > 0) {
-            lore.add(color("&7- &cNon-Reducible Cooldown"));
+            lore.add(color("&7- &cNot affected by modifier."));
         }
         if(ability.getAbility().oneTimeUse()) {
             lore.add(color("&7- &cOne Time Use"));

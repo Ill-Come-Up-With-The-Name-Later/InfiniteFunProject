@@ -2,36 +2,24 @@ package survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.LeftCl
 
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.SpectralArrow;
-import org.bukkit.scheduler.BukkitRunnable;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.ActivatedAbility;
-import survivaltweaks.infinitefunproject.CustomItems.Metadata.RemoveOnGroundMeta;
-import survivaltweaks.infinitefunproject.InfiniteFunProject;
+
+import java.util.ArrayList;
+
+import static survivaltweaks.infinitefunproject.InfiniteFunProject.createDamageRay;
 
 public class ShootScytheGun implements ActivatedAbility {
+
     @Override
     public void activate(Player player) {
-        SpectralArrow arrow = player.launchProjectile(SpectralArrow.class);
-        arrow.setVisibleByDefault(false);
-        arrow.setVelocity(arrow.getVelocity().normalize().multiply(16));
-        arrow.setDamage(0.5);
-        arrow.setCritical(true);
-
-        arrow.setMetadata("RemoveOnGround", new RemoveOnGroundMeta());
-
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                if(arrow.isDead()) {
-                    cancel();
-                    return;
-                }
-
-                arrow.getLocation().getWorld().spawnParticle(Particle.FIREWORKS_SPARK, arrow.getLocation(), 3, 0.1, 0.1, 0.1, 0.02);
-                arrow.getLocation().getWorld().spawnParticle(Particle.CRIT_MAGIC, arrow.getLocation(), 3, 0.1, 0.1, 0.1, 0.02);
+        ArrayList<Particle> particles = new ArrayList<>() {
+            {
+                add(Particle.FIREWORK);
+                add(Particle.ELECTRIC_SPARK);
             }
-        }.runTaskTimer(InfiniteFunProject.plugin, 1, 1);
+        };
+
+        createDamageRay(player, 30, 18, 1, false, false, false, particles, false);
     }
 
     @Override

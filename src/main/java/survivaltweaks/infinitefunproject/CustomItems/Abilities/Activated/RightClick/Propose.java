@@ -19,7 +19,7 @@ public class Propose implements ActivatedAbility {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
                 add(Particle.HEART);
-                add(Particle.VILLAGER_HAPPY);
+                add(Particle.HAPPY_VILLAGER);
             }
         };
 

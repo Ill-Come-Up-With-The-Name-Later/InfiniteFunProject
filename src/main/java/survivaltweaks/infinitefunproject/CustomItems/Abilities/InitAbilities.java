@@ -3,18 +3,23 @@ package survivaltweaks.infinitefunproject.CustomItems.Abilities;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Ability;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.ActivateAbility;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.LeftClick.FallenStar;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.LeftClick.RejuvenationRing;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RightClick.Bleach;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RightClick.Flashbang;
+import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.LeftClick.RocketJump;
+import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.PreventAccidents;
+import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RightClick.*;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.ActivatePassive;
+import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.Passives.BouncingArrows;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.Passives.CallistoArrows;
+import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.Passives.ExplosiveArrows;
+import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.Passives.SeekingArrows;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
-import survivaltweaks.infinitefunproject.Periodic.WorldModifiers.WorldModInit;
+import survivaltweaks.infinitefunproject.Player.Upgrades.PlayerUpgrade;
 
 import java.util.HashMap;
+
+import static survivaltweaks.infinitefunproject.Player.Upgrades.InitUpgrades.getUpgradeLevel;
 
 public class InitAbilities {
 
@@ -28,6 +33,15 @@ public class InitAbilities {
         Bukkit.getServer().getPluginManager().registerEvents(new FallenStar(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new RejuvenationRing(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new CallistoArrows(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new RocketJump(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new SeekingArrows(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new BouncingArrows(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new ExplosiveArrows(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new PreventAccidents(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new SetUnusual(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new UnboxArmor(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new UnboxWeapon(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new UnboxCustomItem(), InfiniteFunProject.plugin);
 
         ActivatePassive.activateIntervalAbilities();
     }
@@ -39,11 +53,14 @@ public class InitAbilities {
     }
 
     public static void setCooldown(Player player, Ability ability, int cd) {
+        int cooldownReduction = getUpgradeLevel(player, PlayerUpgrade.ABILITY_COOLDOWNS);
+        double reductionFactor = 1 - (double) cooldownReduction / 40;
+
         if(playerCooldowns.containsKey(player)) {
-            playerCooldowns.get(player).put(ability, cd);
+            playerCooldowns.get(player).put(ability, (int) (cd * reductionFactor));
         } else {
             playerCooldowns.put(player, new HashMap<>());
-            playerCooldowns.get(player).put(ability, cd);
+            playerCooldowns.get(player).put(ability, (int) (cd * reductionFactor));
         }
 
         tickCooldown(player, ability);

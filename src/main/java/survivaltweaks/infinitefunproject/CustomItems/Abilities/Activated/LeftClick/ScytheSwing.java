@@ -17,7 +17,7 @@ public class ScytheSwing implements ActivatedAbility {
     @Override
     public void activate(Player player) {
         drawCircle(player.getLocation(), 4, Particle.SWEEP_ATTACK, 90);
-        drawCircle(player.getLocation(), 3, Particle.CRIT_MAGIC, 180);
+        drawCircle(player.getLocation(), 3, Particle.ENCHANTED_HIT, 180);
 
         ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(player, radius);
 

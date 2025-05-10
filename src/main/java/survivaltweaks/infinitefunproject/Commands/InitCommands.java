@@ -1,8 +1,9 @@
 package survivaltweaks.infinitefunproject.Commands;
 
 import org.bukkit.Bukkit;
-import survivaltweaks.infinitefunproject.Commands.CustomItemsUI.CustomItemsCommand;
+import survivaltweaks.infinitefunproject.Commands.Executors.CustomItemsCommand;
 import survivaltweaks.infinitefunproject.Commands.CustomItemsUI.GivePlayerItems;
+import survivaltweaks.infinitefunproject.Commands.Executors.*;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
 public class InitCommands {
@@ -20,6 +21,12 @@ public class InitCommands {
         InfiniteFunProject.getPlugin(InfiniteFunProject.class).getCommand("addbonusmodifier").setExecutor(new AddBonusModifierCommand());
         InfiniteFunProject.getPlugin(InfiniteFunProject.class).getCommand("modifier").setExecutor(new PickModifierCommand());
         InfiniteFunProject.getPlugin(InfiniteFunProject.class).getCommand("removechallenges").setExecutor(new DisableChallengesCommand());
+        InfiniteFunProject.getPlugin(InfiniteFunProject.class).getCommand("removeprojectiles").setExecutor(new RemoveProjectilesCommand());
+        InfiniteFunProject.getPlugin(InfiniteFunProject.class).getCommand("sethealth").setExecutor(new SetHealthCommand());
+        InfiniteFunProject.getPlugin(InfiniteFunProject.class).getCommand("startmeteors").setExecutor(new MeteorShowerCommand());
+        InfiniteFunProject.getPlugin(InfiniteFunProject.class).getCommand("endmeteors").setExecutor(new EndMeteorsCommand());
+        InfiniteFunProject.getPlugin(InfiniteFunProject.class).getCommand("addrandomunusual").setExecutor(new AddUnusualCommand());
+        InfiniteFunProject.getPlugin(InfiniteFunProject.class).getCommand("setunusual").setExecutor(new AddSetUnusualCommand());
 
         Bukkit.getServer().getPluginManager().registerEvents(new GivePlayerItems(), InfiniteFunProject.plugin);
     }

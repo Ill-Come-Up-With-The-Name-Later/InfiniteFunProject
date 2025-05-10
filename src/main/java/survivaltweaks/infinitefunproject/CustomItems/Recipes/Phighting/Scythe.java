@@ -17,7 +17,7 @@ public class Scythe {
 
         recipe.setIngredient('N', Material.NETHER_STAR);
         recipe.setIngredient('A', Material.ARROW);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('S', Material.DIAMOND_HOE);
 
         Bukkit.getServer().addRecipe(recipe);

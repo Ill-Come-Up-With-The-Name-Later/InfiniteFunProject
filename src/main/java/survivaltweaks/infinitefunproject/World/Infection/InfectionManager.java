@@ -1,5 +1,6 @@
 package survivaltweaks.infinitefunproject.World.Infection;
 
+import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -31,7 +32,7 @@ public class InfectionManager {
                         LivingEntity living = (LivingEntity) entity;
 
                         if(living.hasMetadata("Infected") && !entity.isDead()) {
-                            drawCircle(living.getLocation(), infectionRadius, Particle.VILLAGER_HAPPY, 90);
+                            drawCircle(living.getLocation(), infectionRadius, Particle.HAPPY_VILLAGER, 90);
                             infectSurrounding(living);
                         }
                     }
@@ -74,10 +75,10 @@ public class InfectionManager {
         entity.setMetadata("Infected", new InfectedMetadata());
         entity.sendMessage(ChatColor.LIGHT_PURPLE + "You are now infected with Coronavirus!");
 
-        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, infectionDuration, 1, false, false, false));
-        entity.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, infectionDuration, 1, false, false, false));
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, infectionDuration, 1, false, false, false));
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, infectionDuration, 1, false, false, false));
         entity.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, infectionDuration, 1, false, false, false));
-        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, infectionDuration, 1, false, false, false));
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, infectionDuration, 1, false, false, false));
 
         if(new Random().nextInt(0, 12) == 4) {
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {

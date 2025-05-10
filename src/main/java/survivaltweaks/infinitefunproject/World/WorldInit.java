@@ -1,17 +1,13 @@
 package survivaltweaks.infinitefunproject.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.advancement.Advancement;
-import org.bukkit.advancement.AdvancementProgress;
-import org.bukkit.boss.DragonBattle;
-import org.bukkit.entity.Player;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
-import survivaltweaks.infinitefunproject.World.Events.CoalMining;
-import survivaltweaks.infinitefunproject.World.Events.DestroyProjectiles;
-import survivaltweaks.infinitefunproject.World.Events.PlayerJoinsEvent;
-import survivaltweaks.infinitefunproject.World.Events.SpawnTermites;
+import survivaltweaks.infinitefunproject.World.Events.*;
 import survivaltweaks.infinitefunproject.World.Infection.InfectionManager;
 import survivaltweaks.infinitefunproject.World.PillagerRaid.AddExtraEnemies;
+import survivaltweaks.infinitefunproject.World.TrialChamber.InitTrial;
+import survivaltweaks.infinitefunproject.World.Village.BlackMarketTrader;
+import survivaltweaks.infinitefunproject.World.Village.SuperTrader;
 
 public class WorldInit {
 
@@ -21,7 +17,12 @@ public class WorldInit {
         Bukkit.getServer().getPluginManager().registerEvents(new DestroyProjectiles(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new AddExtraEnemies(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new CoalMining(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new SIDS(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new SuperTrader(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new BlackMarketTrader(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new ObtainSpecialDirt(), InfiniteFunProject.plugin);
 
         InfectionManager.init();
+        InitTrial.init();
     }
 }

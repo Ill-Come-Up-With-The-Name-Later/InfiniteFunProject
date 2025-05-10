@@ -9,6 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.stun;
 
+@Deprecated
 public class RandomCritProjectiles implements Listener {
 
     @EventHandler
@@ -16,13 +17,13 @@ public class RandomCritProjectiles implements Listener {
         Entity damaged = event.getEntity();
         Entity damager = event.getDamager();
 
-        if(damaged instanceof LivingEntity) {
+        if (damaged instanceof LivingEntity) {
             LivingEntity entity = (LivingEntity) damaged;
 
-            if(damager instanceof Projectile) {
+            if (damager instanceof Projectile) {
                 Projectile projectile = (Projectile) damager;
 
-                if(projectile.hasMetadata("EntityCrit")) {
+                if (projectile.hasMetadata("EntityCrit")) {
                     stun(entity, 20, false);
                 }
             }

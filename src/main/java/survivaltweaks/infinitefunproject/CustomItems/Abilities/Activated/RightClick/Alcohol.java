@@ -11,7 +11,7 @@ public class Alcohol implements ActivatedAbility {
     public void activate(Player player) {
         giveCrits(player, 600);
 
-        player.addPotionEffect(PotionEffectType.CONFUSION.createEffect(600, 1));
+        player.addPotionEffect(PotionEffectType.NAUSEA.createEffect(600, 1));
         player.addPotionEffect(PotionEffectType.SPEED.createEffect(600, 1));
         player.addPotionEffect(PotionEffectType.DARKNESS.createEffect(600, 1));
 

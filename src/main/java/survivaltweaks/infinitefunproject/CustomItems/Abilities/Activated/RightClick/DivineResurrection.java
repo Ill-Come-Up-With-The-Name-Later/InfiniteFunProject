@@ -18,13 +18,13 @@ public class DivineResurrection implements ActivatedAbility {
 
     @Override
     public void activate(Player player) {
-        drawCircle(player.getLocation(), radius, Particle.VILLAGER_HAPPY, 90);
-        drawCircle(player.getLocation(), radius, Particle.FIREWORKS_SPARK, 90);
+        drawCircle(player.getLocation(), radius, Particle.HAPPY_VILLAGER, 90);
+        drawCircle(player.getLocation(), radius, Particle.FIREWORK, 90);
 
         ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(player, radius);
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
         player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 200, 4, false, false, false));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 0, false, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 100, 0, false, false, false));
 
         for(Entity entity : nearby) {
             if(entity instanceof Player) {
@@ -32,7 +32,7 @@ public class DivineResurrection implements ActivatedAbility {
 
                 other.setHealth(other.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
                 other.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 200, 4, false, false, false));
-                other.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 0, false, false, false));
+                other.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 100, 0, false, false, false));
             }
         }
     }

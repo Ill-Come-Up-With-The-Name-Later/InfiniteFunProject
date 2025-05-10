@@ -18,17 +18,17 @@ public class RandomTippedArrows implements Listener {
 
         if(!(shooter instanceof LivingEntity)) return;
 
-        if(projectile instanceof Arrow && shooter.getType() == EntityType.SKELETON) {
+        if(projectile instanceof Arrow && shooter instanceof AbstractSkeleton) {
             Arrow arrow = (Arrow) projectile;
 
             ArrayList<PotionEffectType> negativeEffects = new ArrayList<>();
             negativeEffects.add(PotionEffectType.BLINDNESS);
-            negativeEffects.add(PotionEffectType.CONFUSION);
+            negativeEffects.add(PotionEffectType.NAUSEA);
             negativeEffects.add(PotionEffectType.WEAKNESS);
             negativeEffects.add(PotionEffectType.POISON);
             negativeEffects.add(PotionEffectType.DARKNESS);
             negativeEffects.add(PotionEffectType.HUNGER);
-            negativeEffects.add(PotionEffectType.SLOW_DIGGING);
+            negativeEffects.add(PotionEffectType.MINING_FATIGUE);
 
             if(new Random().nextInt(0, 20) == 3) {
                 arrow.addCustomEffect(negativeEffects.get(new Random().nextInt(0, negativeEffects.size()))

@@ -40,16 +40,16 @@ public class ThirstInit {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 0, true, true, true));
             }
             if(getThirst(player) > 80 && getThirst(player) <= 95) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 0, true, true, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, 0, true, true, true));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 1, true, true, true));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100, 1, true, true, true));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1, true, true, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, 100, 1, true, true, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 100, 1, true, true, true));
             }
             if(getThirst(player) > 95) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 2, true, true, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, 2, true, true, true));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 1, true, true, true));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100, 2, true, true, true));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1, true, true, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, 100, 2, true, true, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 100, 1, true, true, true));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 100, 1, true, true, true));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 40, 0, true, true, true));
             }

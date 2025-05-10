@@ -15,6 +15,7 @@ import static survivaltweaks.infinitefunproject.CustomItems.Abilities.InitAbilit
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.color;
 
 public enum TriggeredAbility implements Ability {
+
     CRYSTALLIZE(new Crystallize(), "Crystallize", new Crystallize().getDescription(), new Crystallize().getCooldown()),
     DOUBLE_JUMP(new DoubleJumpAbility(), "Double Jump", new DoubleJumpAbility().getDescription(), new DoubleJumpAbility().getCooldown()),
     ;
@@ -116,10 +117,6 @@ public enum TriggeredAbility implements Ability {
             return;
         }
 
-        if(!item.hasItemMeta()) {
-            return;
-        }
-
         ArrayList<String> lore = new ArrayList<>();
         ItemMeta meta = item.getItemMeta();
 
@@ -140,7 +137,7 @@ public enum TriggeredAbility implements Ability {
             lore.add(color("&7- &eCooldown&7: &b" + String.format("%.2f", ability.getCooldown() / 20) + " Second(s)"));
         }
         if(!ability.getAbility().cooldownModifiable() && ability.getCooldown() > 0) {
-            lore.add(color("&7- &cNon-Reducible Cooldown"));
+            lore.add(color("&7- &cNot affected by modifier."));
         }
 
         meta.setLore(lore);

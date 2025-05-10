@@ -22,14 +22,14 @@ public class Bleach implements ActivatedAbility, Listener {
     public void activate(Player player) {
         ArrayList<PotionEffectType> positiveEffects = new ArrayList<>();
         positiveEffects.add(PotionEffectType.FIRE_RESISTANCE);
-        positiveEffects.add(PotionEffectType.DAMAGE_RESISTANCE);
+        positiveEffects.add(PotionEffectType.RESISTANCE);
         positiveEffects.add(PotionEffectType.DOLPHINS_GRACE);
         positiveEffects.add(PotionEffectType.HERO_OF_THE_VILLAGE);
-        positiveEffects.add(PotionEffectType.INCREASE_DAMAGE);
+        positiveEffects.add(PotionEffectType.STRENGTH);
         positiveEffects.add(PotionEffectType.INVISIBILITY);
         positiveEffects.add(PotionEffectType.LUCK);
         positiveEffects.add(PotionEffectType.SPEED);
-        positiveEffects.add(PotionEffectType.JUMP);
+        positiveEffects.add(PotionEffectType.JUMP_BOOST);
         positiveEffects.add(PotionEffectType.REGENERATION);
         positiveEffects.add(PotionEffectType.ABSORPTION);
         positiveEffects.add(PotionEffectType.HEALTH_BOOST);
@@ -73,7 +73,7 @@ public class Bleach implements ActivatedAbility, Listener {
         ItemStack selected = player.getItemOnCursor();
 
         if(selected.equals(ItemManager.bleach)) {
-            if(item.getData().getItemType().isEdible()) {
+            if(item.getType().isEdible()) {
                 ItemMeta modified = item.getItemMeta();
                 modified.setDisplayName(ChatColor.GRAY + fixCaps(item.getType().toString()));
 

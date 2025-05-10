@@ -1,7 +1,7 @@
 package survivaltweaks.infinitefunproject.Periodic.Events.Anomalies;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import survivaltweaks.infinitefunproject.Periodic.Events.RandomEvents.RandomEvent;

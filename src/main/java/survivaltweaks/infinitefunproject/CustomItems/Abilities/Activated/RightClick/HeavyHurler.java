@@ -19,7 +19,7 @@ public class HeavyHurler implements ActivatedAbility {
     public void activate(Player player) {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
-                add(Particle.CRIT_MAGIC);
+                add(Particle.ENCHANTED_HIT);
                 add(Particle.ELECTRIC_SPARK);
             }
         };

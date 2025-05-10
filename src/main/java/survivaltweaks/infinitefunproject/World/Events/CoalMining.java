@@ -1,7 +1,7 @@
 package survivaltweaks.infinitefunproject.World.Events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
@@ -35,7 +35,7 @@ public class CoalMining implements Listener {
             return;
         }
 
-        block.getWorld().spawnParticle(Particle.SMOKE_LARGE, block.getLocation().add(0, 0.4, 0), 20,
+        block.getWorld().spawnParticle(Particle.LARGE_SMOKE, block.getLocation().add(0, 0.4, 0), 20,
                 0.7, 0.4, 0.7, 0.01);
 
         if(new Random().nextInt(0, 100) == 1) {
@@ -45,7 +45,7 @@ public class CoalMining implements Listener {
                 if(entity instanceof LivingEntity) {
                     LivingEntity living = (LivingEntity) entity;
 
-                    drawCircle(living.getLocation(), 1.4, Particle.SMOKE_NORMAL, 90);
+                    drawCircle(living.getLocation(), 1.4, Particle.SMOKE, 90);
                     drawCircle(living.getLocation(), 1.4, Particle.DAMAGE_INDICATOR, 90);
 
                     int timeUntilDeath = new Random().nextInt(300, 1200);
@@ -55,9 +55,9 @@ public class CoalMining implements Listener {
 
                     living.setMetadata("Cancer", new CancerMeta());
 
-                    living.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,
+                    living.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS,
                             timeUntilDeath, 1, false, false, false));
-                    living.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING,
+                    living.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE,
                             timeUntilDeath, 0, false, false, false));
 
                     Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {

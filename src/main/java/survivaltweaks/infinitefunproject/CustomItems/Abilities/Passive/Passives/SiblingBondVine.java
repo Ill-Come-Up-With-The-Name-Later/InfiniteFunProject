@@ -23,9 +23,9 @@ public class SiblingBondVine implements Passive {
                 Player other = (Player) entity;
 
                 if(other.getInventory().contains(ItemManager.shuriken)) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20, 0, false, false, false));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20, 0, false, false, false));
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 0, false, false, false));
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20, 0, false, false, false));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20, 0, false, false, false));
                 }
             }
         }

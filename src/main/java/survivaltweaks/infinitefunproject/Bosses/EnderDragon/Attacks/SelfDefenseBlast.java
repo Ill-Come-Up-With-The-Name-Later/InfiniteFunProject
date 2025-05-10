@@ -12,6 +12,12 @@ import java.util.Random;
 
 public class SelfDefenseBlast implements Listener {
 
+    /**
+     * Dragon damaged and self defense
+     * blast loop
+     *
+     * @param event: Entity damage by entity event
+     */
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
         Entity damaged = event.getEntity();
@@ -24,7 +30,7 @@ public class SelfDefenseBlast implements Listener {
                     ArrayList<Entity> entities = (ArrayList<Entity>) dragon.getNearbyEntities(12, 12, 12);
 
                     if(!entities.isEmpty()) {
-                        dragon.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, dragon.getLocation(), 10, .1, .1, .1, 12);
+                        dragon.getWorld().spawnParticle(Particle.EXPLOSION, dragon.getLocation(), 10, .1, .1, .1, 12);
                     }
 
                     for(Entity e : entities) {

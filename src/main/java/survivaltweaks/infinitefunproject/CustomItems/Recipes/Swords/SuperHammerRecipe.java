@@ -16,7 +16,7 @@ public class SuperHammerRecipe {
                      " B ");
 
         recipe.setIngredient('D', Material.IRON_BLOCK);
-        recipe.setIngredient('B', ItemManager.weaponHandle.getData());
+        recipe.setIngredient('B', ItemManager.weaponHandle);
 
         Bukkit.getServer().addRecipe(recipe);
     }

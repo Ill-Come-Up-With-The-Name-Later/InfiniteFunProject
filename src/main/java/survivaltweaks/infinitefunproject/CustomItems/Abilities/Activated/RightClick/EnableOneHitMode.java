@@ -2,7 +2,7 @@ package survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RightC
 
 import org.bukkit.entity.Player;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.ActivatedAbility;
-import survivaltweaks.infinitefunproject.Player.ChallengeMode.Managers.OneHitModeManager;
+import survivaltweaks.infinitefunproject.ChallengeMode.Managers.OneHitModeManager;
 
 public class EnableOneHitMode implements ActivatedAbility {
     @Override

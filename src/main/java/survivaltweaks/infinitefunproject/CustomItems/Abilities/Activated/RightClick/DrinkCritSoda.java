@@ -13,7 +13,7 @@ public class DrinkCritSoda implements ActivatedAbility {
     @Override
     public void activate(Player player) {
         giveMiniCrits(player, duration);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 0, false, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, duration, 0, false, false, false));
     }
 
     @Override

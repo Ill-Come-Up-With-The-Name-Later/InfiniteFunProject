@@ -14,9 +14,9 @@ public class CulminationRecipe {
                      " D ",
                      " B ");
 
-        recipe.setIngredient('S', ItemManager.decrepitScroll.getData());
-        recipe.setIngredient('D', ItemManager.dragonSword.getData());
-        recipe.setIngredient('B', ItemManager.berserkSword.getData());
+        recipe.setIngredient('S', ItemManager.decrepitScroll);
+        recipe.setIngredient('D', ItemManager.dragonSword);
+        recipe.setIngredient('B', ItemManager.berserkSword);
 
         Bukkit.getServer().addRecipe(recipe);
     }

@@ -6,11 +6,11 @@ import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.Activat
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.taxEvade;
 
 public class DamageTaxExemption implements ActivatedAbility {
-    int duration = 1200;
+    int duration = 60;
 
     @Override
     public void activate(Player player) {
-        taxEvade(player, duration, true);
+        taxEvade(player, duration * 20, true);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class DamageTaxExemption implements ActivatedAbility {
 
     @Override
     public String getDescription() {
-        return "Dodges the the damage tax\nfor " + String.format("%.2f", (float) duration / 20) + " seconds.";
+        return "Dodges the the damage tax\nfor " + duration + " seconds.";
     }
 
     @Override

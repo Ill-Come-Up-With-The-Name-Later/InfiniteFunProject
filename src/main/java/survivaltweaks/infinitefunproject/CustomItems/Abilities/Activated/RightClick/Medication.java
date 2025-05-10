@@ -15,9 +15,9 @@ public class Medication implements ActivatedAbility {
             player.sendMessage(ChatColor.GREEN + "Your super lung cancer is in remission!");
         }
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 400, 0, false, false, false));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 400, 1, false, false, false));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 400, 1, false, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 400, 0, false, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 400, 1, false, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP_BOOST, 400, 1, false, false, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 400, 1, false, false, false));
     }
 

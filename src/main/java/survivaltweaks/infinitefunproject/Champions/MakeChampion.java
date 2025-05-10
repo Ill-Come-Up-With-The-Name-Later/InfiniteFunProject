@@ -15,7 +15,7 @@ import static survivaltweaks.infinitefunproject.Champions.ChampionInit.makeChamp
 
 public class MakeChampion implements Listener {
 
-    int baseChance = 270;
+    int baseChance = 300;
 
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {

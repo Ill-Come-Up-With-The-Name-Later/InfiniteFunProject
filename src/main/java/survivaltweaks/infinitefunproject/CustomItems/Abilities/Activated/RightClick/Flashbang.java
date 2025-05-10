@@ -1,7 +1,7 @@
 package survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RightClick;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -30,7 +30,7 @@ public class Flashbang implements ActivatedAbility, Listener {
             if(!flashbang.isDead()) {
                 ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(flashbang, 6);
                 flashbang.getWorld().spawnParticle(Particle.FLASH, flashbang.getLocation().add(0, 0.2, 0), 8, 0.01, 0.01, 0.01, 0.5);
-                flashbang.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, flashbang.getLocation().add(0, 0.2, 0), 5, 0.01, 0.01, 0.01, 0.05);
+                flashbang.getWorld().spawnParticle(Particle.EXPLOSION, flashbang.getLocation().add(0, 0.2, 0), 5, 0.01, 0.01, 0.01, 0.05);
 
                 for(Entity entity : nearby) {
                     if(entity instanceof LivingEntity && ((LivingEntity) entity).hasLineOfSight(flashbang)) {
@@ -76,7 +76,7 @@ public class Flashbang implements ActivatedAbility, Listener {
         if(projectile.hasMetadata("Flashbang")) {
             ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(projectile, 6);
             projectile.getWorld().spawnParticle(Particle.FLASH, projectile.getLocation(), 5, 0.01, 0.01, 0.01, 0.05);
-            projectile.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, projectile.getLocation(), 5, 0.01, 0.01, 0.01, 0.05);
+            projectile.getWorld().spawnParticle(Particle.EXPLOSION, projectile.getLocation(), 5, 0.01, 0.01, 0.01, 0.05);
 
             for(Entity entity : nearby) {
                 if(entity instanceof LivingEntity && ((LivingEntity) entity).hasLineOfSight(projectile)) {

@@ -3,12 +3,10 @@ package survivaltweaks.infinitefunproject.Mobs;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
-import survivaltweaks.infinitefunproject.Mobs.Animals.DropBleachedFood;
 import survivaltweaks.infinitefunproject.Mobs.Bat.BatDisease;
 import survivaltweaks.infinitefunproject.Mobs.Blaze.AutoAimFireballs;
 import survivaltweaks.infinitefunproject.Champions.ChampionInit;
 import survivaltweaks.infinitefunproject.Mobs.Creeper.AutoCharge;
-import survivaltweaks.infinitefunproject.Mobs.ElderGuardian.DropKingTrident;
 import survivaltweaks.infinitefunproject.Mobs.ElderGuardian.GiveMiningFatigue;
 import survivaltweaks.infinitefunproject.Mobs.EnderDragon.DropSword;
 import survivaltweaks.infinitefunproject.Mobs.EnderDragon.GiveDragonHealth;
@@ -22,6 +20,7 @@ import survivaltweaks.infinitefunproject.Mobs.Rabbit.TurnLethal;
 import survivaltweaks.infinitefunproject.Mobs.Skeleton.AutoAimArrows;
 import survivaltweaks.infinitefunproject.Mobs.Skeleton.EquipSkeletonItems;
 import survivaltweaks.infinitefunproject.Mobs.Skeleton.RandomTippedArrows;
+import survivaltweaks.infinitefunproject.Mobs.Slime.CancelSplit;
 import survivaltweaks.infinitefunproject.Mobs.Spider.GiveSpiderEffects;
 import survivaltweaks.infinitefunproject.Mobs.Stray.AutoAimStrayArrows;
 import survivaltweaks.infinitefunproject.Mobs.Stray.EquipStrays;
@@ -33,6 +32,8 @@ import survivaltweaks.infinitefunproject.Mobs.Wither.AutoAimSkulls;
 import survivaltweaks.infinitefunproject.Mobs.Wither.DropScroll;
 import survivaltweaks.infinitefunproject.Mobs.Wither.GiveWitherHealth;
 import survivaltweaks.infinitefunproject.Mobs.WitherSkele.EquipWitherSkele;
+import survivaltweaks.infinitefunproject.Mobs.Wolf.BuffTamed;
+import survivaltweaks.infinitefunproject.Mobs.Zombie.DropGiantPants;
 import survivaltweaks.infinitefunproject.Mobs.Zombie.EquipZombieItems;
 
 public class MobInit {
@@ -70,7 +71,9 @@ public class MobInit {
         Bukkit.getServer().getPluginManager().registerEvents(new ChampionInit(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new MonsterSwarm(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new LandmineTurtle(), InfiniteFunProject.plugin);
-        Bukkit.getServer().getPluginManager().registerEvents(new DropKingTrident(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new DropGiantPants(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new CancelSplit(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new BuffTamed(), InfiniteFunProject.plugin);
 
         InitFarmAnimals.init();
     }

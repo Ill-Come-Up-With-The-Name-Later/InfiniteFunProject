@@ -18,8 +18,8 @@ public class CalamitySlice implements ActivatedAbility {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
                 add(Particle.SWEEP_ATTACK);
-                add(Particle.CRIT_MAGIC);
-                add(Particle.SPELL_WITCH);
+                add(Particle.ENCHANTED_HIT);
+                add(Particle.ENCHANTED_HIT);
             }
         };
 

@@ -26,7 +26,7 @@ public class GiveDragonHealth implements Listener {
 
             grantImmunity(dragon);
 
-            dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(275 + (players.size() * 55) + (getLevel() * 6));
+            dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(280 + (players.size() * 60) + (getLevel() * 6));
             dragon.setHealth(dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {

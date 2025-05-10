@@ -4,7 +4,12 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
+/**
+ * Sets an enemy as the
+ * wither's to control
+ */
 public class WitherSpawn implements MetadataValue {
+
     @Override
     public Object value() {
         return "WitherSpawn";

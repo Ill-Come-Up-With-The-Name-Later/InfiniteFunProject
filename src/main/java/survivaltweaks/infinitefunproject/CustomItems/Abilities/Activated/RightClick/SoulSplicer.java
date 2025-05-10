@@ -17,7 +17,7 @@ public class SoulSplicer implements ActivatedAbility {
     @Override
     public void activate(Player player) {
         drawCircle(player.getLocation(), radius, Particle.SWEEP_ATTACK, 90);
-        drawCircle(player.getLocation(), radius, Particle.CRIT_MAGIC, 90);
+        drawCircle(player.getLocation(), radius, Particle.ENCHANTED_HIT, 90);
 
         ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(player, radius);
 

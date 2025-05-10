@@ -2,6 +2,7 @@ package survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.AbilityType;
 
 /**
@@ -18,6 +19,7 @@ public interface OnAttackedAbility extends Passive {
      * @param attacker: The attacking entity
      */
     void activate(Player player, LivingEntity attacker);
+    void activate(EntityDamageByEntityEvent event);
     int getCooldown();
     String getDescription();
     boolean oneTimeUse();

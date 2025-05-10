@@ -1,7 +1,7 @@
 package survivaltweaks.infinitefunproject.Player.Upgrades;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,9 +17,10 @@ import java.util.ArrayList;
 import static survivaltweaks.infinitefunproject.Player.Upgrades.InitUpgrades.applyUpgrades;
 
 public class UpgradeGUI implements Listener {
+
     public static final String menuTitle = ChatColor.GOLD + "Upgrades";
-    private static final int size = 9;
-    private static final String cannotUpgrade = ChatColor.RED + "Max Level Reached.";
+    private static final int size = 18;
+    private static final String cannotUpgrade = ChatColor.RED + "Maximum Level Reached.";
 
     public static void openGUI(Player player) {
         Inventory upgradeUI = Bukkit.createInventory(player, size, menuTitle);

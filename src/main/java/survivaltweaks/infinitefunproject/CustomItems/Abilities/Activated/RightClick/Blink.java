@@ -19,8 +19,8 @@ public class Blink implements ActivatedAbility {
     public void activate(Player player) {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
-                add(Particle.SPELL_WITCH);
-                add(Particle.CRIT_MAGIC);
+                add(Particle.WITCH);
+                add(Particle.ENCHANTED_HIT);
             }
         };
 

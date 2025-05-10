@@ -27,7 +27,7 @@ public class GivePlayerItems implements Listener {
         }
         if(clicked.equals(top) && title.equals("Custom Items") && !item.equals(ItemManager.comingSoon)) {
             player.getInventory().addItem(item.clone());
-            player.sendMessage(ChatColor.GREEN + "Gave you " + ChatColor.RESET +
+            player.sendMessage(ChatColor.GREEN + "Gave you " + ChatColor.WHITE +
                     item.getItemMeta().getDisplayName() + ChatColor.GREEN + ".");
         }
     }

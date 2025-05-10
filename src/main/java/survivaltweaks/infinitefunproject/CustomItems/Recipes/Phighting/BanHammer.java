@@ -16,7 +16,7 @@ public class BanHammer {
                 " S ");
 
         recipe.setIngredient('E', Material.IRON_BARS);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('S', Material.NETHERITE_AXE);
 
         Bukkit.getServer().addRecipe(recipe);

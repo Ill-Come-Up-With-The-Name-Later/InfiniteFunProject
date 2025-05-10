@@ -16,14 +16,14 @@ public class BoomboxShield implements ActivatedAbility {
         ArrayList<Particle> deflect = new ArrayList<>() {
             {
                 add(Particle.NOTE);
-                add(Particle.CRIT_MAGIC);
+                add(Particle.ENCHANTED_HIT);
             }
         };
 
         ArrayList<Particle> aura = new ArrayList<>() {
             {
                 add(Particle.NOTE);
-                add(Particle.CRIT_MAGIC);
+                add(Particle.ENCHANTED_HIT);
                 add(Particle.CRIT);
             }
         };

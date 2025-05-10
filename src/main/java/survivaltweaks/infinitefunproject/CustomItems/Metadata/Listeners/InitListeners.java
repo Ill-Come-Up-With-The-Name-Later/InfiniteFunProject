@@ -2,7 +2,6 @@ package survivaltweaks.infinitefunproject.CustomItems.Metadata.Listeners;
 
 import org.bukkit.Bukkit;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
-import survivaltweaks.infinitefunproject.Player.ChallengeMode.Metadata.Listeners.OneHitModeListener;
 
 public class InitListeners {
 
@@ -11,6 +10,8 @@ public class InitListeners {
         Bukkit.getServer().getPluginManager().registerEvents(new SeekingProjectiles(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new RemoveGroundedProjectiles(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new BackstabListener(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new BounceArrowListener(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new MeteorListener(), InfiniteFunProject.plugin);
 
         ProjectileShieldManager.init();
     }

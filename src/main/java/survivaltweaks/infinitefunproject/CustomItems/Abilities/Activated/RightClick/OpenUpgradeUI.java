@@ -5,6 +5,7 @@ import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.Activat
 import survivaltweaks.infinitefunproject.Player.Upgrades.UpgradeGUI;
 
 public class OpenUpgradeUI implements ActivatedAbility {
+
     @Override
     public void activate(Player player) {
         UpgradeGUI.openGUI(player);
@@ -17,7 +18,7 @@ public class OpenUpgradeUI implements ActivatedAbility {
 
     @Override
     public String getDescription() {
-        return "Allows you to buy as many upgrades\nas you can afford.";
+        return "Allows you to buy upgrades for\nyour stats.";
     }
 
     @Override

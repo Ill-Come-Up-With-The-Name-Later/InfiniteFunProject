@@ -1,11 +1,8 @@
 package survivaltweaks.infinitefunproject.EventListeners;
 
-import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,23 +14,31 @@ import survivaltweaks.infinitefunproject.InfiniteFunProject;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static survivaltweaks.infinitefunproject.EventListeners.DamageTax.getTaxedDamage;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.color;
 
 public class OnEntityDamaged implements Listener {
+
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
         Entity damaged = event.getEntity();
 
+        if(event.isCancelled()) {
+            return;
+        }
+
+        if(!(damaged instanceof LivingEntity)) {
+            return;
+        }
+
         ArrayList<EntityType> ignore = new ArrayList<>();
         ignore.add(EntityType.ITEM_FRAME);
-        ignore.add(EntityType.DROPPED_ITEM);
+        ignore.add(EntityType.ITEM);
         ignore.add(EntityType.GLOW_ITEM_FRAME);
         ignore.add(EntityType.FIREBALL);
         ignore.add(EntityType.SMALL_FIREBALL);
         ignore.add(EntityType.DRAGON_FIREBALL);
-        ignore.add(EntityType.FIREWORK);
-        ignore.add(EntityType.FISHING_HOOK);
+        ignore.add(EntityType.FIREWORK_ROCKET);
+        ignore.add(EntityType.FISHING_BOBBER);
         ignore.add(EntityType.ARMOR_STAND);
         ignore.add(EntityType.TEXT_DISPLAY);
         ignore.add(EntityType.ARROW);
@@ -41,15 +46,15 @@ public class OnEntityDamaged implements Listener {
         ignore.add(EntityType.SNOWBALL);
         ignore.add(EntityType.EGG);
         ignore.add(EntityType.SNOWBALL);
-        ignore.add(EntityType.ENDER_CRYSTAL);
+        ignore.add(EntityType.END_CRYSTAL);
         ignore.add(EntityType.SHULKER_BULLET);
+        ignore.add(EntityType.BOAT);
         ignore.add(EntityType.BLOCK_DISPLAY);
         ignore.add(EntityType.ITEM_DISPLAY);
         ignore.add(EntityType.INTERACTION);
-        ignore.add(EntityType.BOAT);
+        ignore.add(EntityType.WIND_CHARGE);
 
         Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
-            double originalDamage = event.getDamage();
             double damage = event.getFinalDamage();
 
             if(!ignore.contains(damaged.getType())  && event.getFinalDamage() > 0) {
@@ -83,12 +88,13 @@ public class OnEntityDamaged implements Listener {
 
                 display.setCustomNameVisible(false);
 
+                /**
                 Player shooter;
                 if(event.getDamager().getType().equals(EntityType.ARROW) || event.getDamager().getType().equals(EntityType.TRIDENT) ||
-                        event.getDamager().getType().equals(EntityType.SPECTRAL_ARROW) || event.getDamager().getType().equals(EntityType.FIREWORK)) {
+                        event.getDamager().getType().equals(EntityType.SPECTRAL_ARROW) || event.getDamager().getType().equals(EntityType.FIREWORK_ROCKET)) {
                     Projectile damageSource = (Projectile) event.getDamager();
 
-                    if(event.getDamager().getType().equals(EntityType.FIREWORK)) {
+                    if(event.getDamager().getType().equals(EntityType.FIREWORK_ROCKET)) {
                         ((LivingEntity) damaged).setNoDamageTicks(0);
                     }
 
@@ -101,6 +107,7 @@ public class OnEntityDamaged implements Listener {
                     shooter = null;
                 }
 
+
                 if(event.getDamager() instanceof Player) {
                     LivingEntity entity = (LivingEntity) damaged;
                     Player damager = (Player) event.getDamager();
@@ -110,37 +117,37 @@ public class OnEntityDamaged implements Listener {
                     if(!entity.isDead()) {
                         if(damaged.getType().equals(EntityType.PLAYER)) {
                             Player player = (Player) event.getEntity();
-                            output = ChatColor.AQUA + player.getName() + ChatColor.RESET + ": " +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.RESET + "/" +
+                            output = ChatColor.AQUA + player.getName() + ChatColor.WHITE + ": " +
+                                    ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.WHITE + "/" +
                                     ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
-                                    + ChatColor.RESET + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.RESET + ")"
+                                    + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")"
                                     + ChatColor.GRAY + " Tax Amount: " + ChatColor.GREEN + String.format("%.2f", getTaxedDamage(damage));
                         } else {
-                            output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.RESET + ": " +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.RESET + "/" +
+                            output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.WHITE + ": " +
+                                    ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.WHITE + "/" +
                                     ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
-                                    + ChatColor.RESET + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.RESET + ")";
+                                    + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         }
                     } else {
                         if(damaged.getType().equals(EntityType.PLAYER)) {
                             Player player = (Player) event.getEntity();
-                            output = ChatColor.AQUA + player.getName() + ChatColor.RESET + ": " +
-                                    ChatColor.RED + "DEAD" + ChatColor.RESET + "/" +
+                            output = ChatColor.AQUA + player.getName() + ChatColor.WHITE + ": " +
+                                    ChatColor.RED + "DEAD" + ChatColor.WHITE + "/" +
                                     ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
-                                    + ChatColor.RESET + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.RESET + ")";
+                                    + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         } else {
-                            output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.RESET + ": " +
-                                    ChatColor.RED + "DEAD" + ChatColor.RESET + "/" +
+                            output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.WHITE + ": " +
+                                    ChatColor.RED + "DEAD" + ChatColor.WHITE + "/" +
                                     ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
-                                    + ChatColor.RESET + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.RESET + ")";
+                                    + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         }
                     }
 
                     BukkitScheduler showMsg = Bukkit.getScheduler();
 
                     String finalOutput = output;
-                    showMsg.runTaskLaterAsynchronously(InfiniteFunProject.plugin, bukkitTask ->
-                            damager.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(finalOutput)), 2L);
+                    //showMsg.runTaskLaterAsynchronously(InfiniteFunProject.plugin, bukkitTask ->
+                    //        damager.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(finalOutput)), 2L);
                 }
 
                 if(shooter != null) {
@@ -150,28 +157,28 @@ public class OnEntityDamaged implements Listener {
                     if(!entity.isDead()) {
                         if(damaged.getType().equals(EntityType.PLAYER)) {
                             Player player = (Player) event.getEntity();
-                            output = ChatColor.AQUA + player.getName() + ChatColor.RESET + ": " +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.RESET + "/" +
+                            output = ChatColor.AQUA + player.getName() + ChatColor.WHITE + ": " +
+                                    ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.WHITE + "/" +
                                     ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
-                                    + ChatColor.RESET + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.RESET + ")";
+                                    + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         } else {
-                            output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.RESET + ": " +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.RESET + "/" +
+                            output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.WHITE + ": " +
+                                    ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.WHITE + "/" +
                                     ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
-                                    + ChatColor.RESET + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.RESET + ")";
+                                    + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         }
                     } else {
                         if(damaged.getType().equals(EntityType.PLAYER)) {
                             Player player = (Player) event.getEntity();
-                            output = ChatColor.AQUA + player.getName() + ChatColor.RESET + ": " +
-                                    ChatColor.RED + "DEAD" + ChatColor.RESET + "/" +
+                            output = ChatColor.AQUA + player.getName() + ChatColor.WHITE + ": " +
+                                    ChatColor.RED + "DEAD" + ChatColor.WHITE + "/" +
                                     ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
-                                    + ChatColor.RESET + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.RESET + ")";
+                                    + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         } else {
-                            output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.RESET + ": " +
-                                    ChatColor.RED + "DEAD" + ChatColor.RESET + "/" +
+                            output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.WHITE + ": " +
+                                    ChatColor.RED + "DEAD" + ChatColor.WHITE + "/" +
                                     ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
-                                    + ChatColor.RESET + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.RESET + ")";
+                                    + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         }
                     }
 
@@ -195,17 +202,24 @@ public class OnEntityDamaged implements Listener {
                     // showMsg.runTaskLaterAsynchronously(InfiniteFunProject.plugin, bukkitTask ->
                     //        shooter.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(finalOutput)), 2L);
                 }
+                 */
+
+                //Bukkit.spigot().broadcast(new TextComponent("Damage: " + display.getText()));
 
                 BukkitScheduler killStand = Bukkit.getScheduler();
                 killStand.runTaskLater(InfiniteFunProject.plugin, display::remove, 16L);
             }
-        }, 0);
+        }, 2);
     }
 
     @EventHandler
     public void onNonEntityAttack(EntityDamageEvent event) {
         Entity damaged = event.getEntity();
         double damage = event.getFinalDamage();
+
+        if(event.isCancelled()) {
+            return;
+        }
 
         if(event.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK) || event.getCause().equals(EntityDamageEvent.DamageCause.PROJECTILE)
                 || event.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION)) {
@@ -214,13 +228,13 @@ public class OnEntityDamaged implements Listener {
 
         ArrayList<EntityType> ignore = new ArrayList<>();
         ignore.add(EntityType.ITEM_FRAME);
-        ignore.add(EntityType.DROPPED_ITEM);
+        ignore.add(EntityType.ITEM);
         ignore.add(EntityType.GLOW_ITEM_FRAME);
         ignore.add(EntityType.FIREBALL);
         ignore.add(EntityType.SMALL_FIREBALL);
         ignore.add(EntityType.DRAGON_FIREBALL);
-        ignore.add(EntityType.FIREWORK);
-        ignore.add(EntityType.FISHING_HOOK);
+        ignore.add(EntityType.FIREWORK_ROCKET);
+        ignore.add(EntityType.FISHING_BOBBER);
         ignore.add(EntityType.ARMOR_STAND);
         ignore.add(EntityType.TEXT_DISPLAY);
         ignore.add(EntityType.ARROW);
@@ -228,12 +242,13 @@ public class OnEntityDamaged implements Listener {
         ignore.add(EntityType.SNOWBALL);
         ignore.add(EntityType.EGG);
         ignore.add(EntityType.SNOWBALL);
-        ignore.add(EntityType.ENDER_CRYSTAL);
+        ignore.add(EntityType.END_CRYSTAL);
         ignore.add(EntityType.SHULKER_BULLET);
         ignore.add(EntityType.BOAT);
         ignore.add(EntityType.BLOCK_DISPLAY);
         ignore.add(EntityType.ITEM_DISPLAY);
         ignore.add(EntityType.INTERACTION);
+        ignore.add(EntityType.WIND_CHARGE);
 
         if(!ignore.contains(damaged.getType()) && ((LivingEntity)damaged).getNoDamageTicks() == 0) {
             Location spawnLoc;

@@ -12,6 +12,9 @@ import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
 public class InitDragon {
 
+    /**
+     * Establish event listeners
+     */
     public static void init() {
         Bukkit.getServer().getPluginManager().registerEvents(new SelfDefenseBlast(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new ProjectileImmunity(), InfiniteFunProject.plugin);
@@ -25,13 +28,18 @@ public class InitDragon {
         Bukkit.getServer().getPluginManager().registerEvents(new DragonUltimateAttack(), InfiniteFunProject.plugin);
     }
 
+    /**
+     * Find if the dragon has been defeated
+     *
+     * @return If the dragon has been defeated
+     */
     public static boolean dragonDead() {
-        for(World w : Bukkit.getWorlds()) {
+        for(World world : Bukkit.getWorlds()) {
             try {
-                if(w.getEnderDragonBattle().hasBeenPreviouslyKilled()) {
+                if(world.getEnderDragonBattle().hasBeenPreviouslyKilled()) {
                     return true;
                 }
-            } catch (NullPointerException e) {}
+            } catch(NullPointerException ignored) {}
         }
         return false;
     }

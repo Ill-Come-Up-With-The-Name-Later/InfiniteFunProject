@@ -32,6 +32,6 @@ public class OnRespawn implements Listener {
         Player player = event.getPlayer();
 
         Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin,
-                () -> grantInvulnerability(player, 80), 5);
+                () -> grantInvulnerability(player, 100), 3);
     }
 }

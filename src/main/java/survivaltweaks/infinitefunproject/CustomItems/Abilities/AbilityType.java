@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
  * passive.
  */
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface AbilityType {
 }

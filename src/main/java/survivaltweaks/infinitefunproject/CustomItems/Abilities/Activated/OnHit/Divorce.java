@@ -1,7 +1,6 @@
 package survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.OnHit;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -51,6 +50,7 @@ public class Divorce implements AttackAbility {
 
     @Override
     public void activate(Player player, EntityDamageByEntityEvent event) {
+        event.setDamage(0);
         event.setCancelled(true);
     }
 

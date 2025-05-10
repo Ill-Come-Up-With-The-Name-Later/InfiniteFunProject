@@ -14,7 +14,7 @@ public class EndlessPearl implements ActivatedAbility {
 
     @Override
     public int getCooldown() {
-        return 23;
+        return 20;
     }
 
     @Override

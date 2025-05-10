@@ -16,7 +16,7 @@ public class Hyperlaser {
                 " S ");
 
         recipe.setIngredient('E', Material.ECHO_SHARD);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('S', Material.CROSSBOW);
 
         Bukkit.getServer().addRecipe(recipe);

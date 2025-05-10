@@ -1,6 +1,5 @@
 package survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.LeftClick;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -9,8 +8,7 @@ import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.Activat
 import survivaltweaks.infinitefunproject.CustomItems.Metadata.RemoveOnGroundMeta;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
-import java.util.ArrayList;
-import java.util.Random;
+import static survivaltweaks.infinitefunproject.InfiniteFunProject.addProjectileTrail;
 
 public class VinestaffShoot implements ActivatedAbility {
     @Override
@@ -31,7 +29,7 @@ public class VinestaffShoot implements ActivatedAbility {
                     return;
                 }
 
-                arrow.getLocation().getWorld().spawnParticle(Particle.CHERRY_LEAVES, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
+                addProjectileTrail(arrow, Particle.CHERRY_LEAVES);
             }
         }.runTaskTimer(InfiniteFunProject.plugin, 0, 1);
     }

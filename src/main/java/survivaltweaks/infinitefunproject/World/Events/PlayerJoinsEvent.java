@@ -8,8 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.world.WorldLoadEvent;
-import survivaltweaks.infinitefunproject.CustomItems.ItemManager;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
 import java.util.List;

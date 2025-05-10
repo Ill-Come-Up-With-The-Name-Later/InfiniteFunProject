@@ -3,39 +3,53 @@ package survivaltweaks.infinitefunproject.CustomItems;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ArmorMeta;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.*;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.LCAbility;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.OnHitAbility;
-import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RCAbility;
+import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.*;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.OnDamagedAbility;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.PassiveAbility;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.TriggeredAbility;
+import survivaltweaks.infinitefunproject.CustomItems.Unusual.Unusual;
 import survivaltweaks.infinitefunproject.Player.Upgrades.InitUpgrades;
 
 import java.util.ArrayList;
 
 import static org.bukkit.Material.*;
+import static survivaltweaks.infinitefunproject.CustomItems.Unusual.Unusual.addUnusual;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.color;
 
 public class ItemManager {
 
-    public static ArrayList<ItemStack> customItems;
+    /**
+     * Item series
+     */
+    enum Series {
 
-    private static final String phightingSeries = color("&bPHIGHTING!");
-    private static final String lethalCompanySeries = color("&4Lethal Company");
-    private static final String tf2Series = color("&6Team Fortress 2");
-    private static final String csSeries = color("&aCounter-Strike");
-    private static final String returningSeries = color("&eReturning");
+        PHIGHTING(color("&bPHIGHTING!")),
+        LETHAL_COMPANY(color("&4Lethal Company")),
+        TEAM_FORTRESS_2(color("&6Team Fortress 2")),
+        COUNTER_STRIKE(color("&aCounter-Strike")),
+        RETURNING(color("&eReturning")),
+        DEVELOPER(color("&d&lDeveloper"))
+        ;
+
+        private final String name;
+
+        Series(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
+    public static ArrayList<ItemStack> customItems;
 
     public static ItemStack bat;
     public static ItemStack zombieSword;
@@ -98,11 +112,48 @@ public class ItemManager {
     public static ItemStack scannerHelmet;
     public static ItemStack oneHitMode;
     public static ItemStack challengeModeBrowser;
+    public static ItemStack smasher;
+    public static ItemStack deflectorHelmet;
+    public static ItemStack shinyKnife;
+    public static ItemStack remedy;
+    public static ItemStack impregnationCannon;
+    public static ItemStack rocketJumper;
+    public static ItemStack chainBow;
+    public static ItemStack thunderAxe;
+    public static ItemStack star;
+    public static ItemStack bounceBow;
+    public static ItemStack directHit;
+    public static ItemStack superCritPotion;
+    public static ItemStack soulBoots;
+    public static ItemStack giantPants;
+    public static ItemStack controlCrystal;
+    public static ItemStack magicWand;
+    public static ItemStack guidedMissileLauncher;
+    public static ItemStack critPotion;
+    public static ItemStack ramAxe;
+    public static ItemStack meteorFragment;
+    public static ItemStack unusualifier;
+    public static ItemStack unusualDictionary;
+    public static ItemStack writtenDictionary;
+    public static ItemStack specialUnusualifier;
+    public static ItemStack cosmeticCrate;
+    public static ItemStack weaponCrate;
+    public static ItemStack forwardArrow;
+    public static ItemStack backArrow;
+    public static ItemStack specialCrate;
+    public static ItemStack obsidianDome;
+    public static ItemStack hathat;
+    public static ItemStack terminator;
+    public static ItemStack burningFlame;
+    public static ItemStack nukeLauncher;
 
+    /**
+     * Create all custom items
+     */
     public static void init() {
         customItems = new ArrayList<>();
 
-        bat = setSeries(createBat(), tf2Series);
+        bat = setSeries(setSeries(createBat(), Series.TEAM_FORTRESS_2), Series.RETURNING);
         customItems.add(bat);
 
         zombieSword = createZombieSword();
@@ -111,7 +162,7 @@ public class ItemManager {
         spiderSword = createSpiderSword();
         customItems.add(spiderSword);
 
-        wardenChestplate = createWardenChestplate();
+        wardenChestplate = setSeries(createWardenChestplate(), Series.RETURNING);
         customItems.add(wardenChestplate);
 
         endlessPearl = createEndlessPearl();
@@ -126,7 +177,7 @@ public class ItemManager {
         decrepitScroll = setMiniCrits(createDecrepitScroll());
         customItems.add(decrepitScroll);
 
-        culmination = setMiniCrits(setAlwaysCrits(createCulmination()));
+        culmination = setMiniCrits(createCulmination());
         customItems.add(culmination);
 
         berserkSword = setMiniCrits(createBerserkSword());
@@ -159,69 +210,70 @@ public class ItemManager {
         bleach = createBleach();
         customItems.add(bleach);
 
-        easterEgg = setSeries(setNoCrits(createEasterEgg()), lethalCompanySeries);
+        easterEgg = setSeries(setNoCrits(createEasterEgg()), Series.LETHAL_COMPANY);
         customItems.add(easterEgg);
 
-        flashbang = setSeries(createFlashbang(), csSeries);
+        flashbang = setSeries(createFlashbang(), Series.COUNTER_STRIKE);
         customItems.add(flashbang);
 
         radar = createRadar();
         customItems.add(radar);
 
-        scythe = setSeries(createScythe(), phightingSeries);
+        scythe = setSeries(createScythe(), Series.PHIGHTING);
         customItems.add(scythe);
 
-        beamSword = setSeries(createBeamSword(), phightingSeries);
+        beamSword = setSeries(createBeamSword(), Series.PHIGHTING);
         customItems.add(beamSword);
 
-        gun = setSeries(createGun(), phightingSeries);
+        gun = setSeries(createGun(), Series.PHIGHTING);
+        customItems.add(gun);
 
-        boombox = setSeries(createBoombox(), phightingSeries);
+        boombox = setSeries(createBoombox(), Series.PHIGHTING);
         customItems.add(boombox);
 
-        banHammer = setSeries(createBanHammer(), phightingSeries);
+        banHammer = setSeries(createBanHammer(), Series.PHIGHTING);
         customItems.add(banHammer);
 
-        rocketLauncher = setSeries(createRocketLauncher(), phightingSeries);
+        rocketLauncher = setSeries(createRocketLauncher(), Series.PHIGHTING);
         customItems.add(rocketLauncher);
 
         grenade = createGrenade();
         customItems.add(grenade);
 
-        hyperLaser = setSeries(createHyperLaser(), phightingSeries);
+        hyperLaser = setSeries(createHyperLaser(), Series.PHIGHTING);
         customItems.add(hyperLaser);
 
-        spaceTripmine = setSeries(createSubspace(), phightingSeries);
+        spaceTripmine = setSeries(createSubspace(), Series.PHIGHTING);
         customItems.add(spaceTripmine);
 
-        katana = setSeries(createKatana(), phightingSeries);
+        katana = setSeries(createKatana(), Series.PHIGHTING);
         customItems.add(katana);
 
-        slingshot = setSeries(createSlingshot(), phightingSeries);
+        slingshot = setSeries(createSlingshot(), Series.PHIGHTING);
         customItems.add(slingshot);
 
-        medkit = setSeries(createMedkit(), phightingSeries);
+        medkit = setSeries(createMedkit(), Series.PHIGHTING);
         customItems.add(medkit);
 
-        biograftSword = setSeries(createBioSword(), phightingSeries);
+        biograftSword = setSeries(createBioSword(), Series.PHIGHTING);
         customItems.add(biograftSword);
 
-        vineStaff = setSeries(createVineStaff(), phightingSeries);
+        vineStaff = setSeries(createVineStaff(), Series.PHIGHTING);
         customItems.add(vineStaff);
 
-        shuriken = setSeries(createShuriken(), phightingSeries);
+        shuriken = setSeries(createShuriken(), Series.PHIGHTING);
         customItems.add(shuriken);
 
-        critSoda = setSeries(createCritSoda(), tf2Series);
+        critSoda = setSeries(createCritSoda(), Series.TEAM_FORTRESS_2);
         customItems.add(critSoda);
 
         playbook = createPlaybook();
         customItems.add(playbook);
 
-        inphernalBase = setSeries(createInphernalBase(), phightingSeries);
+        inphernalBase = setSeries(createInphernalBase(), Series.PHIGHTING);
         customItems.add(inphernalBase);
 
-        doubleBarrel = setSeries(setMiniCrits(createDoubleBarrel()), lethalCompanySeries);
+        doubleBarrel = setSeries(setMiniCrits(createDoubleBarrel()), Series.LETHAL_COMPANY);
         customItems.add(doubleBarrel);
 
         comingSoon = createComingSoon();
@@ -231,16 +283,16 @@ public class ItemManager {
         upgradeCatalyst = createUpgradeCatalyst();
         customItems.add(upgradeCatalyst);
 
-        butterflyKnife = setSeries(createButterflyKnife(), tf2Series);
+        butterflyKnife = setSeries(createButterflyKnife(), Series.TEAM_FORTRESS_2);
         customItems.add(butterflyKnife);
 
-        executionThread = setSeries(createExecutionThread(), phightingSeries);
+        executionThread = setSeries(createExecutionThread(), Series.PHIGHTING);
         customItems.add(executionThread);
 
         revolver = createRevolver();
         customItems.add(revolver);
 
-        medkitRevolver = setSeries(createMedkitRevolver(), phightingSeries);
+        medkitRevolver = setSeries(createMedkitRevolver(), Series.PHIGHTING);
         customItems.add(medkitRevolver);
 
         engagementRing = createEngagementRing();
@@ -258,22 +310,22 @@ public class ItemManager {
         divorcePapers = createDivorcePapers();
         customItems.add(divorcePapers);
 
-        callisto = setSeries(createCallisto(), returningSeries);
+        callisto = setSeries(createCallisto(), Series.RETURNING);
         customItems.add(callisto);
 
-        triton = setSeries(createTriton(), returningSeries);
+        triton = setSeries(createTriton(), Series.RETURNING);
         customItems.add(triton);
 
-        ascensionGaze = setSeries(createAscensionGaze(), returningSeries);
+        ascensionGaze = setSeries(createAscensionGaze(), Series.RETURNING);
         customItems.add(ascensionGaze);
 
-        dirt = setSeries(createDirt(), returningSeries);
+        dirt = setSeries(createDirt(), Series.RETURNING);
         customItems.add(dirt);
 
-        railgun = setSeries(createRailgun(), returningSeries);
+        railgun = setSeries(createRailgun(), Series.RETURNING);
         customItems.add(railgun);
 
-        scannerHelmet = setSeries(createScannerHelmet(), lethalCompanySeries);
+        scannerHelmet = setSeries(createScannerHelmet(), Series.LETHAL_COMPANY);
         customItems.add(scannerHelmet);
 
         oneHitMode = createOneHitMode();
@@ -282,7 +334,818 @@ public class ItemManager {
         challengeModeBrowser = createChallengeModeBrowser();
         customItems.add(challengeModeBrowser);
 
+        smasher = createSmasher();
+        customItems.add(smasher);
+
+        deflectorHelmet = createDeflectorHelm();
+        customItems.add(deflectorHelmet);
+
+        shinyKnife = createShinyKnife();
+        customItems.add(shinyKnife);
+
+        remedy = setSeries(createRemedy(), Series.RETURNING);
+        customItems.add(remedy);
+
+        impregnationCannon = createImpregnationCannon();
+        customItems.add(impregnationCannon);
+
+        rocketJumper = setSeries(createRocketJumper(), Series.TEAM_FORTRESS_2);
+        customItems.add(rocketJumper);
+
+        chainBow = createChainBow();
+        customItems.add(chainBow);
+
+        thunderAxe = createThunderAxe();
+        customItems.add(thunderAxe);
+
+        star = setSuperCrits(createStar());
+        customItems.add(star);
+
+        bounceBow = createBounceBow();
+        customItems.add(bounceBow);
+
+        directHit = setSeries(createDirectHit(), Series.TEAM_FORTRESS_2);
+        customItems.add(directHit);
+
+        superCritPotion = createSuperCritPotion();
+        customItems.add(superCritPotion);
+
+        soulBoots = createSoulBoots();
+        customItems.add(soulBoots);
+
+        giantPants = createGiantPants();
+        customItems.add(giantPants);
+
+        controlCrystal = createControlCrystal();
+        customItems.add(controlCrystal);
+
+        magicWand = createMagicWand();
+        customItems.add(magicWand);
+
+        guidedMissileLauncher = createGuidedMissileLauncher();
+        customItems.add(guidedMissileLauncher);
+
+        critPotion = createCritPotion();
+        customItems.add(critPotion);
+
+        ramAxe = setNoCrits(createRamAxe());
+        customItems.add(ramAxe);
+
+        meteorFragment = createMeteorFragment();
+        customItems.add(meteorFragment);
+
+        unusualifier = createUnusualifier();
+        customItems.add(unusualifier);
+
+        unusualDictionary = createUnusualDictionary();
+        customItems.add(unusualDictionary);
+
+        writtenDictionary = createSpecialDictionary();
+        customItems.add(writtenDictionary);
+
+        specialUnusualifier = createSpecialUnusualifier();
+        customItems.add(specialUnusualifier);
+
+        cosmeticCrate = setSeries(createCosmeticCrate(), Series.TEAM_FORTRESS_2);
+        customItems.add(cosmeticCrate);
+
+        weaponCrate = setSeries(createWeaponCrate(), Series.TEAM_FORTRESS_2);
+        customItems.add(weaponCrate);
+
+        specialCrate = setSeries(createSpecialCrate(), Series.TEAM_FORTRESS_2);
+        customItems.add(specialCrate);
+
+        forwardArrow = createForwardArrow();
+
+        backArrow = createBackArrow();
+
+        obsidianDome = createObsidianDome();
+        customItems.add(obsidianDome);
+
+        hathat = setSeries(setSeries(createHatHat(), Series.RETURNING), Series.DEVELOPER);
+        customItems.add(hathat);
+
+        terminator = createTerminator();
+        customItems.add(terminator);
+
+        burningFlame = setSeries(createBurningFlame(), Series.DEVELOPER);
+        customItems.add(burningFlame);
+
+        nukeLauncher = createNukeLauncher();
+        customItems.add(nukeLauncher);
+
         postLore();
+    }
+
+    private static ItemStack createNukeLauncher() {
+        ItemStack launcher = new ItemStack(CROSSBOW);
+        ItemMeta launcherMeta = launcher.getItemMeta();
+
+        launcherMeta.setDisplayName(ChatColor.GREEN + "Nuclear Bomb Launcher");
+
+        launcher.setItemMeta(launcherMeta);
+
+        RCAbility.addAbility(launcher, RCAbility.LAUNCH_NUKE);
+        return launcher;
+    }
+
+    private static ItemStack createBurningFlame() {
+        ItemStack burningFlame = new ItemStack(NETHERITE_HELMET);
+        ItemMeta flameMeta = burningFlame.getItemMeta();
+
+        flameMeta.setDisplayName(ChatColor.GOLD + "Burning Flame");
+
+        flameMeta.addEnchant(Enchantment.PROTECTION, 5, true);
+        flameMeta.addEnchant(Enchantment.FIRE_PROTECTION, 5, true);
+        flameMeta.addEnchant(Enchantment.BLAST_PROTECTION, 5, true);
+        flameMeta.addEnchant(Enchantment.PROJECTILE_PROTECTION, 5, true);
+        flameMeta.addEnchant(Enchantment.UNBREAKING, 7, true);
+        flameMeta.addEnchant(Enchantment.MENDING, 2, true);
+
+        burningFlame.setItemMeta(flameMeta);
+
+        SneakAbility.addAbility(burningFlame, SneakAbility.SUPER_JUMP);
+        PassiveAbility.addAbility(burningFlame, PassiveAbility.VIGOR);
+        OnDamagedAbility.addAbility(burningFlame, OnDamagedAbility.FLAMING_THORN);
+
+        addUnusual(burningFlame, Unusual.FURIOUS_FLAMES);
+        return burningFlame;
+    }
+
+    private static ItemStack createTerminator() {
+        ItemStack terminator = new ItemStack(BOW);
+        ItemMeta terminatorMeta = terminator.getItemMeta();
+
+        terminatorMeta.setDisplayName(ChatColor.GOLD + "Terminator");
+
+        terminator.setItemMeta(terminatorMeta);
+
+        LCAbility.addAbility(terminator, LCAbility.SALVATION);
+        RCAbility.addAbility(terminator, RCAbility.TRIPLE_SHOT);
+
+        addUnusual(terminator, Unusual.DEATH_RAY);
+        return terminator;
+    }
+
+    private static ItemStack createHatHat() {
+        ItemStack hat = new ItemStack(LEATHER_HELMET);
+        LeatherArmorMeta meta = (LeatherArmorMeta) hat.getItemMeta();
+
+        meta.setDisplayName(ChatColor.GREEN + "Hat's Hat");
+        meta.setColor(Color.LIME);
+        meta.addItemFlags(ItemFlag.HIDE_DYE);
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "The legendary hat of");
+        lore.add(ChatColor.GREEN + "Hat" + ChatColor.GRAY + ".");
+
+        meta.setLore(lore);
+        hat.setItemMeta(meta);
+
+        SneakAbility.addAbility(hat, SneakAbility.SONIC_BLAST);
+
+        addUnusual(hat, Unusual.GREEN_MACHINE);
+        return hat;
+    }
+
+    private static ItemStack createObsidianDome() {
+        ItemStack dome = new ItemStack(REPEATER);
+        ItemMeta domeMeta = dome.getItemMeta();
+
+        domeMeta.setDisplayName(ChatColor.YELLOW + "Meteor Defense System");
+
+        domeMeta.addEnchant(Enchantment.UNBREAKING, 1, false);
+        domeMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.LIGHT_PURPLE + "Obsidian Dome Missile Defense");
+        lore.add(ChatColor.LIGHT_PURPLE + "System");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Intercepts incoming meteors.");
+
+        domeMeta.setLore(lore);
+        dome.setItemMeta(domeMeta);
+
+        LCAbility.addAbility(dome, LCAbility.INTERCEPT_METEORS);
+        return dome;
+    }
+
+    private static ItemStack createSpecialCrate() {
+        ItemStack crate = new ItemStack(CHEST);
+        ItemMeta crateMeta = crate.getItemMeta();
+
+        crateMeta.setDisplayName(ChatColor.GOLD + "Unlocked Mann Co. Supply Crate");
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.AQUA + "Crate Series: #3");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Contains a random custom");
+        lore.add(ChatColor.GRAY + "item.");
+
+        crateMeta.setLore(lore);
+        crate.setItemMeta(crateMeta);
+
+        RCAbility.addAbility(crate, RCAbility.UNBOX_CUSTOM_ITEM);
+        return crate;
+    }
+
+    private static ItemStack createForwardArrow() {
+        ItemStack arrow = new ItemStack(ARROW);
+        ItemMeta arrowMeta = arrow.getItemMeta();
+
+        arrowMeta.setDisplayName(ChatColor.GREEN + "Next Page");
+
+        arrow.setItemMeta(arrowMeta);
+        return arrow;
+    }
+
+    private static ItemStack createBackArrow() {
+        ItemStack arrow = new ItemStack(ARROW);
+        ItemMeta arrowMeta = arrow.getItemMeta();
+
+        arrowMeta.setDisplayName(ChatColor.GREEN + "Previous Page");
+
+        arrow.setItemMeta(arrowMeta);
+        return arrow;
+    }
+
+    private static ItemStack createCosmeticCrate() {
+        ItemStack crate = new ItemStack(CHEST);
+        ItemMeta crateMeta = crate.getItemMeta();
+
+        crateMeta.setDisplayName(ChatColor.GOLD + "Unlocked Mann Co. Supply Crate");
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.AQUA + "Crate Series: #1");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Contains a random helmet");
+        lore.add(ChatColor.GRAY + "or boots.");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Contents have a low chance");
+        lore.add(ChatColor.GRAY + "of being Unusual.");
+
+        crateMeta.setLore(lore);
+        crate.setItemMeta(crateMeta);
+
+        RCAbility.addAbility(crate, RCAbility.UNBOX_WEARABLE);
+        return crate;
+    }
+
+    private static ItemStack createWeaponCrate() {
+        ItemStack crate = new ItemStack(CHEST);
+        ItemMeta crateMeta = crate.getItemMeta();
+
+        crateMeta.setDisplayName(ChatColor.GOLD + "Unlocked Mann Co. Supply Crate");
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.AQUA + "Crate Series: #2");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Contains a random weapon.");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Contents have a low chance");
+        lore.add(ChatColor.GRAY + "of being Unusual.");
+
+        crateMeta.setLore(lore);
+        crate.setItemMeta(crateMeta);
+
+        RCAbility.addAbility(crate, RCAbility.UNBOX_WEAPON);
+        return crate;
+    }
+
+    private static ItemStack createSpecialUnusualifier() {
+        ItemStack specialUnusualifier = new ItemStack(NETHER_STAR);
+        ItemMeta unusualifierMeta = specialUnusualifier.getItemMeta();
+
+        unusualifierMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Special Unusualifier");
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Used to set a desired");
+        lore.add(ChatColor.GRAY + "Unusual effect to apply");
+        lore.add(ChatColor.GRAY + "to an item.");
+        lore.add("");
+        lore.add(ChatColor.LIGHT_PURPLE + "Use this on a helmet, boots,");
+        lore.add(ChatColor.LIGHT_PURPLE + "or a weapon to apply the");
+        lore.add(ChatColor.LIGHT_PURPLE + "chosen Unusual effect to it.");
+        lore.add("");
+        lore.add(ChatColor.RED + "ONE TIME USE!");
+        lore.add(ChatColor.RED + "CAN ONLY APPLY IN SURVIVAL MODE!");
+
+        unusualifierMeta.setLore(lore);
+        specialUnusualifier.setItemMeta(unusualifierMeta);
+
+        addUnusual(specialUnusualifier, Unusual.NONE);
+
+        RCAbility.addAbility(specialUnusualifier, RCAbility.SELECT_UNUSUAL);
+        return specialUnusualifier;
+    }
+
+    private static ItemStack createSpecialDictionary() {
+        ItemStack book = new ItemStack(WRITTEN_BOOK);
+        BookMeta bookMeta = (BookMeta) book.getItemMeta();
+
+        bookMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Unusual Guide");
+        bookMeta.setTitle(ChatColor.LIGHT_PURPLE + "Unusual Guide");
+
+        bookMeta.setAuthor(ChatColor.GREEN + "Project: Infinite Fun");
+
+        int sumWeights = 0;
+
+        for(Unusual unusual : Unusual.values()) {
+            sumWeights += unusual.getWeight();
+        }
+
+        ArrayList<String> pages = new ArrayList<>();
+        StringBuilder page = new StringBuilder();
+
+        for(int i = 0; i < Unusual.values().length; i++) {
+            if(i % 8 == 0 && i != 0) {
+                pages.add(page.toString());
+                page = new StringBuilder();
+            }
+
+            if(Unusual.values()[i].getWeight() == 0) {
+                continue;
+            }
+
+            page.append(ChatColor.GRAY + "- " + ChatColor.DARK_PURPLE + Unusual.values()[i].getName() + ChatColor.GRAY + ": "
+                    + ChatColor.GOLD + String.format("%.2f", ((float) Unusual.values()[i].getWeight() / (float) sumWeights) * 100f)
+                    + ChatColor.GRAY + "%\n");
+        }
+
+        pages.add(page.toString());
+
+        bookMeta.setPages(pages);
+        book.setItemMeta(bookMeta);
+
+        return book;
+    }
+
+    private static ItemStack createUnusualDictionary() {
+        ItemStack dictionary = new ItemStack(BOOK);
+        ItemMeta dictionaryMeta = dictionary.getItemMeta();
+
+        dictionaryMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Unusual Dictionary");
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Shows the chance to get");
+        lore.add(ChatColor.GRAY + "any unusual effect from an");
+        lore.add(ChatColor.GRAY + "Unusualifier.");
+        lore.add("");
+
+        int sumWeights = 0;
+
+        for(Unusual unusual : Unusual.values()) {
+            sumWeights += unusual.getWeight();
+        }
+
+        for(Unusual unusual : Unusual.values()) {
+            if(unusual.getWeight() == 0) {
+                continue;
+            }
+
+            lore.add(ChatColor.GRAY + "- " + ChatColor.DARK_PURPLE + unusual.getName() + ChatColor.GRAY + ": "
+                    + ChatColor.GOLD + String.format("%.2f", ((float) unusual.getWeight() / (float) sumWeights) * 100f) +
+                    ChatColor.GRAY + "%");
+        }
+
+        dictionaryMeta.setLore(lore);
+        dictionary.setItemMeta(dictionaryMeta);
+
+        return dictionary;
+    }
+
+    private static ItemStack createUnusualifier() {
+        ItemStack converter = new ItemStack(Material.RECOVERY_COMPASS);
+        ItemMeta converterMeta = converter.getItemMeta();
+
+        converterMeta.setDisplayName(ChatColor.DARK_PURPLE + "Unusualifier");
+        converterMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
+        converterMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Add this to an item by clicking");
+        lore.add(ChatColor.GRAY + "on it while this is selected in");
+        lore.add(ChatColor.GRAY + "your inventory.");
+        lore.add("");
+        lore.add(ChatColor.LIGHT_PURPLE + "Use this on a helmet, boots,");
+        lore.add(ChatColor.LIGHT_PURPLE + "or a weapon to apply a");
+        lore.add(ChatColor.LIGHT_PURPLE + "random Unusual effect to it.");
+        lore.add("");
+        lore.add(ChatColor.RED + "ONE TIME USE!");
+        lore.add(ChatColor.RED + "CAN ONLY APPLY IN SURVIVAL MODE!");
+
+        converterMeta.setLore(lore);
+        converter.setItemMeta(converterMeta);
+
+        RCAbility.addAbility(converter, RCAbility.SHOW_UNUSUALS);
+        return converter;
+    }
+
+    private static ItemStack createMeteorFragment() {
+        ItemStack fragment = new ItemStack(MAGMA_BLOCK);
+
+        ItemMeta fragmentMeta = fragment.getItemMeta();
+        fragmentMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Meteor Fragment");
+
+        fragmentMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
+        fragmentMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "A chunk of an interstellar");
+        lore.add(ChatColor.GRAY + "meteor that was intercepted.");
+
+        fragmentMeta.setLore(lore);
+        fragment.setItemMeta(fragmentMeta);
+
+        return fragment;
+    }
+
+    private static ItemStack createRamAxe() {
+        ItemStack ramAxe = new ItemStack(DIAMOND_AXE);
+
+        ItemMeta axeMeta = ramAxe.getItemMeta();
+        axeMeta.setDisplayName(ChatColor.RED + "Ram Axe");
+
+        axeMeta.addEnchant(Enchantment.SHARPNESS, 6, true);
+        axeMeta.addEnchant(Enchantment.KNOCKBACK, 1, true);
+        axeMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        ramAxe.setItemMeta(axeMeta);
+
+        PassiveAbility.addAbility(ramAxe, PassiveAbility.SPEED_BOOST);
+        OnHitAbility.addAbility(ramAxe, OnHitAbility.VELOCITY_DAMAGE_BOOST);
+        OnKillAbility.addAbility(ramAxe, OnKillAbility.KILL_SPEED_BOOST);
+        return ramAxe;
+    }
+
+    private static ItemStack createGuidedMissileLauncher() {
+        ItemStack launcher = new ItemStack(COMPARATOR);
+
+        ItemMeta launcherMeta = launcher.getItemMeta();
+        launcherMeta.setDisplayName(ChatColor.RED + "Guided Missile Launcher");
+
+        launcher.setItemMeta(launcherMeta);
+
+        LCAbility.addAbility(launcher, LCAbility.GUIDED_MISSILE);
+        return launcher;
+    }
+
+    private static ItemStack createMagicWand() {
+        ItemStack wand = new ItemStack(BLAZE_ROD);
+
+        ItemMeta wandMeta = wand.getItemMeta();
+        wandMeta.setDisplayName(ChatColor.DARK_PURPLE + "Magical Wand");
+
+        wandMeta.addEnchant(Enchantment.UNBREAKING, 1, false);
+        wandMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "A magical wand capable");
+        lore.add(ChatColor.GRAY + "of casting powerful");
+        lore.add(ChatColor.GRAY + "spells.");
+
+        wandMeta.setLore(lore);
+        wand.setItemMeta(wandMeta);
+
+        LCAbility.addAbility(wand, LCAbility.BLAST_PULSE);
+        RCAbility.addAbility(wand, RCAbility.CURSE_ENEMY);
+        PassiveAbility.addAbility(wand, PassiveAbility.DETARGET_PLAYER);
+        OnHitAbility.addAbility(wand, OnHitAbility.MAGIC_LIFESTEAL);
+        OnKillAbility.addAbility(wand, OnKillAbility.EXPLOSIVE_KILL);
+        SneakAbility.addAbility(wand, SneakAbility.RADIAL_BLASTS);
+        return wand;
+    }
+
+    private static ItemStack createControlCrystal() {
+        ItemStack crystal = new ItemStack(AMETHYST_CLUSTER);
+
+        ItemMeta crystalMeta = crystal.getItemMeta();
+        crystalMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Crystal of Control");
+
+        crystalMeta.addEnchant(Enchantment.UNBREAKING, 1, false);
+        crystalMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "A magical crystal capable");
+        lore.add(ChatColor.GRAY + "of manipulating enemies to");
+        lore.add(ChatColor.GRAY + "sow internal chaos.");
+
+        crystalMeta.setLore(lore);
+        crystal.setItemMeta(crystalMeta);
+
+        RCAbility.addAbility(crystal, RCAbility.CONTROL_ENEMIES);
+        PassiveAbility.addAbility(crystal, PassiveAbility.DETARGET_PLAYER);
+        return crystal;
+    }
+
+    private static ItemStack createGiantPants() {
+        ItemStack pants = new ItemStack(DIAMOND_LEGGINGS);
+
+        ArmorMeta pantsMeta = (ArmorMeta) pants.getItemMeta();
+        pantsMeta.setDisplayName(ChatColor.GREEN + "Giant's Pants");
+
+        pantsMeta.addEnchant(Enchantment.PROTECTION, 5, true);
+        pantsMeta.addEnchant(Enchantment.BLAST_PROTECTION, 5, true);
+        pantsMeta.addEnchant(Enchantment.FIRE_PROTECTION, 5, true);
+        pantsMeta.addEnchant(Enchantment.PROJECTILE_PROTECTION, 5, true);
+        pantsMeta.addEnchant(Enchantment.UNBREAKING, 20, true);
+        pantsMeta.addEnchant(Enchantment.MENDING, 1, true);
+
+        pantsMeta.setTrim(new ArmorTrim(TrimMaterial.EMERALD, TrimPattern.BOLT));
+
+        pantsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        pantsMeta.addItemFlags(ItemFlag.HIDE_ARMOR_TRIM);
+
+        pants.setItemMeta(pantsMeta);
+
+        SneakAbility.addAbility(pants, SneakAbility.GROW_GIANT);
+        PassiveAbility.addAbility(pants, PassiveAbility.STOMP);
+        return pants;
+    }
+
+    private static ItemStack createSoulBoots() {
+        ItemStack boots = new ItemStack(NETHERITE_BOOTS);
+
+        ArmorMeta bootMeta = (ArmorMeta) boots.getItemMeta();
+        bootMeta.setDisplayName(ChatColor.DARK_GRAY + "Soul Boots");
+
+        bootMeta.addEnchant(Enchantment.SOUL_SPEED, 3, true);
+        bootMeta.addEnchant(Enchantment.PROTECTION, 5, true);
+        bootMeta.addEnchant(Enchantment.BLAST_PROTECTION, 5, true);
+        bootMeta.addEnchant(Enchantment.FIRE_PROTECTION, 5, true);
+        bootMeta.addEnchant(Enchantment.PROJECTILE_PROTECTION, 5, true);
+        bootMeta.addEnchant(Enchantment.UNBREAKING, 20, true);
+        bootMeta.addEnchant(Enchantment.MENDING, 1, true);
+
+        bootMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        bootMeta.addItemFlags(ItemFlag.HIDE_ARMOR_TRIM);
+
+        bootMeta.setTrim(new ArmorTrim(TrimMaterial.DIAMOND, TrimPattern.RIB));
+
+        boots.setItemMeta(bootMeta);
+
+        PassiveAbility.addAbility(boots, PassiveAbility.AT_ONE_SOULS);
+        PassiveAbility.addAbility(boots, PassiveAbility.SOUL_DRAIN);
+        OnDamagedAbility.addAbility(boots, OnDamagedAbility.SOUL_HARVEST);
+        return boots;
+    }
+
+    private static ItemStack createCritPotion() {
+        ItemStack potion = new ItemStack(POTION);
+
+        PotionMeta meta = (PotionMeta) potion.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Crit Potion");
+
+        meta.addEnchant(Enchantment.UNBREAKING, 1, true);
+
+        meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        meta.setColor(Color.fromRGB(0, 255, 0));
+
+        potion.setItemMeta(meta);
+
+        RCAbility.addAbility(potion, RCAbility.CRIT_POTION);
+        return potion;
+    }
+
+    private static ItemStack createSuperCritPotion() {
+        ItemStack potion = new ItemStack(POTION);
+
+        PotionMeta meta = (PotionMeta) potion.getItemMeta();
+        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Super Crit-a-Cola");
+
+        meta.addEnchant(Enchantment.UNBREAKING, 1, true);
+
+        meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        meta.setColor(Color.fromRGB(255, 0, 255));
+
+        potion.setItemMeta(meta);
+
+        RCAbility.addAbility(potion, RCAbility.SUPER_CRIT_POTION);
+        return potion;
+    }
+
+    private static ItemStack createDirectHit() {
+        ItemStack directHit = new ItemStack(CROSSBOW);
+        ItemMeta hitMeta = directHit.getItemMeta();
+
+        hitMeta.setDisplayName(ChatColor.GRAY + "Direct Hit");
+
+        directHit.setItemMeta(hitMeta);
+
+        LCAbility.addAbility(directHit, LCAbility.DIRECT_HIT_ROCKET);
+        OnHitAbility.addAbility(directHit, OnHitAbility.DIRECT_HIT);
+        return directHit;
+    }
+
+    private static ItemStack createBounceBow() {
+        ItemStack bow = new ItemStack(BOW);
+        ItemMeta bowMeta = bow.getItemMeta();
+
+        bowMeta.setDisplayName(ChatColor.GREEN + "Bouncy Blast Bow");
+
+        bow.setItemMeta(bowMeta);
+
+        PassiveAbility.addAbility(bow, PassiveAbility.BOUNCING_ARROWS);
+        PassiveAbility.addAbility(bow, PassiveAbility.EXPLOSIVE_ARROW);
+        return bow;
+    }
+
+    private static ItemStack createStar() {
+        ItemStack star = new ItemStack(SHROOMLIGHT);
+
+        ItemMeta starMeta = star.getItemMeta();
+        starMeta.setDisplayName(color("&6&lPocket Star"));
+
+        starMeta.addEnchant(Enchantment.SHARPNESS, 7, true);
+        starMeta.addEnchant(Enchantment.FIRE_ASPECT, 10, true);
+        starMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(color("&7&o\"Here comes the sun."));
+        lore.add(color("&7&oHere comes the sun,"));
+        lore.add(color("&7&oand I say, it's alright.\""));
+        lore.add("");
+        lore.add(color("&7- George Harrison,"));
+        lore.add(color("&7&o\"Here Comes the Sun\""));
+
+        starMeta.setLore(lore);
+        star.setItemMeta(starMeta);
+
+        LCAbility.addAbility(star, LCAbility.SOLAR_FLARE);
+        RCAbility.addAbility(star, RCAbility.SUPERNOVA);
+        OnHitAbility.addAbility(star, OnHitAbility.STELLAR_RADIATION);
+        OnKillAbility.addAbility(star, OnKillAbility.EXPLOSIVE_KILL);
+        PassiveAbility.addAbility(star, PassiveAbility.SCORCH_SURROUNDING);
+        PassiveAbility.addAbility(star, PassiveAbility.FIRE_MEMBRANE);
+        return star;
+    }
+
+    private static ItemStack createThunderAxe() {
+        ItemStack axe = new ItemStack(DIAMOND_AXE);
+
+        ItemMeta axeMeta = axe.getItemMeta();
+        axeMeta.setDisplayName(ChatColor.YELLOW + "Thunder Axe");
+
+        axeMeta.addEnchant(Enchantment.SHARPNESS, 6, true);
+        axeMeta.addEnchant(Enchantment.FIRE_ASPECT, 3, true);
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "A powerful axe infused");
+        lore.add(ChatColor.GRAY + "with lightning.");
+
+        axeMeta.setLore(lore);
+        axe.setItemMeta(axeMeta);
+
+        RCAbility.addAbility(axe, RCAbility.ELECTRIC_PULSE);
+        OnHitAbility.addAbility(axe, OnHitAbility.TRIPLE_STRIKE);
+        OnKillAbility.addAbility(axe, OnKillAbility.GROUNDED);
+        return axe;
+    }
+
+    private static ItemStack createChainBow() {
+        ItemStack bow = new ItemStack(BOW);
+
+        ItemMeta bowMeta = bow.getItemMeta();
+        bowMeta.setDisplayName(ChatColor.GREEN + "Chain Reaction Bow");
+
+        bowMeta.addEnchant(Enchantment.POWER, 3, false);
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Firing arrows leads to");
+        lore.add(ChatColor.GRAY + "large chain reactions.");
+
+        bowMeta.setLore(lore);
+        bow.setItemMeta(bowMeta);
+
+        LCAbility.addAbility(bow, LCAbility.ARROW_FLURRY);
+        PassiveAbility.addAbility(bow, PassiveAbility.SEEKING_ARROWS);
+        OnHitAbility.addAbility(bow, OnHitAbility.ARROW_EJECTION);
+        OnKillAbility.addAbility(bow, OnKillAbility.CORPSE_SHOT);
+        return bow;
+    }
+
+    private static ItemStack createRocketJumper() {
+        ItemStack jumper = new ItemStack(FIREWORK_ROCKET);
+
+        ItemMeta jumperMeta = jumper.getItemMeta();
+        jumperMeta.setDisplayName(ChatColor.RED + "Rocket Jumper");
+
+        jumperMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+
+        jumper.setItemMeta(jumperMeta);
+
+        LCAbility.addAbility(jumper, LCAbility.ROCKET_JUMP);
+        return jumper;
+    }
+
+    private static ItemStack createImpregnationCannon() {
+        ItemStack cannon = new ItemStack(CROSSBOW);
+
+        ItemMeta cannonMeta = cannon.getItemMeta();
+        cannonMeta.setDisplayName(ChatColor.WHITE + "Impregnation Cannon");
+
+        cannonMeta.addEnchant(Enchantment.UNBREAKING, 1, false);
+        cannonMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "Why did I make this?");
+
+        cannonMeta.setLore(lore);
+        cannon.setItemMeta(cannonMeta);
+
+        LCAbility.addAbility(cannon, LCAbility.IMPREGNATION_RAY);
+        return cannon;
+    }
+
+    private static ItemStack createRemedy() {
+        ItemStack remedy = new ItemStack(BOOK);
+
+        ItemMeta remedyMeta = remedy.getItemMeta();
+        remedyMeta.setDisplayName(ChatColor.GREEN + "Remedy");
+
+        remedyMeta.addEnchant(Enchantment.UNBREAKING, 1, false);
+        remedyMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        remedy.setItemMeta(remedyMeta);
+
+        LCAbility.addAbility(remedy, LCAbility.HEAL_USER);
+        RCAbility.addAbility(remedy, RCAbility.GRANT_INVULNERABILITY);
+        OnHitAbility.addAbility(remedy, OnHitAbility.TARGETED_HEAL);
+        return remedy;
+    }
+
+    private static ItemStack createShinyKnife() {
+        ItemStack knife = new ItemStack(IRON_SWORD);
+
+        ItemMeta knifeMeta = knife.getItemMeta();
+        knifeMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Shiny Knife");
+
+        knife.setItemMeta(knifeMeta);
+
+        OnKillAbility.addAbility(knife, OnKillAbility.BREAD_SLICE);
+        return knife;
+    }
+
+    private static ItemStack createDeflectorHelm() {
+        ItemStack helm = new ItemStack(NETHERITE_HELMET);
+
+        ArmorMeta helmMeta = (ArmorMeta) helm.getItemMeta();
+        helmMeta.setDisplayName(ChatColor.GRAY + "Deflector");
+
+        helmMeta.addEnchant(Enchantment.PROTECTION, 6, true);
+        helmMeta.addEnchant(Enchantment.PROJECTILE_PROTECTION, 6, true);
+        helmMeta.addEnchant(Enchantment.UNBREAKING, 20, true);
+        helmMeta.addEnchant(Enchantment.MENDING, 1, true);
+
+        helmMeta.setTrim(new ArmorTrim(TrimMaterial.AMETHYST, TrimPattern.FLOW));
+        helmMeta.addItemFlags(ItemFlag.HIDE_ARMOR_TRIM);
+        helmMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        helm.setItemMeta(helmMeta);
+
+        PassiveAbility.addAbility(helm, PassiveAbility.WIND_DEFLECT);
+
+        addUnusual(helm, Unusual.WINDY);
+        return helm;
+    }
+
+    private static ItemStack createSmasher() {
+        ItemStack smasher = new ItemStack(MACE);
+
+        ItemMeta smasherMeta = smasher.getItemMeta();
+        smasherMeta.setDisplayName(ChatColor.RED + "Super Smasher");
+
+        smasherMeta.addEnchant(Enchantment.BREACH, 5, true);
+        smasherMeta.addEnchant(Enchantment.WIND_BURST, 4, true);
+        smasherMeta.addEnchant(Enchantment.DENSITY, 5, true);
+        smasherMeta.addEnchant(Enchantment.UNBREAKING, 3, true);
+        smasherMeta.addEnchant(Enchantment.SHARPNESS, 3, true);
+        smasherMeta.addEnchant(Enchantment.SMITE, 3, true);
+        smasherMeta.addEnchant(Enchantment.BANE_OF_ARTHROPODS, 3, true);
+
+        smasher.setItemMeta(smasherMeta);
+
+        OnHitAbility.addAbility(smasher, OnHitAbility.CRIPPLE);
+        return smasher;
     }
 
     private static ItemStack createChallengeModeBrowser() {
@@ -291,13 +1154,13 @@ public class ItemManager {
         ItemMeta browserMeta = browser.getItemMeta();
         browserMeta.setDisplayName(ChatColor.DARK_AQUA + "Challenge Modes");
 
-        browserMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        browserMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         browserMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "Allows you to choose to");
-        lore.add(ChatColor.GRAY + "enable challenges.");
+        lore.add(ChatColor.GRAY + "Additional modifiers for the");
+        lore.add(ChatColor.GRAY + "game's difficulty.");
 
         browserMeta.setLore(lore);
         browser.setItemMeta(browserMeta);
@@ -344,7 +1207,7 @@ public class ItemManager {
         ItemMeta railgunMeta = railgun.getItemMeta();
         railgunMeta.setDisplayName(ChatColor.GOLD + "Railgun");
 
-        railgunMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        railgunMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         railgunMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         railgun.setItemMeta(railgunMeta);
@@ -367,7 +1230,7 @@ public class ItemManager {
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.YELLOW + "(Right-Click) Ability" + ChatColor.GRAY + ": " + ChatColor.GREEN + "Place");
+        lore.add(ChatColor.YELLOW + "(Right Click) Ability" + ChatColor.GRAY + ": " + ChatColor.GREEN + "Place");
         lore.add(ChatColor.GRAY + "Place the item on the ground,");
         lore.add(ChatColor.GRAY + "wasting it.");
         lore.add(color("&7- &cOne Time Use"));
@@ -399,7 +1262,7 @@ public class ItemManager {
         tritonMeta.addEnchant(Enchantment.PIERCING, 10, true);
         tritonMeta.addEnchant(Enchantment.QUICK_CHARGE, 5, true);
         tritonMeta.addEnchant(Enchantment.MULTISHOT, 1, true);
-        tritonMeta.addEnchant(Enchantment.DURABILITY, 5, true);
+        tritonMeta.addEnchant(Enchantment.UNBREAKING, 5, true);
         tritonMeta.addEnchant(Enchantment.MENDING, 1, true);
 
         triton.setItemMeta(tritonMeta);
@@ -414,8 +1277,8 @@ public class ItemManager {
         ItemMeta bowMeta = callisto.getItemMeta();
         bowMeta.setDisplayName(ChatColor.GOLD + "Callisto");
 
-        bowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 10, true);
-        bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+        bowMeta.addEnchant(Enchantment.POWER, 10, true);
+        bowMeta.addEnchant(Enchantment.INFINITY, 1, true);
 
         bowMeta.setUnbreakable(true);
         bowMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
@@ -424,6 +1287,8 @@ public class ItemManager {
 
         LCAbility.addAbility(callisto, LCAbility.CALLISTO_EXPLOSIVE_SHOT);
         PassiveAbility.addAbility(callisto, PassiveAbility.CALLISTO_ARROWS);
+
+        addUnusual(callisto, Unusual.MALEVOLENT_MAGIC);
         return callisto;
     }
 
@@ -435,15 +1300,13 @@ public class ItemManager {
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(color("&7&o\"Try to see it my way."));
-        lore.add(color("&7&oDo I have to keep on talking"));
-        lore.add(color("&7&otill I can't go on?"));
-        lore.add(color("&7&oWhile you see it your way,"));
-        lore.add(color("&7&oRun the risk of knowing that"));
-        lore.add(color("&7&oour love may soon be gone."));
+        lore.add(color("&7&o\"Why, tell me why did"));
+        lore.add(color("&7&oyou not treat me right?"));
+        lore.add(color("&7&oLove has a nasty habit"));
+        lore.add(color("&7&oof disappearing overnight.\""));
         lore.add("");
-        lore.add(color("&7&oWe can work it out."));
-        lore.add(color("&7&oWe can work it out.\""));
+        lore.add(color("&7- Paul McCartney,"));
+        lore.add(color("&7&o\"I'm Looking Through You\""));
 
         paperMeta.setLore(lore);
         papers.setItemMeta(paperMeta);
@@ -458,12 +1321,12 @@ public class ItemManager {
         ItemMeta tridentMeta = kingTrident.getItemMeta();
         tridentMeta.setDisplayName(ChatColor.DARK_AQUA + "Drowned King's Trident");
 
-        tridentMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
-        tridentMeta.addEnchant(Enchantment.DAMAGE_UNDEAD, 3, true);
-        tridentMeta.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 3, true);
+        tridentMeta.addEnchant(Enchantment.SHARPNESS, 3, true);
+        tridentMeta.addEnchant(Enchantment.SMITE, 3, true);
+        tridentMeta.addEnchant(Enchantment.BANE_OF_ARTHROPODS, 3, true);
         tridentMeta.addEnchant(Enchantment.CHANNELING, 3, true);
         tridentMeta.addEnchant(Enchantment.IMPALING, 3, true);
-        tridentMeta.addEnchant(Enchantment.DURABILITY, 3, true);
+        tridentMeta.addEnchant(Enchantment.UNBREAKING, 3, true);
 
         tridentMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
@@ -476,6 +1339,9 @@ public class ItemManager {
         lore.add(color("&7&osea..."));
         lore.add(color("&7&oIn an octopus's garden in the"));
         lore.add(color("&7&oshade...\""));
+        lore.add("");
+        lore.add(color("&7- Ringo Starr,"));
+        lore.add(color("&7&o\"Octopus's Garden\""));
 
         tridentMeta.setLore(lore);
         kingTrident.setItemMeta(tridentMeta);
@@ -483,6 +1349,8 @@ public class ItemManager {
         PassiveAbility.addAbility(kingTrident, PassiveAbility.AQUATIC_ADAPTATION);
         OnHitAbility.addAbility(kingTrident, OnHitAbility.SPLASH);
         OnHitAbility.addAbility(kingTrident, OnHitAbility.IMPALE_ABILITY);
+
+        addUnusual(kingTrident, Unusual.RIPTIDE);
         return kingTrident;
     }
 
@@ -492,7 +1360,7 @@ public class ItemManager {
         ItemMeta laserMeta = laserGun.getItemMeta();
         laserMeta.setDisplayName(ChatColor.AQUA + "Laser Machine Gun");
 
-        laserMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        laserMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         laserMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         laserGun.setItemMeta(laserMeta);
@@ -507,7 +1375,7 @@ public class ItemManager {
         ItemMeta flamethrowerMeta = flamethrower.getItemMeta();
         flamethrowerMeta.setDisplayName(ChatColor.GOLD + "Flamethrower");
 
-        flamethrowerMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        flamethrowerMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         flamethrowerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         flamethrower.setItemMeta(flamethrowerMeta);
@@ -522,7 +1390,7 @@ public class ItemManager {
         ItemMeta ringMeta = ring.getItemMeta();
         ringMeta.setDisplayName(ChatColor.GOLD + "Engagement Ring");
 
-        ringMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        ringMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         ringMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -534,6 +1402,9 @@ public class ItemManager {
         lore.add(color("&7&oYou stick around,"));
         lore.add(color("&7&onow it may show."));
         lore.add(color("&7&oI don't know, I don't know.\""));
+        lore.add("");
+        lore.add(color("&7- George Harrison,"));
+        lore.add(color("&7&o\"Something\""));
 
         ringMeta.setLore(lore);
         ring.setItemMeta(ringMeta);
@@ -548,7 +1419,7 @@ public class ItemManager {
         ItemMeta revolverMeta = revolver.getItemMeta();
         revolverMeta.setDisplayName(ChatColor.GREEN + "Medkit's Revolver");
 
-        revolverMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        revolverMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         revolverMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         revolver.setItemMeta(revolverMeta);
@@ -565,7 +1436,7 @@ public class ItemManager {
         ItemMeta revolverMeta = revolver.getItemMeta();
         revolverMeta.setDisplayName(ChatColor.RED + "Revolver");
 
-        revolverMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        revolverMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         revolverMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         revolverMeta.setUnbreakable(true);
@@ -575,7 +1446,7 @@ public class ItemManager {
         lore.add("");
         lore.add(ChatColor.GRAY + "Now Featuring:");
         lore.add("");
-        lore.add(ChatColor.GRAY + "- A-Side:");
+        lore.add(ChatColor.GRAY + "- Side A:");
         lore.add(ChatColor.GRAY + "  - Taxman");
         lore.add(ChatColor.GRAY + "  - Elanor Rigby");
         lore.add(ChatColor.GRAY + "  - I'm Only Sleeping");
@@ -585,7 +1456,7 @@ public class ItemManager {
         lore.add(ChatColor.GRAY + "  - Yellow Submarine");
         lore.add(ChatColor.GRAY + "  - She Said She Said");
         lore.add("");
-        lore.add(ChatColor.GRAY + "- B-Side:");
+        lore.add(ChatColor.GRAY + "- Side B:");
         lore.add(ChatColor.GRAY + "  - Good Day Sunshine");
         lore.add(ChatColor.GRAY + "  - And Your Bird Can");
         lore.add(ChatColor.GRAY + "    Sing");
@@ -611,7 +1482,7 @@ public class ItemManager {
         ItemMeta threadMeta = thread.getItemMeta();
         threadMeta.setDisplayName(ChatColor.GRAY + "Thread");
 
-        threadMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        threadMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         threadMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         thread.setItemMeta(threadMeta);
@@ -638,6 +1509,85 @@ public class ItemManager {
         return knife;
     }
 
+    public static ItemStack createDamageReductionUpgradeIcon() {
+        ItemStack icon = new ItemStack(DIAMOND_CHESTPLATE);
+
+        ItemMeta iconMeta = icon.getItemMeta();
+        iconMeta.setDisplayName(ChatColor.GREEN + "Upgrade Damage Reduction");
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "+ 2.5% Damage Reduction/Level.");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "XP Level Cost: " + ChatColor.YELLOW + InitUpgrades.damageReductionCost);
+
+        iconMeta.setLore(lore);
+        icon.setItemMeta(iconMeta);
+
+        return icon;
+    }
+
+    public static ItemStack createCooldownUpgradeIcon() {
+        ItemStack icon = new ItemStack(POTION);
+
+        PotionMeta iconMeta = (PotionMeta) icon.getItemMeta();
+        iconMeta.setDisplayName(ChatColor.GREEN + "Upgrade Ability Cooldown Reduction");
+
+        iconMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
+
+        iconMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        iconMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        iconMeta.setColor(Color.fromRGB(153, 255, 153));
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "+ 2.5% Ability Cooldown Reduction/Level.");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "XP Level Cost: " + ChatColor.YELLOW + InitUpgrades.cooldownCost);
+
+        iconMeta.setLore(lore);
+        icon.setItemMeta(iconMeta);
+
+        return icon;
+    }
+
+    public static ItemStack createMultiHitUpgradeIcon() {
+        ItemStack icon = new ItemStack(ECHO_SHARD);
+
+        ItemMeta iconMeta = icon.getItemMeta();
+        iconMeta.setDisplayName(ChatColor.GREEN + "Upgrade Multi-Hit Chance");
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "+ 10% Multi-Hit Chance/Level.");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "XP Level Cost: " + ChatColor.YELLOW + InitUpgrades.multiHitCost);
+
+        iconMeta.setLore(lore);
+        icon.setItemMeta(iconMeta);
+
+        return icon;
+    }
+
+    public static ItemStack createReachDistanceUpgradeIcon() {
+        ItemStack icon = new ItemStack(Material.BRUSH);
+
+        ItemMeta iconMeta = icon.getItemMeta();
+        iconMeta.setDisplayName(ChatColor.GREEN + "Upgrade Reach Distance");
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatColor.GRAY + "+ 0.2 Blocks of Reach/Level.");
+        lore.add("");
+        lore.add(ChatColor.GRAY + "XP Level Cost: " + ChatColor.YELLOW + InitUpgrades.reachDistCost);
+
+        iconMeta.setLore(lore);
+        icon.setItemMeta(iconMeta);
+
+        return icon;
+    }
+
     public static ItemStack createDamageUpgradeIcon() {
         ItemStack icon = new ItemStack(Material.IRON_SWORD);
 
@@ -648,7 +1598,7 @@ public class ItemManager {
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "+ 0.5 Damage/Level.");
+        lore.add(ChatColor.GRAY + "+ 0.7 Damage/Level.");
         lore.add("");
         lore.add(ChatColor.GRAY + "XP Level Cost: " + ChatColor.YELLOW + InitUpgrades.damageUpgradeCost);
 
@@ -769,10 +1719,13 @@ public class ItemManager {
     }
 
     private static ItemStack createUpgradeCatalyst() {
-        ItemStack catalyst = new ItemStack(Material.NETHER_STAR);
+        ItemStack catalyst = new ItemStack(ENDER_EYE);
 
         ItemMeta catalystMeta = catalyst.getItemMeta();
         catalystMeta.setDisplayName(ChatColor.GOLD + "Upgrade Catalyst");
+
+        catalystMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
+        catalystMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
@@ -792,7 +1745,7 @@ public class ItemManager {
         ItemMeta shotgunMeta = shotgun.getItemMeta();
         shotgunMeta.setDisplayName(ChatColor.GRAY + "Double Barrel");
 
-        shotgunMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        shotgunMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         shotgunMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         shotgun.setItemMeta(shotgunMeta);
@@ -807,7 +1760,7 @@ public class ItemManager {
         ItemMeta comingMeta = coming.getItemMeta();
         comingMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Coming Soon!");
 
-        comingMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        comingMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         comingMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -828,7 +1781,7 @@ public class ItemManager {
         ItemMeta baseMeta = base.getItemMeta();
         baseMeta.setDisplayName(ChatColor.GOLD + "Inpherno Base Item");
 
-        baseMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        baseMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         baseMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -848,7 +1801,7 @@ public class ItemManager {
         ItemMeta bookMeta = book.getItemMeta();
         bookMeta.setDisplayName(ChatColor.GOLD + "Billionaire's Playbook");
 
-        bookMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        bookMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         bookMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -868,9 +1821,9 @@ public class ItemManager {
         PotionMeta sodaMeta = (PotionMeta) soda.getItemMeta();
         sodaMeta.setDisplayName(ChatColor.YELLOW + "Crit-a-Cola");
 
-        sodaMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        sodaMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         sodaMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        sodaMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        sodaMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
 
         sodaMeta.setColor(Color.YELLOW);
 
@@ -894,7 +1847,7 @@ public class ItemManager {
         ItemMeta shurikenMeta = shuriken.getItemMeta();
         shurikenMeta.setDisplayName(ChatColor.GRAY + "Shuriken");
 
-        shurikenMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        shurikenMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         shurikenMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -918,7 +1871,7 @@ public class ItemManager {
         ItemMeta staffMeta = vineStaff.getItemMeta();
         staffMeta.setDisplayName(ChatColor.DARK_GREEN + "Vine Staff");
 
-        staffMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        staffMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         staffMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         vineStaff.setItemMeta(staffMeta);
@@ -935,7 +1888,7 @@ public class ItemManager {
         ItemMeta swordMeta = biograftSword.getItemMeta();
         swordMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Biograft Energy Sword");
 
-        swordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        swordMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         swordMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         swordMeta.setUnbreakable(true);
         swordMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
@@ -959,7 +1912,7 @@ public class ItemManager {
         ItemMeta medkitMeta = medkit.getItemMeta();
         medkitMeta.setDisplayName(ChatColor.GREEN + "Medkit");
 
-        medkitMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        medkitMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         medkitMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         medkit.setItemMeta(medkitMeta);
@@ -975,7 +1928,7 @@ public class ItemManager {
         ItemMeta slingMeta = slingshot.getItemMeta();
         slingMeta.setDisplayName(ChatColor.GREEN + "Slingshot");
 
-        slingMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        slingMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         slingMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         slingshot.setItemMeta(slingMeta);
@@ -991,7 +1944,7 @@ public class ItemManager {
         ItemMeta katanaMeta = katana.getItemMeta();
         katanaMeta.setDisplayName(ChatColor.RED + "Katana");
 
-        katanaMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        katanaMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         katanaMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         katana.setItemMeta(katanaMeta);
@@ -1008,7 +1961,7 @@ public class ItemManager {
         ItemMeta starMeta = star.getItemMeta();
         starMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Subspace Tripmine");
 
-        starMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        starMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         starMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         star.setItemMeta(starMeta);
@@ -1025,7 +1978,7 @@ public class ItemManager {
         ItemMeta laserMeta = laser.getItemMeta();
         laserMeta.setDisplayName(ChatColor.DARK_PURPLE + "Hyperlaser");
 
-        laserMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        laserMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         laserMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         laser.setItemMeta(laserMeta);
@@ -1042,7 +1995,7 @@ public class ItemManager {
         ItemMeta grenadeMeta = grenade.getItemMeta();
         grenadeMeta.setDisplayName(ChatColor.GREEN + "Grenade");
 
-        grenadeMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        grenadeMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         grenadeMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -1064,7 +2017,7 @@ public class ItemManager {
         ItemMeta launcherMeta = rocketLauncher.getItemMeta();
         launcherMeta.setDisplayName(ChatColor.RED + "Rocket Launcher");
 
-        launcherMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        launcherMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         launcherMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         rocketLauncher.setItemMeta(launcherMeta);
@@ -1080,7 +2033,7 @@ public class ItemManager {
         ItemMeta hammerMeta = banHammer.getItemMeta();
         hammerMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Ban Hammer");
 
-        hammerMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        hammerMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         hammerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         banHammer.setItemMeta(hammerMeta);
@@ -1096,7 +2049,7 @@ public class ItemManager {
         ItemMeta boomboxMeta = boombox.getItemMeta();
         boomboxMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Boombox");
 
-        boomboxMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        boomboxMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         boomboxMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -1121,12 +2074,9 @@ public class ItemManager {
         ItemMeta swordMeta = sword.getItemMeta();
         swordMeta.setDisplayName(ChatColor.GRAY + "Lost Temple Sword");
 
-        swordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        swordMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         swordMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         swordMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-
-        swordMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,
-                new AttributeModifier("generic.attack_damage", 15, AttributeModifier.Operation.ADD_NUMBER));
 
         sword.setItemMeta(swordMeta);
 
@@ -1142,9 +2092,9 @@ public class ItemManager {
         ItemMeta gunMeta = gun.getItemMeta();
         gunMeta.setDisplayName(ChatColor.AQUA + "Rifle");
 
-        gunMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        gunMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         gunMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        gunMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        gunMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
 
         gun.setItemMeta(gunMeta);
 
@@ -1159,7 +2109,7 @@ public class ItemManager {
         ItemMeta scytheMeta = scythe.getItemMeta();
         scytheMeta.setDisplayName(ChatColor.AQUA + "Scythe");
 
-        scytheMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        scytheMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         scytheMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         scythe.setItemMeta(scytheMeta);
@@ -1175,7 +2125,7 @@ public class ItemManager {
         ItemMeta radarMeta = radar.getItemMeta();
         radarMeta.setDisplayName(ChatColor.GREEN + "Radar");
 
-        radarMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        radarMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         radarMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -1196,7 +2146,7 @@ public class ItemManager {
         ItemMeta flashbangMeta = flashbang.getItemMeta();
         flashbangMeta.setDisplayName(ChatColor.YELLOW + "Flashbang");
 
-        flashbangMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        flashbangMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         flashbangMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -1216,7 +2166,7 @@ public class ItemManager {
         ItemMeta eggMeta = egg.getItemMeta();
         eggMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Easter Egg");
 
-        eggMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        eggMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         eggMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         egg.setItemMeta(eggMeta);
@@ -1232,7 +2182,7 @@ public class ItemManager {
         teaMeta.setDisplayName(ChatColor.GOLD + "Infinite Tea");
         teaMeta.setColor(Color.BLACK);
 
-        teaMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        teaMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
         tea.setItemMeta(teaMeta);
 
         RCAbility.addAbility(tea, RCAbility.CLEAR_BAD_EFFECTS);
@@ -1254,7 +2204,7 @@ public class ItemManager {
         lore.add(ChatColor.DARK_GRAY + "side of the Mississippi!");
 
         alcoholMeta.setLore(lore);
-        alcoholMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        alcoholMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
         alcohol.setItemMeta(alcoholMeta);
 
         RCAbility.addAbility(alcohol, RCAbility.INTOXICATED);
@@ -1279,7 +2229,7 @@ public class ItemManager {
         lore.add(ChatColor.RED + "Does not work in Creative Mode");
 
         bleachMeta.setLore(lore);
-        bleachMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        bleachMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
         bleach.setItemMeta(bleachMeta);
 
         RCAbility.addAbility(bleach, RCAbility.CLEANER);
@@ -1292,7 +2242,7 @@ public class ItemManager {
         ItemMeta sugarMeta = sugar.getItemMeta();
         sugarMeta.setDisplayName(color("&f\"Sugar\""));
 
-        sugarMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        sugarMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         sugarMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -1311,7 +2261,7 @@ public class ItemManager {
         ItemMeta medsMeta = meds.getItemMeta();
         medsMeta.setDisplayName(ChatColor.RED + "\"Medication\"");
 
-        medsMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        medsMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         medsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -1371,7 +2321,7 @@ public class ItemManager {
         ItemMeta vaccineMeta = vaccine.getItemMeta();
         vaccineMeta.setDisplayName(ChatColor.GOLD + "Reusable Coronavirus Vaccine");
 
-        vaccineMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        vaccineMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         vaccineMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -1392,7 +2342,7 @@ public class ItemManager {
         ItemMeta fangMeta = fang.getItemMeta();
         fangMeta.setDisplayName(ChatColor.RED + "Vampiric Fang");
 
-        fangMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+        fangMeta.addEnchant(Enchantment.SHARPNESS, 3, true);
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
@@ -1402,6 +2352,7 @@ public class ItemManager {
         fang.setItemMeta(fangMeta);
 
         RCAbility.addAbility(fang, RCAbility.LIFE_DRAIN_BUFF);
+        OnKillAbility.addAbility(fang, OnKillAbility.HEALTH_DRAIN);
         return fang;
     }
 
@@ -1411,11 +2362,13 @@ public class ItemManager {
         ItemMeta swordMeta = sword.getItemMeta();
         swordMeta.setDisplayName(color("&6&l&kZ &d&lCulmination &6&l&kZ"));
 
-        swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 6, true);
-        swordMeta.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 6, true);
-        swordMeta.addEnchant(Enchantment.DAMAGE_UNDEAD, 6, true);
-        swordMeta.addEnchant(Enchantment.DURABILITY, 5, true);
-        swordMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, 5, true);
+        swordMeta.addEnchant(Enchantment.SHARPNESS, 6, true);
+        swordMeta.addEnchant(Enchantment.BANE_OF_ARTHROPODS, 6, true);
+        swordMeta.addEnchant(Enchantment.SMITE, 6, true);
+        swordMeta.addEnchant(Enchantment.BREACH, 5, true);
+        swordMeta.addEnchant(Enchantment.SWEEPING_EDGE, 4, true);
+        swordMeta.addEnchant(Enchantment.UNBREAKING, 5, true);
+        swordMeta.addEnchant(Enchantment.LOOTING, 5, true);
         swordMeta.addEnchant(Enchantment.MENDING, 1, true);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -1427,6 +2380,7 @@ public class ItemManager {
 
         RCAbility.addAbility(sword, RCAbility.CALL_OF_THE_VOID);
         OnHitAbility.addAbility(sword, OnHitAbility.DRACONIAN_RAGE);
+        OnHitAbility.addAbility(sword, OnHitAbility.DESPERATE_RUSH);
         return sword;
     }
 
@@ -1437,7 +2391,7 @@ public class ItemManager {
         scrollMeta.setDisplayName(ChatColor.DARK_PURPLE + "Decrepit Scroll");
         scrollMeta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
 
-        scrollMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        scrollMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         scrollMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -1457,7 +2411,7 @@ public class ItemManager {
         ItemMeta handleMeta = handle.getItemMeta();
         handleMeta.setDisplayName(ChatColor.GOLD + "Mythic Handle");
 
-        handleMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        handleMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         handleMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
@@ -1477,7 +2431,7 @@ public class ItemManager {
         ItemMeta pearlMeta = pearl.getItemMeta();
         pearlMeta.setDisplayName(ChatColor.AQUA + "Enchanted Ender Pearl");
 
-        pearlMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        pearlMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         pearlMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         pearl.setItemMeta(pearlMeta);
@@ -1490,12 +2444,12 @@ public class ItemManager {
         ItemMeta pearlMeta = pearl.getItemMeta();
         pearlMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Endless Ender Pearl");
 
-        pearlMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        pearlMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         pearlMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatColor.GRAY + "An infinite Ender Pearl");
+        lore.add(ChatColor.GRAY + "An infinite Ender Pearl.");
 
         pearlMeta.setLore(lore);
         pearl.setItemMeta(pearlMeta);
@@ -1510,14 +2464,15 @@ public class ItemManager {
         ItemMeta swordMeta = sword.getItemMeta();
         swordMeta.setDisplayName(color("&7Berserk Sword"));
 
-        swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
-        swordMeta.addEnchant(Enchantment.DAMAGE_UNDEAD, 3, true);
-        swordMeta.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 3, true);
+        swordMeta.addEnchant(Enchantment.SHARPNESS, 3, true);
+        swordMeta.addEnchant(Enchantment.SMITE, 3, true);
+        swordMeta.addEnchant(Enchantment.BANE_OF_ARTHROPODS, 3, true);
 
         sword.setItemMeta(swordMeta);
 
         RCAbility.addAbility(sword, RCAbility.RAGE);
         OnHitAbility.addAbility(sword, OnHitAbility.BLOODLUST);
+        OnHitAbility.addAbility(sword, OnHitAbility.DESPERATE_RUSH);
         return sword;
     }
 
@@ -1527,9 +2482,9 @@ public class ItemManager {
         ItemMeta dragonSwordMeta = sword.getItemMeta();
         dragonSwordMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Dragon Sword");
 
-        dragonSwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 4, true);
-        dragonSwordMeta.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 3, true);
-        dragonSwordMeta.addEnchant(Enchantment.DAMAGE_UNDEAD, 3, true);
+        dragonSwordMeta.addEnchant(Enchantment.SHARPNESS, 4, true);
+        dragonSwordMeta.addEnchant(Enchantment.BANE_OF_ARTHROPODS, 3, true);
+        dragonSwordMeta.addEnchant(Enchantment.SMITE, 3, true);
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
@@ -1552,9 +2507,10 @@ public class ItemManager {
         ItemMeta hammerMeta = hammer.getItemMeta();
         hammerMeta.setDisplayName(ChatColor.DARK_PURPLE + "Super Hammer");
 
-        hammerMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
-        hammerMeta.addEnchant(Enchantment.DAMAGE_UNDEAD, 2, true);
-        hammerMeta.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 2, true);
+        hammerMeta.addEnchant(Enchantment.SHARPNESS, 2, true);
+        hammerMeta.addEnchant(Enchantment.SMITE, 2, true);
+        hammerMeta.addEnchant(Enchantment.BANE_OF_ARTHROPODS, 2, true);
+        hammerMeta.addEnchant(Enchantment.BREACH, 3, true);
 
         hammerMeta.setUnbreakable(true);
         hammerMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
@@ -1567,18 +2523,20 @@ public class ItemManager {
     }
 
     private static ItemStack createWardenChestplate() {
-        ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
+        ItemStack chestplate = new ItemStack(NETHERITE_CHESTPLATE);
 
         ArmorMeta chestplateMeta = (ArmorMeta) chestplate.getItemMeta();
         chestplateMeta.setDisplayName(ChatColor.DARK_AQUA + "Warden Chestplate");
 
-        chestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 6, true);
-        chestplateMeta.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 6, true);
-        chestplateMeta.addEnchant(Enchantment.PROTECTION_FIRE, 6, true);
-        chestplateMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 6, true);
-        chestplateMeta.addEnchant(Enchantment.DURABILITY, 5, true);
+        chestplateMeta.addEnchant(Enchantment.PROTECTION, 6, true);
+        chestplateMeta.addEnchant(Enchantment.BLAST_PROTECTION, 6, true);
+        chestplateMeta.addEnchant(Enchantment.FIRE_PROTECTION, 6, true);
+        chestplateMeta.addEnchant(Enchantment.PROJECTILE_PROTECTION, 6, true);
+        chestplateMeta.addEnchant(Enchantment.UNBREAKING, 5, true);
 
         chestplateMeta.setTrim(new ArmorTrim(TrimMaterial.DIAMOND, TrimPattern.SILENCE));
+        chestplateMeta.addItemFlags(ItemFlag.HIDE_ARMOR_TRIM);
+        chestplateMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
@@ -1616,9 +2574,11 @@ public class ItemManager {
         ItemMeta swordMeta = sword.getItemMeta();
         swordMeta.setDisplayName(color("&2Undead Sword"));
 
-        swordMeta.addEnchant(Enchantment.DAMAGE_UNDEAD, 2, true);
+        swordMeta.addEnchant(Enchantment.SMITE, 2, true);
 
         sword.setItemMeta(swordMeta);
+
+        OnHitAbility.addAbility(sword, OnHitAbility.UNDEAD_DAMAGE_BONUS);
         return sword;
     }
 
@@ -1628,12 +2588,22 @@ public class ItemManager {
         ItemMeta swordMeta = sword.getItemMeta();
         swordMeta.setDisplayName(color("&cSpider Sword"));
 
-        swordMeta.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 2, true);
+        swordMeta.addEnchant(Enchantment.BANE_OF_ARTHROPODS, 2, true);
 
         sword.setItemMeta(swordMeta);
+
+        OnHitAbility.addAbility(sword, OnHitAbility.ARTHROPOD_DAMAGE_BONUS);
         return sword;
     }
 
+    /**
+     * Set an item to only be
+     * able to deal Mini Crits and
+     * not full Crits
+     *
+     * @param item: An item
+     * @return item
+     */
     private static ItemStack setMiniCrits(ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         ArrayList<String> lore = new ArrayList<>();
@@ -1650,6 +2620,13 @@ public class ItemManager {
         return item;
     }
 
+    /**
+     * Set an item as unable to deal
+     * any kind of Crit
+     *
+     * @param item: An item
+     * @return item
+     */
     private static ItemStack setNoCrits(ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         ArrayList<String> lore = new ArrayList<>();
@@ -1666,6 +2643,13 @@ public class ItemManager {
         return item;
     }
 
+    /**
+     * Set an item to only be
+     * able to deal critical hits
+     *
+     * @param item: An item
+     * @return item
+     */
     private static ItemStack setAlwaysCrits(ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         ArrayList<String> lore = new ArrayList<>();
@@ -1682,6 +2666,35 @@ public class ItemManager {
         return item;
     }
 
+    /**
+     * Set an item to only be
+     * able to deal Super Critical
+     * Hits
+     *
+     * @param item: An item
+     * @return item
+     */
+    private static ItemStack setSuperCrits(ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+        ArrayList<String> lore = new ArrayList<>();
+
+        if(meta.hasLore()) {
+            lore = (ArrayList<String>) meta.getLore();
+        }
+        lore.add("");
+        lore.add(color("&5Critical Hits are Enhanced"));
+
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
+    /**
+     * Modify items' lore after
+     * they are created to add final
+     * touches
+     */
     private static void postLore() {
         for(ItemStack item : customItems) {
             ItemMeta meta = item.getItemMeta();
@@ -1712,18 +2725,25 @@ public class ItemManager {
         }
     }
 
-    private static ItemStack setSeries(ItemStack item, String series) {
+    /**
+     * Set an item's series
+     *
+     * @param item: An item
+     * @param series: The series of the item
+     * @return item
+     */
+    private static ItemStack setSeries(ItemStack item, Series series) {
         ItemMeta meta = item.getItemMeta();
 
         if(meta.hasLore()) {
             ArrayList<String> lore = (ArrayList<String>) meta.getLore();
             lore.add("");
-            lore.add(series + ChatColor.GRAY + " Series");
+            lore.add(series.getName() + ChatColor.GRAY + " Series");
             meta.setLore(lore);
         } else {
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(series + ChatColor.GRAY + " Series");
+            lore.add(series.getName() + ChatColor.GRAY + " Series");
             meta.setLore(lore);
         }
 

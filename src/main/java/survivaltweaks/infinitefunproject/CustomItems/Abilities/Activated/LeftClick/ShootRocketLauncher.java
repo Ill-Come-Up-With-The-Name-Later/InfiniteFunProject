@@ -38,8 +38,8 @@ public class ShootRocketLauncher implements ActivatedAbility {
                     return;
                 }
 
-                arrow.getLocation().getWorld().spawnParticle(Particle.SMOKE_NORMAL, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
-                arrow.getLocation().getWorld().spawnParticle(Particle.FIREWORKS_SPARK, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
+                arrow.getLocation().getWorld().spawnParticle(Particle.SMOKE, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
+                arrow.getLocation().getWorld().spawnParticle(Particle.FIREWORK, arrow.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
                 arrow.getLocation().getWorld().spawnParticle(Particle.CRIT, arrow.getLocation(), 5, 0.1, 0.1, 0.1, 0.02);
             }
         }.runTaskTimer(InfiniteFunProject.plugin, 0, 1);

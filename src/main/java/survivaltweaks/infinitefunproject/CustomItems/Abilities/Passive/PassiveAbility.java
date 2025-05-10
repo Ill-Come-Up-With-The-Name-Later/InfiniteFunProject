@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Ability;
+import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.LeftClick.InterceptMeteors;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Passive.Passives.*;
 
 import java.util.ArrayList;
@@ -20,7 +21,19 @@ public enum PassiveAbility implements Ability {
     WAIT(new Wait(), "Passage of Time", new Wait().getDescription(), new Wait().getCooldown()),
     AQUATIC_ADAPTATION(new AquaticSustain(), "Aquatic Adaptation", new AquaticSustain().getDescription(), new AquaticSustain().getCooldown()),
     CALLISTO_ARROWS(new CallistoArrows(), "Powerful Arrows", new CallistoArrows().getDescription(), new CallistoArrows().getCooldown()),
-    SCAN(new Scan(), "Scan", new Scan().getDescription(), new Scan().getCooldown()),
+    SCAN(new Scan(), "Echo Scan", new Scan().getDescription(), new Scan().getCooldown()),
+    WIND_DEFLECT(new WindDeflect(), "Air Shot", new WindDeflect().getDescription(), new WindDeflect().getCooldown()),
+    SEEKING_ARROWS(new SeekingArrows(), "Homing Arrows", new SeekingArrows().getDescription(), new SeekingArrows().getCooldown()),
+    SCORCH_SURROUNDING(new Scorch(), "Radial Scorch", new Scorch().getDescription(), new Scorch().getCooldown()),
+    FIRE_MEMBRANE(new FireMembrane(), "Fiery Membrane", new FireMembrane().getDescription(), new FireMembrane().getCooldown()),
+    BOUNCING_ARROWS(new BouncingArrows(), "Bouncy Arrows", new BouncingArrows().getDescription(), new BouncingArrows().getCooldown()),
+    EXPLOSIVE_ARROW(new ExplosiveArrows(), "Explosive Arrows", new ExplosiveArrows().getDescription(), new ExplosiveArrows().getCooldown()),
+    AT_ONE_SOULS(new AtOne(), "At One With Souls", new AtOne().getDescription(), new AtOne().getCooldown()),
+    SOUL_DRAIN(new SoulDrain(), "Soul Drain", new SoulDrain().getDescription(), new SoulDrain().getCooldown()),
+    STOMP(new Stomp(), "Stomp", new Stomp().getDescription(), new Stomp().getCooldown()),
+    DETARGET_PLAYER(new DetargetPlayer(), "Mind Manipulation", new DetargetPlayer().getDescription(), new DetargetPlayer().getCooldown()),
+    SPEED_BOOST(new SpeedBoost(), "Speed Boost", new SpeedBoost().getDescription(), new SpeedBoost().getCooldown()),
+    VIGOR(new Vigor(), "Vigor", new Vigor().getDescription(), new Vigor().getCooldown()),
     ;
 
     private final Passive ability;
@@ -120,10 +133,6 @@ public enum PassiveAbility implements Ability {
             return;
         }
 
-        if(!item.hasItemMeta()) {
-            return;
-        }
-
         ArrayList<String> lore = new ArrayList<>();
         ItemMeta meta = item.getItemMeta();
 
@@ -144,7 +153,7 @@ public enum PassiveAbility implements Ability {
             lore.add(color("&7- &eCooldown&7: &b" + String.format("%.2f", ability.getCooldown() / 20) + " Second(s)"));
         }
         if(!ability.getAbility().cooldownModifiable() && ability.getCooldown() > 0) {
-            lore.add(color("&7- &cNon-Reducible Cooldown"));
+            lore.add(color("&7- &cNot affected by modifier."));
         }
 
         meta.setLore(lore);

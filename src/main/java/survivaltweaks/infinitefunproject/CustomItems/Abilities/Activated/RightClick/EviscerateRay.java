@@ -22,8 +22,8 @@ public class EviscerateRay implements ActivatedAbility {
     public void activate(Player player) {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
-                add(Particle.CRIT_MAGIC);
-                add(Particle.FIREWORKS_SPARK);
+                add(Particle.ENCHANTED_HIT);
+                add(Particle.FIREWORK);
                 add(Particle.SOUL_FIRE_FLAME);
             }
         };
@@ -42,7 +42,7 @@ public class EviscerateRay implements ActivatedAbility {
             if(hitEntities.get(entity)) {
                 drawCircle(entity.getLocation(), 4, Particle.SOUL_FIRE_FLAME, 90);
                 drawCircle(entity.getLocation(), 4, Particle.DAMAGE_INDICATOR, 90);
-                drawCircle(entity.getLocation(), 4, Particle.CRIT_MAGIC, 90);
+                drawCircle(entity.getLocation(), 4, Particle.ENCHANTED_HIT, 90);
                 ArrayList<Entity> entities = (ArrayList<Entity>) circularNearbyEntities(entity, 4);
 
                 for(Entity e : entities) {

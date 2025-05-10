@@ -14,18 +14,26 @@ import java.util.ArrayList;
 
 public class ProjectileImmunity implements Listener {
 
+    /**
+     * Make end crystals immune to
+     * projectiles
+     *
+     * @param event: Projectile shot
+     */
     @EventHandler
     public void onShoot(ProjectileLaunchEvent event) {
         Projectile projectile = event.getEntity();
 
         if(projectile.getShooter() instanceof Player) {
             new BukkitRunnable() {
+
                 @Override
                 public void run() {
                     if(projectile.isDead() || projectile.isOnGround()) {
                         cancel();
                         return;
                     }
+                    
                     ArrayList<Entity> nearby = (ArrayList<Entity>) projectile.getNearbyEntities(10, 10, 10);
 
                     for(Entity e : nearby) {

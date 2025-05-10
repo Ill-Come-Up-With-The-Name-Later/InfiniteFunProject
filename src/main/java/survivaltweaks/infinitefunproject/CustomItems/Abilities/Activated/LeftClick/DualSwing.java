@@ -25,8 +25,8 @@ public class DualSwing implements ActivatedAbility {
             ArrayList<Particle> particles = new ArrayList<>() {
                 {
                     add(Particle.SWEEP_ATTACK);
-                    add(Particle.SPELL_WITCH);
-                    add(Particle.CRIT_MAGIC);
+                    add(Particle.WITCH);
+                    add(Particle.ENCHANTED_HIT);
                 }
             };
 

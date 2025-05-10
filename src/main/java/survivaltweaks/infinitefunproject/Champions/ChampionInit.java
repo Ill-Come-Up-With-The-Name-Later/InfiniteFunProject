@@ -1,5 +1,6 @@
 package survivaltweaks.infinitefunproject.Champions;
 
+import org.bukkit.ChatColor;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.banner.Pattern;
@@ -15,12 +16,15 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import survivaltweaks.infinitefunproject.Champions.All.AllChampions;
-import survivaltweaks.infinitefunproject.Champions.All.DamagePlayer;
 import survivaltweaks.infinitefunproject.Champions.Blaze.FireballExplosion;
+import survivaltweaks.infinitefunproject.Champions.Breeze.DropDeflectorHelm;
 import survivaltweaks.infinitefunproject.Champions.Creeper.EnlargeBlastRadius;
+import survivaltweaks.infinitefunproject.Champions.Drowned.DropTrident;
+import survivaltweaks.infinitefunproject.Champions.Skeleton.DropCallisto;
 import survivaltweaks.infinitefunproject.Champions.Spider.WebPlayers;
 import survivaltweaks.infinitefunproject.Champions.Witch.EnhancePotions;
 import survivaltweaks.infinitefunproject.Champions.Zombie.ResurrectKilled;
+import survivaltweaks.infinitefunproject.MonsterAbilities.OnMobAttacksAbility;
 
 import java.util.ArrayList;
 
@@ -34,12 +38,14 @@ public class ChampionInit implements Listener {
     public static void init() {
         Bukkit.getServer().getPluginManager().registerEvents(new MakeChampion(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new AllChampions(), plugin);
-        Bukkit.getServer().getPluginManager().registerEvents(new DamagePlayer(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new FireballExplosion(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new ResurrectKilled(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new EnlargeBlastRadius(), plugin);
-        Bukkit.getServer().getPluginManager().registerEvents(new WebPlayers(), plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new EnhancePotions(), plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new DropTrident(), plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new DropDeflectorHelm(), plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new DropCallisto(), plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new WebPlayers(), plugin);
 
         championParticles();
         buffSurrounding();
@@ -58,12 +64,14 @@ public class ChampionInit implements Listener {
                 monster.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).getBaseValue() * 2);
 
         if(!(monster.getType() == EntityType.CREEPER)) {
-            monster.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, -1, 0, false, false, false));
+            monster.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, -1, 0, false, false, false));
             monster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, -1, 1, false, false, false));
-            monster.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, -1, 1, false, false, false));
+            monster.addPotionEffect(new PotionEffect(PotionEffectType.JUMP_BOOST, -1, 1, false, false, false));
             monster.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, -1, 0, false, false, false));
             monster.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, -1, 0, false, false, false));
         }
+
+        OnMobAttacksAbility.addAbility(monster, OnMobAttacksAbility.GAIN_HEALTH_FROM_TARGET);
 
         Bukkit.getScheduler().runTaskLater(plugin,
                 () -> equipChampion(monster), 1);
@@ -79,15 +87,13 @@ public class ChampionInit implements Listener {
     }
 
     public static void equipChampion(Monster monster) {
-        if(monster.getEquipment() == null) {
-            return;
-        }
-
-        monster.getEquipment().setItemInMainHandDropChance(0);
-        monster.getEquipment().setHelmetDropChance(1);
-        monster.getEquipment().setChestplateDropChance(0);
-        monster.getEquipment().setLeggingsDropChance(0);
-        monster.getEquipment().setBootsDropChance(0);
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            monster.getEquipment().setItemInMainHandDropChance(0);
+            monster.getEquipment().setHelmetDropChance(2f);
+            monster.getEquipment().setChestplateDropChance(0);
+            monster.getEquipment().setLeggingsDropChance(0);
+            monster.getEquipment().setBootsDropChance(0);
+        }, 3);
 
         if(monster instanceof AbstractSkeleton) {
             monster.getEquipment().setItem(EquipmentSlot.HAND, createBow());
@@ -109,7 +115,7 @@ public class ChampionInit implements Listener {
         ItemStack sword = new ItemStack(Material.NETHERITE_SWORD);
         ItemMeta swordMeta = sword.getItemMeta();
 
-        swordMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+        swordMeta.addEnchant(Enchantment.SHARPNESS, 3, true);
         swordMeta.addEnchant(Enchantment.FIRE_ASPECT, 2, true);
         swordMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 
@@ -121,7 +127,7 @@ public class ChampionInit implements Listener {
         ItemStack trident = new ItemStack(Material.TRIDENT);
         ItemMeta tridentMeta = trident.getItemMeta();
 
-        tridentMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+        tridentMeta.addEnchant(Enchantment.SHARPNESS, 3, true);
         tridentMeta.addEnchant(Enchantment.FIRE_ASPECT, 2, true);
         tridentMeta.addEnchant(Enchantment.CHANNELING, 1, true);
         tridentMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
@@ -134,8 +140,8 @@ public class ChampionInit implements Listener {
         ItemStack bow = new ItemStack(Material.BOW);
         ItemMeta bowMeta = bow.getItemMeta();
 
-        bowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 4, true);
-        bowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
+        bowMeta.addEnchant(Enchantment.POWER, 4, true);
+        bowMeta.addEnchant(Enchantment.FLAME, 1, true);
         bowMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 
         bow.setItemMeta(bowMeta);
@@ -175,7 +181,7 @@ public class ChampionInit implements Listener {
         ItemStack chestplate = new ItemStack(Material.NETHERITE_CHESTPLATE);
         ItemMeta chestplateMeta = chestplate.getItemMeta();
 
-        chestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+        chestplateMeta.addEnchant(Enchantment.PROTECTION, 3, true);
         chestplateMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 
         chestplate.setItemMeta(chestplateMeta);
@@ -186,7 +192,7 @@ public class ChampionInit implements Listener {
         ItemStack leggings = new ItemStack(Material.NETHERITE_LEGGINGS);
         ItemMeta leggingsMeta = leggings.getItemMeta();
 
-        leggingsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+        leggingsMeta.addEnchant(Enchantment.PROTECTION, 3, true);
         leggingsMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
 
         leggings.setItemMeta(leggingsMeta);
@@ -197,7 +203,7 @@ public class ChampionInit implements Listener {
         ItemStack boots = new ItemStack(Material.NETHERITE_BOOTS);
         ItemMeta bootsMeta = boots.getItemMeta();
 
-        bootsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true);
+        bootsMeta.addEnchant(Enchantment.PROTECTION, 3, true);
         bootsMeta.addEnchant(Enchantment.DEPTH_STRIDER, 3, true);
         bootsMeta.addEnchant(Enchantment.SOUL_SPEED, 3, true);
         bootsMeta.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
@@ -230,8 +236,8 @@ public class ChampionInit implements Listener {
                         if(m.hasMetadata("Champion")) {
                             ArrayList<Particle> effects = new ArrayList<>() {
                                 {
-                                    add(Particle.CRIT_MAGIC);
-                                    add(Particle.SPELL_WITCH);
+                                    add(Particle.ENCHANTED_HIT);
+                                    add(Particle.WITCH);
                                 }
                             };
 

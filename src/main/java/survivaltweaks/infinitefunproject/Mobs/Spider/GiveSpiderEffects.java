@@ -18,7 +18,7 @@ public class GiveSpiderEffects implements Listener {
         if(entity instanceof Spider) {
             Spider spider = (Spider) entity;
             if(new Random().nextInt(0, 4) == 1) {
-                spider.addPotionEffect(PotionEffectType.INCREASE_DAMAGE.createEffect(-1, 0));
+                spider.addPotionEffect(PotionEffectType.STRENGTH.createEffect(-1, 0));
             }
             if(new Random().nextInt(0, 6) == 1) {
                 spider.addPotionEffect(PotionEffectType.SPEED.createEffect(-1, 0));

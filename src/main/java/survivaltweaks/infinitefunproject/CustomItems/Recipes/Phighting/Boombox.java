@@ -16,7 +16,7 @@ public class Boombox {
                 " S ");
 
         recipe.setIngredient('E', Material.DISC_FRAGMENT_5);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('S', Material.JUKEBOX);
 
         Bukkit.getServer().addRecipe(recipe);

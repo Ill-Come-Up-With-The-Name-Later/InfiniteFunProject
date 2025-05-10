@@ -16,7 +16,7 @@ public class Medkit {
                 " S ");
 
         recipe.setIngredient('E', Material.ECHO_SHARD);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('F', Material.SPIDER_EYE);
         recipe.setIngredient('S', Material.WARPED_HANGING_SIGN);
 

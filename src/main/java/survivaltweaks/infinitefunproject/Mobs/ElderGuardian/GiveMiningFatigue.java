@@ -34,7 +34,7 @@ public class GiveMiningFatigue implements Listener {
                     for(Entity e : entities) {
                         if(e instanceof Player) {
                             Player player = (Player) e;
-                            player.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(400, 3));
+                            player.addPotionEffect(PotionEffectType.MINING_FATIGUE.createEffect(400, 3));
                             player.addPotionEffect(PotionEffectType.WEAKNESS.createEffect(400, 1));
                         }
                     }

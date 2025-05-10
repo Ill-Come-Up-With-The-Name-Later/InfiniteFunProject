@@ -33,11 +33,11 @@ public class Etherwarp implements ActivatedAbility {
             }
         }
 
-        player.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, player.getLocation(), 10, 0, 0, 0, 6);
+        player.getWorld().spawnParticle(Particle.EXPLOSION, player.getLocation(), 10, 0, 0, 0, 6);
 
         if(!player.hasPotionEffect(PotionEffectType.ABSORPTION)) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 100, 3, false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 0, false, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 100, 0, false, false, false));
 
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 player.setHealth(Math.min(player.getHealth() + (player.getAbsorptionAmount() / 2),

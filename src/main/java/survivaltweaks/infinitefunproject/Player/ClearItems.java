@@ -1,8 +1,11 @@
 package survivaltweaks.infinitefunproject.Player;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
+import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
 import java.util.ArrayList;
 
@@ -18,6 +21,17 @@ public class ClearItems {
         clearedItems.add(Material.TOTEM_OF_UNDYING);
 
         clearedEffects.add(PotionEffectType.FIRE_RESISTANCE);
+
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                for(Player player : Bukkit.getOnlinePlayers()) {
+                    clearItems(player);
+                    clearEffects(player);
+                }
+            }
+        }.runTaskTimer(InfiniteFunProject.plugin, 1, 1);
     }
 
     public static void clearItems(Player player) {

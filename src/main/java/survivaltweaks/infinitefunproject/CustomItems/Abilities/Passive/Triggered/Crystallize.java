@@ -17,7 +17,7 @@ public class Crystallize implements TriggerAbility {
 
     @Override
     public void activate(Player player) {
-        drawCircle(player.getLocation(), 1.4, Particle.VILLAGER_HAPPY, 90);
+        drawCircle(player.getLocation(), 1.4, Particle.HAPPY_VILLAGER, 90);
 
         ArrayList<Entity> entities = (ArrayList<Entity>) circularNearbyEntities(player, 10);
         Optional<Entity> lowestPlayer = entities.stream().filter(x -> x instanceof Player)
@@ -30,7 +30,7 @@ public class Crystallize implements TriggerAbility {
                 Player other = (Player) lowestPlayer.get();
                 other.setHealth(Math.min(other.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue(), other.getHealth() + 25));
 
-                drawCircle(other.getLocation(), 1.4, Particle.VILLAGER_HAPPY, 90);
+                drawCircle(other.getLocation(), 1.4, Particle.HAPPY_VILLAGER, 90);
             }
             return;
         }

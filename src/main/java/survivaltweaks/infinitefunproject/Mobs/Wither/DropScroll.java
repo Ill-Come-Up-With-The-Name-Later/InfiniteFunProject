@@ -18,16 +18,9 @@ public class DropScroll implements Listener {
         Entity entity = event.getEntity();
 
         if(entity instanceof Wither) {
-            Wither wither = (Wither) entity;
-
-            double x = wither.getWorld().getEnderDragonBattle().getEndPortalLocation().getX() + 0.5;
-            double y = wither.getWorld().getEnderDragonBattle().getEndPortalLocation().getY() + 4;
-            double z = wither.getWorld().getEnderDragonBattle().getEndPortalLocation().getZ() + 0.5;
-
             for(int i = 0; i < Bukkit.getOnlinePlayers().size(); i++) {
-                Item scroll = wither.getWorld().dropItem(new Location(wither.getWorld(), x, y, z), ItemManager.decrepitScroll);
-                scroll.setInvulnerable(true);
-                scroll.setGlowing(true);
+                event.getDrops().add(ItemManager.decrepitScroll);
+                event.getDrops().add(ItemManager.soulBoots);
             }
         }
     }

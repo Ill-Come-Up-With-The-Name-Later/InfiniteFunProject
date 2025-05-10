@@ -21,9 +21,9 @@ public class DecrepitScroll implements ActivatedAbility {
         arrow.setPierceLevel(3);
         arrow.setDamage(15);
         arrow.setMetadata("Seeking", new SeekingMetadata(8, 380, InfiniteFunProject.hostiles()));
-        arrow.addCustomEffect(PotionEffectType.SLOW.createEffect(200, 5), true);
+        arrow.addCustomEffect(PotionEffectType.SLOWNESS.createEffect(200, 5), true);
 
-        drawCircle(player.getLocation(), 1.4, Particle.SMOKE_NORMAL, 90);
+        drawCircle(player.getLocation(), 1.4, Particle.SMOKE, 90);
 
         new BukkitRunnable() {
             @Override
@@ -32,7 +32,7 @@ public class DecrepitScroll implements ActivatedAbility {
                     cancel();
                     return;
                 }
-                arrow.getWorld().spawnParticle(Particle.SMOKE_NORMAL, arrow.getLocation(), 7, 0.02, 0.02, 0.02, 0.07);
+                arrow.getWorld().spawnParticle(Particle.SMOKE, arrow.getLocation(), 7, 0.02, 0.02, 0.02, 0.07);
             }
         }.runTaskTimer(InfiniteFunProject.plugin, 1, 1);
 

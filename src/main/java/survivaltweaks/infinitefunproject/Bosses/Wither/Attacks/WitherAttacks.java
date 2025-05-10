@@ -23,6 +23,11 @@ import static survivaltweaks.infinitefunproject.Bosses.Wither.InitWither.setWith
 
 public class WitherAttacks implements Listener {
 
+    /**
+     * Wither picks attack when damaged
+     *
+     * @param event: Entity damage by entity event
+     */
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
         Entity damaged = event.getEntity();
@@ -36,6 +41,11 @@ public class WitherAttacks implements Listener {
         }
     }
 
+    /**
+     * Wither pick attack
+     *
+     * @param wither: The attacking Wither
+     */
     private void pickAttack(Wither wither) {
         int attack = new Random().nextInt(0, 9);
 
@@ -90,16 +100,21 @@ public class WitherAttacks implements Listener {
         }, 35);
     }
 
+    /**
+     * Wither clone attack
+     *
+     * @param wither: The attacking Wither
+     */
     private void clone(Wither wither) {
         Wither clone = wither.getWorld().spawn(wither.getLocation(), Wither.class);
         clone.setHealth(wither.getHealth());
-        clone.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 120, 4, false, false, false));
+        clone.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 120, 4, false, false, false));
 
         Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
             if(new Random().nextInt(0, 3) == 1) {
-                wither.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20, 10, false,
+                wither.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20, 10, false,
                         false, false));
-                clone.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20, 10, false,
+                clone.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20, 10, false,
                         false, false));
                 clone.getWorld().createExplosion(clone.getLocation(), 9.8f, true, true, wither);
             }
@@ -107,29 +122,44 @@ public class WitherAttacks implements Listener {
         }, 160);
     }
 
+    /**
+     * Wither launch entities attack
+     *
+     * @param wither: The attacking Wither
+     */
     private void launch(Wither wither) {
         ArrayList<Entity> entities = (ArrayList<Entity>) wither.getNearbyEntities(8, 8, 8);
 
         wither.setVelocity(new Vector(0, 1.2, 0));
-        wither.getWorld().spawnParticle(Particle.SMOKE_LARGE, wither.getLocation(), 70, .25, .25, .25, 0.2);
+        wither.getWorld().spawnParticle(Particle.LARGE_SMOKE, wither.getLocation(), 70, .25, .25, .25, 0.2);
 
         for(Entity e : entities) {
             if(e instanceof LivingEntity) {
                 LivingEntity entity = (LivingEntity) e;
                 entity.setVelocity(new Vector(0, 1.4, 0));
-                entity.getWorld().spawnParticle(Particle.SMOKE_LARGE, entity.getLocation(), 70, .25, .25, .25, 0.2);
+                entity.getWorld().spawnParticle(Particle.LARGE_SMOKE, entity.getLocation(), 70, .25, .25, .25, 0.2);
             }
         }
     }
 
+    /**
+     * Wither skull barrage attack
+     *
+     * @param wither: The attacking Wither
+     */
     private void skullBarrage(Wither wither) {
         for(int i = 0; i < 10; i++) {
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> wither.launchProjectile(WitherSkull.class), i * 3);
         }
     }
 
+    /**
+     * Wither smoke screen attack
+     *
+     * @param wither: The attacking Wither
+     */
     private void smokeScreen(Wither wither) {
-        wither.getWorld().spawnParticle(Particle.SMOKE_LARGE, wither.getLocation(), 250, 3, 3, 3, 0.25);
+        wither.getWorld().spawnParticle(Particle.LARGE_SMOKE, wither.getLocation(), 250, 3, 3, 3, 0.25);
 
         ArrayList<Entity> entities = (ArrayList<Entity>) wither.getNearbyEntities(12, 12, 12);
 
@@ -141,6 +171,11 @@ public class WitherAttacks implements Listener {
         }
     }
 
+    /**
+     * Wither summoning wither skeletons attack
+     *
+     * @param wither: The attacking Wither
+     */
     private void summonWitherSkeletons(Wither wither) {
         for(int i = 0; i < 2; i++) {
             WitherSkeleton witherSkeleton = (WitherSkeleton) wither.getWorld().spawnEntity(wither.getLocation(), EntityType.WITHER_SKELETON);
@@ -150,6 +185,11 @@ public class WitherAttacks implements Listener {
         }
     }
 
+    /**
+     * Wither summoning skeletons attack
+     *
+     * @param wither: The attacking Wither
+     */
     private void summonSkeletons(Wither wither) {
         for(int i = 0; i < 2; i++) {
             Skeleton skeleton = (Skeleton) wither.getWorld().spawnEntity(wither.getLocation(), EntityType.SKELETON);
@@ -159,11 +199,16 @@ public class WitherAttacks implements Listener {
         }
     }
 
+    /**
+     * Wither small explosion attack
+     *
+     * @param wither: The attacking Wither
+     */
     private void normalImplode(Wither wither) {
         Location particleSpawn = wither.getLocation();
         particleSpawn.setY(particleSpawn.getY() + 0.95);
 
-        wither.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, particleSpawn, 8, 0.05 ,0.05, 0.05, 9);
+        wither.getWorld().spawnParticle(Particle.LARGE_SMOKE, particleSpawn, 8, 0.05 ,0.05, 0.05, 9);
 
         ArrayList<Entity> entities = (ArrayList<Entity>) wither.getNearbyEntities(9, 9, 9);
 
@@ -175,6 +220,11 @@ public class WitherAttacks implements Listener {
         }
     }
 
+    /**
+     * Wither expanding explosion attack
+     *
+     * @param wither: The attacking Wither
+     */
     private void expandingBlast(Wither wither) {
         wither.setAI(false);
         wither.teleport(wither.getLocation().add(new Vector(0, 5, 0)));
@@ -187,7 +237,7 @@ public class WitherAttacks implements Listener {
                     cancel();
                     return;
                 }
-                if(wither.getLastDamage() >= 15) {
+                if(wither.getLastDamage() >= (radius * 3)) {
                     cancel();
                     wither.setAI(true);
                     return;
@@ -200,7 +250,7 @@ public class WitherAttacks implements Listener {
                 Location particleSpawn = wither.getLocation();
                 particleSpawn.setY(particleSpawn.getY() + 0.95);
 
-                wither.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, particleSpawn, 8, 0.05 ,0.05, 0.05, radius);
+                wither.getWorld().spawnParticle(Particle.EXPLOSION, particleSpawn, 8, 0.05 ,0.05, 0.05, radius);
                 ArrayList<Entity> entities = (ArrayList<Entity>) wither.getNearbyEntities(radius, radius, radius);
 
                 for(Entity e : entities) {
@@ -216,14 +266,32 @@ public class WitherAttacks implements Listener {
         }.runTaskTimer(InfiniteFunProject.plugin, 14, 14);
     }
 
+    /**
+     * Calculate wither expanding blast damage
+     *
+     * @param blastRadius: The current radius
+     */
     private double calculateBlastDamage(int blastRadius) {
         return evaluateLogIntegral(blastRadius) - evaluateLogIntegral(2.6);
     }
 
+    /**
+     * Evaluate integral of ln(x)
+     * and divide by ln(10)
+     *
+     * x * ln(x) - x / ln(10)
+     *
+     * @param x: Number
+     */
     private double evaluateLogIntegral(double x) {
         return (x * Math.log(x) - x) / Math.log(10);
     }
 
+    /**
+     * Wither explode and teleport forward attack
+     *
+     * @param wither: The attacking Wither
+     */
     private void superImplode(Wither wither) {
         Location witherLoc = wither.getLocation();
         witherLoc.setY(witherLoc.getY() + 1);
@@ -235,6 +303,7 @@ public class WitherAttacks implements Listener {
             target.setY(target.getY() - 1);
             Location oneAbove = target;
             oneAbove.setY(oneAbove.getY() + 1);
+
             if(!target.getBlock().getType().isSolid() && !oneAbove.getBlock().getType().isSolid()) {
                 wither.teleport(target);
             } else {
@@ -245,7 +314,7 @@ public class WitherAttacks implements Listener {
         Location particleSpawn = wither.getLocation();
         particleSpawn.setY(particleSpawn.getY() + 0.95);
 
-        wither.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, particleSpawn, 8, 0.05 ,0.05, 0.05, 9);
+        wither.getWorld().spawnParticle(Particle.EXPLOSION, particleSpawn, 8, 0.05 ,0.05, 0.05, 9);
 
         ArrayList<Entity> entities = (ArrayList<Entity>) wither.getNearbyEntities(9, 9, 9);
 

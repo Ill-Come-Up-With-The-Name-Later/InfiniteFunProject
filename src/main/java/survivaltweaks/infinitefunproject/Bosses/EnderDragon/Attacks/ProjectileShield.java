@@ -14,6 +14,12 @@ import java.util.ArrayList;
 
 public class ProjectileShield implements Listener {
 
+    /**
+     * Dragon spawn and shield
+     * loop
+     *
+     * @param event: Entity spawn event
+     */
     @EventHandler
     public void onSpawn(EntitySpawnEvent event) {
         Entity spawned = event.getEntity();

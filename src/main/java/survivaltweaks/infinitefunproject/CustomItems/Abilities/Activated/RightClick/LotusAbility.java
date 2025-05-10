@@ -34,7 +34,7 @@ public class LotusAbility implements ActivatedAbility {
 
         for(int i = 1; i <= 3; i++) {
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
-                drawCircle(arrow.getLocation(), radius, Particle.VILLAGER_HAPPY, 90);
+                drawCircle(arrow.getLocation(), radius, Particle.HAPPY_VILLAGER, 90);
 
                 ArrayList<Entity> entities = (ArrayList<Entity>) circularNearbyEntities(arrow, radius);
 
@@ -62,7 +62,7 @@ public class LotusAbility implements ActivatedAbility {
                     return;
                 }
 
-                arrow.getLocation().getWorld().spawnParticle(Particle.VILLAGER_HAPPY, arrow.getLocation(), 4, 0.1, 0.1, 0.1, 0.02);
+                arrow.getLocation().getWorld().spawnParticle(Particle.HAPPY_VILLAGER, arrow.getLocation(), 4, 0.1, 0.1, 0.1, 0.02);
                 arrow.getLocation().getWorld().spawnParticle(Particle.CHERRY_LEAVES, arrow.getLocation(), 3, 0.1, 0.1, 0.1, 0.02);
             }
         }.runTaskTimer(InfiniteFunProject.plugin, 0, 1);

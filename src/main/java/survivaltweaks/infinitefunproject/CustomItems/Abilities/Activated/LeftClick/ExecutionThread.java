@@ -20,7 +20,7 @@ public class ExecutionThread implements ActivatedAbility {
             {
                 add(Particle.CRIT);
                 add(Particle.WHITE_SMOKE);
-                add(Particle.FIREWORKS_SPARK);
+                add(Particle.FIREWORK);
                 add(Particle.ELECTRIC_SPARK);
             }
         };

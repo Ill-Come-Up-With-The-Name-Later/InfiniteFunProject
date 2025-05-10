@@ -19,7 +19,7 @@ public class AquaticSustain implements Passive {
                     false, false, false));
             player.addPotionEffect(new PotionEffect(PotionEffectType.CONDUIT_POWER, 20, 0,
                     false, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20, 0,
+            player.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20, 0,
                     false, false, false));
             player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20, 0,
                     false, false, false));

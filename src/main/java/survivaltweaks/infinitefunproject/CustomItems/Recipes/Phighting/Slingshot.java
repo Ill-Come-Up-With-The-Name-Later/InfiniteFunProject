@@ -17,7 +17,7 @@ public class Slingshot {
 
         recipe.setIngredient('E', Material.STONE);
         recipe.setIngredient('D', Material.TORCHFLOWER_SEEDS);
-        recipe.setIngredient('C', ItemManager.inphernalBase.getData());
+        recipe.setIngredient('C', ItemManager.inphernalBase);
         recipe.setIngredient('S', Material.LEAD);
 
         Bukkit.getServer().addRecipe(recipe);

@@ -25,7 +25,7 @@ public class Scan implements Passive {
     public void activate(Player player) {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
-                add(Particle.CRIT_MAGIC);
+                add(Particle.ENCHANTED_HIT);
             }
         };
 

@@ -19,6 +19,7 @@ public class BindArmor {
             ItemMeta meta = i.getItemMeta();
 
             if(meta.hasEnchant(Enchantment.BINDING_CURSE)) {
+                continue;
             } else {
                 meta.addEnchant(Enchantment.BINDING_CURSE, 1, true);
                 i.setItemMeta(meta);

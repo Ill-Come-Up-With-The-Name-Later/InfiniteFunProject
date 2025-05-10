@@ -17,29 +17,25 @@ import survivaltweaks.infinitefunproject.InfiniteFunProject;
 
 import java.util.ArrayList;
 
+import static survivaltweaks.infinitefunproject.InfiniteFunProject.addProjectileTrail;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.circularNearbyEntities;
 
 public class FallenStar implements ActivatedAbility, Listener {
     @Override
     public void activate(Player player) {
+        ArrayList<Particle> starParticles = new ArrayList<>() {
+            {
+                add(Particle.SOUL_FIRE_FLAME);
+                add(Particle.FIREWORK);
+                add(Particle.CRIT);
+            }
+        };
+
         Snowball snowball = player.launchProjectile(Snowball.class);
         snowball.setVisibleByDefault(false);
         snowball.setMetadata("FallenStar", new FallenStarMeta());
 
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                if(snowball.isDead()) {
-                    cancel();
-                    return;
-                }
-
-                snowball.getLocation().getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, snowball.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
-                snowball.getLocation().getWorld().spawnParticle(Particle.FIREWORKS_SPARK, snowball.getLocation(), 7, 0.1, 0.1, 0.1, 0.02);
-                snowball.getLocation().getWorld().spawnParticle(Particle.CRIT, snowball.getLocation(), 5, 0.1, 0.1, 0.1, 0.02);
-            }
-        }.runTaskTimer(InfiniteFunProject.plugin, 0, 1);
+        addProjectileTrail(snowball, starParticles);
     }
 
     @EventHandler

@@ -1,7 +1,7 @@
 package survivaltweaks.infinitefunproject.Player.Marriage;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -15,32 +15,37 @@ public class MarriageManager {
     public static HashMap<LivingEntity, LivingEntity> marriages = new HashMap<>();
 
     public static void init() {
+        Bukkit.getServer().getPluginManager().registerEvents(new Lifelink(), InfiniteFunProject.plugin);
+
         new BukkitRunnable() {
             @Override
             public void run() {
                 for(LivingEntity entity : marriages.keySet()) {
-                    entity.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20, 0,
+                    entity.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20, 0,
                             false, false, false));
                     entity.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20, 0,
                             false, false, false));
                     entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 0,
                             false, false, false));
-                    entity.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20, 0,
+                    entity.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20, 0,
                             false, false, false));
 
                     if(marriages.get(entity).isDead()) {
-                        divorce(entity);
-                        entity.sendMessage(ChatColor.RED + "Your spouse is dead.");
+                        Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
+                            divorce(entity);
+                            entity.sendMessage(ChatColor.RED + "Your spouse is dead.");
+                        }, 2);
+
                         continue;
                     }
 
-                    marriages.get(entity).addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20, 0,
+                    marriages.get(entity).addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20, 0,
                             false, false, false));
                     marriages.get(entity).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20, 0,
                             false, false, false));
                     marriages.get(entity).addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 0,
                             false, false, false));
-                    marriages.get(entity).addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20, 0,
+                    marriages.get(entity).addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20, 0,
                             false, false, false));
                 }
             }

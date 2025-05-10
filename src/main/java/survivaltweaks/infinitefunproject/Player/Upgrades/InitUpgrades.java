@@ -6,8 +6,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
-import survivaltweaks.infinitefunproject.Player.Events.PlayerJoin;
 import survivaltweaks.infinitefunproject.Player.Upgrades.Metadata.DoubleJumpMeta;
+import survivaltweaks.infinitefunproject.Player.Upgrades.Upgrade.Damage;
+import survivaltweaks.infinitefunproject.Player.Upgrades.Upgrade.DamageReduction;
 import survivaltweaks.infinitefunproject.Player.Upgrades.Upgrade.DoubleJump;
 
 import java.io.File;
@@ -18,12 +19,16 @@ public class InitUpgrades {
 
     public static HashMap<Player, HashMap<PlayerUpgrade, Integer>> upgrades = new HashMap<>();
 
-    public static int damageUpgradeCost = 35;
-    public static int armorUpgradeCost = 35;
+    public static int damageUpgradeCost = 45;
+    public static int armorUpgradeCost = 50;
     public static int attackSpeedUpgradeCost = 40;
-    public static int knockbackResistanceUpgradeCost = 33;
-    public static int healthUpgradeCost = 40;
+    public static int knockbackResistanceUpgradeCost = 35;
+    public static int healthUpgradeCost = 45;
     public static int doubleJumpCost = 200;
+    public static int reachDistCost = 30;
+    public static int multiHitCost = 75;
+    public static int cooldownCost = 75;
+    public static int damageReductionCost = 65;
 
     public static void init() {
         for(Player player : Bukkit.getOnlinePlayers()) {
@@ -32,6 +37,8 @@ public class InitUpgrades {
 
         Bukkit.getServer().getPluginManager().registerEvents(new UpgradeGUI(), InfiniteFunProject.plugin);
         Bukkit.getServer().getPluginManager().registerEvents(new DoubleJump(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new Damage(), InfiniteFunProject.plugin);
+        Bukkit.getServer().getPluginManager().registerEvents(new DamageReduction(), InfiniteFunProject.plugin);
     }
 
     public static void setUpgradeLevel(Player player, PlayerUpgrade upgrade, int level) {
@@ -162,7 +169,7 @@ public class InitUpgrades {
     }
 
     public static void applyUpgrades(Player player) {
-        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(PlayerJoin.getBaseDamage() + (getUpgradeLevel(player, PlayerUpgrade.DAMAGE) * 0.5));
+        //player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(PlayerJoin.getBaseDamage() + (getUpgradeLevel(player, PlayerUpgrade.DAMAGE) * 0.5));
 
         player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(4 + (getUpgradeLevel(player, PlayerUpgrade.ATTACK_SPEED) * 0.32));
 
@@ -170,8 +177,12 @@ public class InitUpgrades {
         player.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.ARMOR) * 0.35));
 
         player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.KNOCKBACK_RESISTANCE) * 0.02));
+        player.getAttribute(Attribute.GENERIC_EXPLOSION_KNOCKBACK_RESISTANCE).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.KNOCKBACK_RESISTANCE) * 0.02));
 
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20 + (getUpgradeLevel(player, PlayerUpgrade.HEALTH) * 0.5));
+
+        player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).setBaseValue(4.5 + (getUpgradeLevel(player, PlayerUpgrade.REACH) * 0.2));
+        player.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE).setBaseValue(3 + (getUpgradeLevel(player, PlayerUpgrade.REACH) * 0.2));
 
         if(getUpgradeLevel(player, PlayerUpgrade.DOUBLE_JUMP) > 0) {
             player.setMetadata("DoubleJump", new DoubleJumpMeta());

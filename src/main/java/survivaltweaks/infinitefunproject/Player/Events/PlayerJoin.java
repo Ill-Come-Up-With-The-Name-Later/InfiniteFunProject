@@ -9,13 +9,14 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import survivaltweaks.infinitefunproject.CustomItems.ItemManager;
 import survivaltweaks.infinitefunproject.InfiniteFunProject;
-import survivaltweaks.infinitefunproject.Player.ChallengeMode.ChallengeMode;
-import survivaltweaks.infinitefunproject.Player.ChallengeMode.ChallengeModeManager;
+import survivaltweaks.infinitefunproject.ChallengeMode.ChallengeMode;
+import survivaltweaks.infinitefunproject.ChallengeMode.ChallengeModeManager;
 import survivaltweaks.infinitefunproject.Player.Upgrades.InitUpgrades;
 
 import static survivaltweaks.infinitefunproject.CustomItems.Abilities.InitAbilities.playerCooldowns;
 import static survivaltweaks.infinitefunproject.InfiniteFunProject.color;
-import static survivaltweaks.infinitefunproject.Player.ChallengeMode.ChallengeModeManager.applyChallenges;
+import static survivaltweaks.infinitefunproject.ChallengeMode.ChallengeModeManager.applyChallenges;
+import static survivaltweaks.infinitefunproject.InfiniteFunProject.resetAttributes;
 import static survivaltweaks.infinitefunproject.StatusMeters.StatusInit.setupMeters;
 
 public class PlayerJoin implements Listener {
@@ -30,6 +31,8 @@ public class PlayerJoin implements Listener {
             player.getInventory().addItem(ItemManager.bat);
             player.getInventory().addItem(ItemManager.challengeModeBrowser);
         }
+
+        resetAttributes(player);
 
         player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(baseDamage);
         player.sendTitle(color("&a&lWelcome to: Project Infinite Fun!"), color("&c&l&kZ &aGood Luck! &c&l&kZ"), 20, 40, 20);

@@ -19,10 +19,10 @@ public class Splash implements AttackAbility {
     public void activate(Player player) {
         ArrayList<Particle> particles = new ArrayList<>() {
             {
-                add(Particle.WATER_BUBBLE);
-                add(Particle.CRIT_MAGIC);
+                add(Particle.BUBBLE);
+                add(Particle.ENCHANTED_HIT);
                 add(Particle.END_ROD);
-                add(Particle.WATER_WAKE);
+                add(Particle.SPLASH);
             }
         };
 

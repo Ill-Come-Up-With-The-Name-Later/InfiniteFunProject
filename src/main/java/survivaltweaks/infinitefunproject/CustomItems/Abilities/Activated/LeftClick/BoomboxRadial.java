@@ -20,7 +20,7 @@ public class BoomboxRadial implements ActivatedAbility {
     @Override
     public void activate(Player player) {
         drawCircle(player.getLocation(), radius, Particle.NOTE, 90);
-        drawCircle(player.getLocation(), radius, Particle.CRIT_MAGIC, 90);
+        drawCircle(player.getLocation(), radius, Particle.ENCHANTED_HIT, 90);
         drawCircle(player.getLocation(), radius, Particle.CRIT, 90);
 
         ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(player, radius);

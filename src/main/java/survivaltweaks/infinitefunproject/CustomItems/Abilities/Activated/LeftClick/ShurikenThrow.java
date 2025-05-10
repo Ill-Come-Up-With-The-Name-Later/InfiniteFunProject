@@ -37,7 +37,7 @@ public class ShurikenThrow implements ActivatedAbility {
                             arrow.remove();
                         }
 
-                        arrow.getLocation().getWorld().spawnParticle(Particle.SMOKE_NORMAL, arrow.getLocation(), 8, 0.1, 0.1, 0.1, 0.02);
+                        arrow.getLocation().getWorld().spawnParticle(Particle.SMOKE, arrow.getLocation(), 8, 0.1, 0.1, 0.1, 0.02);
                         arrow.getLocation().getWorld().spawnParticle(Particle.ELECTRIC_SPARK, arrow.getLocation(), 8, 0.1, 0.1, 0.1, 0.02);
                     }
                 }.runTaskTimer(InfiniteFunProject.plugin, 0, 1);
