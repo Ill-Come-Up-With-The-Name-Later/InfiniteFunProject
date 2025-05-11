@@ -1,6 +1,7 @@
 # Project Infinite Fun
 
 Minecraft Version: 1.21 PaperMC
+- To run this, you will need a 1.21 Minecraft server running PaperMC
 
 - If I'm being honest, I could never truly mention everything I've added here. IF you want to see what's been added, just download the plugin from the releases and see for yourself. This is just a small snippet I think.
 
@@ -16,6 +17,10 @@ Players have to now worry about thirst, heat, and cold, which are affected by th
 
 <p>
 Player combat has receieved some questionable changes: from making shields give a flat damage resistance to adding Team Fortress 2 styled randomized critical hits, to even adding the ability for a player's attack to hit twice.
+</p>
+
+<p>
+Players can also spend XP levels to upgrade their stats such as damage, health, and reach. There are also special challenge modifiers that cannot be removed once activated.
 </p>
 
 <p>
