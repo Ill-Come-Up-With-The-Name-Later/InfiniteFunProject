@@ -15,7 +15,7 @@ public class LightDependentListener implements Listener {
         if(player.hasMetadata("Light Dependent")) {
             int light = player.getLocation().getBlock().getLightLevel();
 
-            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(light + 5);
+            player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(light + 5);
         }
     }
 }

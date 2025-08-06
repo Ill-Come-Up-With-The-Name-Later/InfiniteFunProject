@@ -16,8 +16,8 @@ public class SoulHarvest implements OnAttackedAbility {
     @Override
     public void activate(Player player, LivingEntity attacker) {
         attacker.damage(666_666_666, player);
-        player.setHealth(Math.min(player.getHealth() + attacker.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.04,
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()));
+        player.setHealth(Math.min(player.getHealth() + attacker.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 0.04,
+                player.getAttribute(Attribute.MAX_HEALTH).getBaseValue()));
 
         ArrayList<Particle> particles = new ArrayList<>() {
             {

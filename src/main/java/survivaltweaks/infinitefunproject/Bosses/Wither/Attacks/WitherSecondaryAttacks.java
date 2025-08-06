@@ -151,7 +151,7 @@ public class WitherSecondaryAttacks implements Listener {
                     drawCircle(entity.getLocation(), 2, Particle.SMOKE, 180);
                     ((LivingEntity) entity).damage(5, wither);
                     entity.getWorld().spawnParticle(Particle.DAMAGE_INDICATOR, entity.getLocation(), 8, 0.3, 0.3, 0.3, 0.1);
-                    wither.setHealth(Math.min(wither.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue(), wither.getHealth() + 3));
+                    wither.setHealth(Math.min(wither.getAttribute(Attribute.MAX_HEALTH).getValue(), wither.getHealth() + 3));
                 }, 4L * i);
             }
         }

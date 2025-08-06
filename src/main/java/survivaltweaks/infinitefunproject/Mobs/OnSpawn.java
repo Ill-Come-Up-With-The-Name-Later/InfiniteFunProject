@@ -74,11 +74,11 @@ public class OnSpawn implements Listener {
         Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
             if(e instanceof Enemy && !(e instanceof Boss) && !e.hasMetadata("NoLevel") && !e.hasMetadata("WitherSpawn")) {
                 LivingEntity entity = (LivingEntity) e;
-                entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue((entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() * 0.8)
+                entity.getAttribute(Attribute.MAX_HEALTH).setBaseValue((entity.getAttribute(Attribute.MAX_HEALTH).getValue() * 0.8)
                         + (finalLevel * 3));
-                entity.setHealth(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-                entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).
-                        setBaseValue(entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue() * 1 + (finalLevel * 0.75));
+                entity.setHealth(entity.getAttribute(Attribute.MAX_HEALTH).getValue());
+                entity.getAttribute(Attribute.ATTACK_DAMAGE).
+                        setBaseValue(entity.getAttribute(Attribute.ATTACK_DAMAGE).getBaseValue() * 1 + (finalLevel * 0.75));
                 if (finalLevel >= 10) {
                     entity.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(-1, 0));
                 }
@@ -88,10 +88,10 @@ public class OnSpawn implements Listener {
 
                 if(InitDragon.dragonDead()) {
                     entity.setCustomName(null);
-                    entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() * 1.66);
-                    entity.setHealth(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-                    entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).
-                            setBaseValue(entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue() * 1.5);
+                    entity.getAttribute(Attribute.MAX_HEALTH).setBaseValue(entity.getAttribute(Attribute.MAX_HEALTH).getValue() * 1.66);
+                    entity.setHealth(entity.getAttribute(Attribute.MAX_HEALTH).getValue());
+                    entity.getAttribute(Attribute.ATTACK_DAMAGE).
+                            setBaseValue(entity.getAttribute(Attribute.ATTACK_DAMAGE).getBaseValue() * 1.5);
                     entity.setCustomName(color("&6[&rLevel &b" + finalLevel + "&6] &e" + fixCaps(e.getType().toString())));
                 }
 
@@ -103,9 +103,9 @@ public class OnSpawn implements Listener {
                     if(entity instanceof Ageable) {
                         Ageable ageable = (Ageable) entity;
                         if(!ageable.isAdult()) {
-                            ageable.getAttribute(Attribute.GENERIC_MAX_HEALTH).
-                                    setBaseValue(ageable.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.75);
-                            ageable.setHealth(ageable.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
+                            ageable.getAttribute(Attribute.MAX_HEALTH).
+                                    setBaseValue(ageable.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 0.75);
+                            ageable.setHealth(ageable.getAttribute(Attribute.MAX_HEALTH).getBaseValue());
                         }
                     }
                 }, 1);

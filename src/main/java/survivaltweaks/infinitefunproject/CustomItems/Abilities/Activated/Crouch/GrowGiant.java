@@ -12,39 +12,39 @@ public class GrowGiant implements CrouchAbility {
 
     @Override
     public void activate(Player player) {
-        double scale = player.getAttribute(Attribute.GENERIC_SCALE).getBaseValue();
-        double health = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
-        double damage = player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue();
-        double knockBack = player.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).getBaseValue() + 1;
-        double blockRange = player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).getBaseValue();
-        double entityRange = player.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE).getBaseValue();
-        double jumpHeight = player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).getBaseValue();
-        double moveSpeed = player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue();
-        double stepHeight = player.getAttribute(Attribute.GENERIC_STEP_HEIGHT).getBaseValue();
+        double scale = player.getAttribute(Attribute.SCALE).getBaseValue();
+        double health = player.getAttribute(Attribute.MAX_HEALTH).getBaseValue();
+        double damage = player.getAttribute(Attribute.ATTACK_DAMAGE).getBaseValue();
+        double knockBack = player.getAttribute(Attribute.ATTACK_KNOCKBACK).getBaseValue() + 1;
+        double blockRange = player.getAttribute(Attribute.BLOCK_INTERACTION_RANGE).getBaseValue();
+        double entityRange = player.getAttribute(Attribute.ENTITY_INTERACTION_RANGE).getBaseValue();
+        double jumpHeight = player.getAttribute(Attribute.JUMP_STRENGTH).getBaseValue();
+        double moveSpeed = player.getAttribute(Attribute.MOVEMENT_SPEED).getBaseValue();
+        double stepHeight = player.getAttribute(Attribute.STEP_HEIGHT).getBaseValue();
 
-        player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(scale * 3);
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health * 3);
-        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage * 3);
-        player.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(knockBack * 3);
-        player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).setBaseValue(blockRange * 6);
-        player.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE).setBaseValue(entityRange * 6);
-        player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(jumpHeight * 1.7);
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(moveSpeed * 1.6);
-        player.getAttribute(Attribute.GENERIC_STEP_HEIGHT).setBaseValue(stepHeight * 7);
+        player.getAttribute(Attribute.SCALE).setBaseValue(scale * 3);
+        player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(health * 3);
+        player.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(damage * 3);
+        player.getAttribute(Attribute.ATTACK_KNOCKBACK).setBaseValue(knockBack * 3);
+        player.getAttribute(Attribute.BLOCK_INTERACTION_RANGE).setBaseValue(blockRange * 6);
+        player.getAttribute(Attribute.ENTITY_INTERACTION_RANGE).setBaseValue(entityRange * 6);
+        player.getAttribute(Attribute.JUMP_STRENGTH).setBaseValue(jumpHeight * 1.7);
+        player.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(moveSpeed * 1.6);
+        player.getAttribute(Attribute.STEP_HEIGHT).setBaseValue(stepHeight * 7);
 
         player.setHealth(health * 3);
         giveCrits(player, 200);
 
         Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
-            player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(scale);
-            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
-            player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage);
-            player.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(knockBack - 1);
-            player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).setBaseValue(blockRange);
-            player.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE).setBaseValue(entityRange);
-            player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(jumpHeight);
-            player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(moveSpeed);
-            player.getAttribute(Attribute.GENERIC_STEP_HEIGHT).setBaseValue(stepHeight);
+            player.getAttribute(Attribute.SCALE).setBaseValue(scale);
+            player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(health);
+            player.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(damage);
+            player.getAttribute(Attribute.ATTACK_KNOCKBACK).setBaseValue(knockBack - 1);
+            player.getAttribute(Attribute.BLOCK_INTERACTION_RANGE).setBaseValue(blockRange);
+            player.getAttribute(Attribute.ENTITY_INTERACTION_RANGE).setBaseValue(entityRange);
+            player.getAttribute(Attribute.JUMP_STRENGTH).setBaseValue(jumpHeight);
+            player.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(moveSpeed);
+            player.getAttribute(Attribute.STEP_HEIGHT).setBaseValue(stepHeight);
         }, 200);
     }
 

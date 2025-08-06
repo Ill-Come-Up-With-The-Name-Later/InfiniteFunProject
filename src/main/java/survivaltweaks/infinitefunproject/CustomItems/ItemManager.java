@@ -2389,7 +2389,7 @@ public class ItemManager {
 
         ItemMeta scrollMeta = scroll.getItemMeta();
         scrollMeta.setDisplayName(ChatColor.DARK_PURPLE + "Decrepit Scroll");
-        scrollMeta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
+        scrollMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         scrollMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         scrollMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

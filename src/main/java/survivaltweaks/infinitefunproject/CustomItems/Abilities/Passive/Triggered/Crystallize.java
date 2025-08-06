@@ -25,16 +25,16 @@ public class Crystallize implements TriggerAbility {
 
         if(lowestPlayer.isPresent()) {
             if(lowestPlayer.equals(player)) {
-                player.setHealth(Math.min(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue(), player.getHealth() + 20));
+                player.setHealth(Math.min(player.getAttribute(Attribute.MAX_HEALTH).getValue(), player.getHealth() + 20));
             } else {
                 Player other = (Player) lowestPlayer.get();
-                other.setHealth(Math.min(other.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue(), other.getHealth() + 25));
+                other.setHealth(Math.min(other.getAttribute(Attribute.MAX_HEALTH).getValue(), other.getHealth() + 25));
 
                 drawCircle(other.getLocation(), 1.4, Particle.HAPPY_VILLAGER, 90);
             }
             return;
         }
-        player.setHealth(Math.min(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue(), player.getHealth() + 20));
+        player.setHealth(Math.min(player.getAttribute(Attribute.MAX_HEALTH).getValue(), player.getHealth() + 20));
     }
 
     @Override

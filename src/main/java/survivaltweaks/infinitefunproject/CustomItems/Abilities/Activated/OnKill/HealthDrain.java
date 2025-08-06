@@ -12,8 +12,8 @@ public class HealthDrain implements KillAbility {
 
     @Override
     public void activate(Player player, LivingEntity entity) {
-        player.setHealth(Math.min(player.getHealth() + entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.1,
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()));
+        player.setHealth(Math.min(player.getHealth() + entity.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 0.1,
+                player.getAttribute(Attribute.MAX_HEALTH).getBaseValue()));
 
         drawExpandingCircle(player.getLocation(), 1, 3, 0.75, 10, Particle.FLAME);
     }

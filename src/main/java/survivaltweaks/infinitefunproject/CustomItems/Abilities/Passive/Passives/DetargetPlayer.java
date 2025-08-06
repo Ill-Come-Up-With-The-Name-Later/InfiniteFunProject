@@ -47,7 +47,7 @@ public class DetargetPlayer implements Passive {
 
             if(enemy.getTarget().equals(player)) {
                 ArrayList<Entity> targets = (ArrayList<Entity>)
-                        circularNearbyEntities(enemy, enemy.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).getBaseValue());
+                        circularNearbyEntities(enemy, enemy.getAttribute(Attribute.FOLLOW_RANGE).getBaseValue());
 
                 Mob finalEnemy = enemy;
                 Mob finalEnemy2 = enemy;

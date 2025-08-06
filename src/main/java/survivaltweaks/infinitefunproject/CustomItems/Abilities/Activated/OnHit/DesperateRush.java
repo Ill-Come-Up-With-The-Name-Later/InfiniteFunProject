@@ -13,7 +13,7 @@ public class DesperateRush implements AttackAbility {
 
     @Override
     public void activate(Player player, EntityDamageByEntityEvent event) {
-        if(player.getHealth() < player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() / 2) {
+        if(player.getHealth() < player.getAttribute(Attribute.MAX_HEALTH).getBaseValue() / 2) {
             event.setDamage(event.getDamage() * 1.4);
         }
     }

@@ -24,7 +24,7 @@ public class Backstab implements AttackAbility {
             if(facingSameWay(player, entity) && !entity.isDead() && !entity.hasMetadata("BeenHit")) {
                 taxEvade(player, 2, false);
 
-                entity.damage(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 6, player);
+                entity.damage(entity.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 6, player);
                 setHasBeenHit(entity, 5);
             }
         }, 1);

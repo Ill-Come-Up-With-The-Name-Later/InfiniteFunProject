@@ -35,7 +35,7 @@ public class ExecutionThread implements ActivatedAbility {
             Location ahead = player.getLocation().add(player.getLocation().getDirection());
             living.teleport(ahead);
 
-            if(living.getHealth() < living.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() / 4) {
+            if(living.getHealth() < living.getAttribute(Attribute.MAX_HEALTH).getBaseValue() / 4) {
                 living.damage(2_000_000_000, player);
             } else {
                 living.damage(10, player);

@@ -34,7 +34,7 @@ public class PlayerJoin implements Listener {
 
         resetAttributes(player);
 
-        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(baseDamage);
+        player.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(baseDamage);
         player.sendTitle(color("&a&lWelcome to: Project Infinite Fun!"), color("&c&l&kZ &aGood Luck! &c&l&kZ"), 20, 40, 20);
 
         setupMeters(player);

@@ -49,7 +49,7 @@ public class WitherAttacks implements Listener {
     private void pickAttack(Wither wither) {
         int attack = new Random().nextInt(0, 9);
 
-        double witherHpPercent = (wither.getHealth() / wither.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) * 100;
+        double witherHpPercent = (wither.getHealth() / wither.getAttribute(Attribute.MAX_HEALTH).getValue()) * 100;
 
         wither.setGlowing(true);
         wither.getBossBar().setColor(BarColor.RED);
@@ -243,8 +243,8 @@ public class WitherAttacks implements Listener {
                     return;
                 }
 
-                if(wither.getHealth() < wither.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2) {
-                    wither.setHealth((wither.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2) + 20);
+                if(wither.getHealth() < wither.getAttribute(Attribute.MAX_HEALTH).getValue() / 2) {
+                    wither.setHealth((wither.getAttribute(Attribute.MAX_HEALTH).getValue() / 2) + 20);
                 }
 
                 Location particleSpawn = wither.getLocation();

@@ -250,15 +250,15 @@ public final class InfiniteFunProject extends JavaPlugin {
      * @param player: The player
      */
     public static void resetAttributes(Player player) {
-        player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
-        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(2);
-        player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).setBaseValue(4.5);
-        player.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE).setBaseValue(3);
-        player.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(0);
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
-        player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(0.42);
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.1);
-        player.getAttribute(Attribute.GENERIC_STEP_HEIGHT).setBaseValue(0.6);
+        player.getAttribute(Attribute.SCALE).setBaseValue(1);
+        player.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(2);
+        player.getAttribute(Attribute.BLOCK_INTERACTION_RANGE).setBaseValue(4.5);
+        player.getAttribute(Attribute.ENTITY_INTERACTION_RANGE).setBaseValue(3);
+        player.getAttribute(Attribute.ATTACK_KNOCKBACK).setBaseValue(0);
+        player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(20);
+        player.getAttribute(Attribute.JUMP_STRENGTH).setBaseValue(0.42);
+        player.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(0.1);
+        player.getAttribute(Attribute.STEP_HEIGHT).setBaseValue(0.6);
     }
 
     /**

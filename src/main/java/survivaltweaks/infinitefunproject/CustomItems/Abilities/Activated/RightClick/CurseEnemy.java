@@ -40,7 +40,7 @@ public class CurseEnemy implements ActivatedAbility {
             };
 
             drawCircle(target, 1.1, particles, 45);
-            applyDOT(player, target, target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() / 4, 25, 10);
+            applyDOT(player, target, target.getAttribute(Attribute.MAX_HEALTH).getBaseValue() / 4, 25, 10);
         }
     }
 

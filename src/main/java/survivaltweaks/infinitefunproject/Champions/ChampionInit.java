@@ -57,11 +57,11 @@ public class ChampionInit implements Listener {
         monster.setMetadata("Champion", new ChampionMetadata());
         monster.setPersistent(true);
 
-        monster.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(calculateChampionHealth(monster));
-        monster.setHealth(monster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
-        monster.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1);
-        monster.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(
-                monster.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).getBaseValue() * 2);
+        monster.getAttribute(Attribute.MAX_HEALTH).setBaseValue(calculateChampionHealth(monster));
+        monster.setHealth(monster.getAttribute(Attribute.MAX_HEALTH).getBaseValue());
+        monster.getAttribute(Attribute.KNOCKBACK_RESISTANCE).setBaseValue(1);
+        monster.getAttribute(Attribute.FOLLOW_RANGE).setBaseValue(
+                monster.getAttribute(Attribute.FOLLOW_RANGE).getBaseValue() * 2);
 
         if(!(monster.getType() == EntityType.CREEPER)) {
             monster.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, -1, 0, false, false, false));
@@ -82,7 +82,7 @@ public class ChampionInit implements Listener {
     }
 
     public static double calculateChampionHealth(Monster monster) {
-        return (monster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 2) + (getLevel(monster) * 5)
+        return (monster.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 2) + (getLevel(monster) * 5)
                 + 45 + ((double) getLevel(monster) / 2);
     }
 

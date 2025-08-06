@@ -48,7 +48,6 @@ public class OnEntityDamaged implements Listener {
         ignore.add(EntityType.SNOWBALL);
         ignore.add(EntityType.END_CRYSTAL);
         ignore.add(EntityType.SHULKER_BULLET);
-        ignore.add(EntityType.BOAT);
         ignore.add(EntityType.BLOCK_DISPLAY);
         ignore.add(EntityType.ITEM_DISPLAY);
         ignore.add(EntityType.INTERACTION);
@@ -119,13 +118,13 @@ public class OnEntityDamaged implements Listener {
                             Player player = (Player) event.getEntity();
                             output = ChatColor.AQUA + player.getName() + ChatColor.WHITE + ": " +
                                     ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.WHITE + "/" +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.MAX_HEALTH).getValue())
                                     + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")"
                                     + ChatColor.GRAY + " Tax Amount: " + ChatColor.GREEN + String.format("%.2f", getTaxedDamage(damage));
                         } else {
                             output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.WHITE + ": " +
                                     ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.WHITE + "/" +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.MAX_HEALTH).getValue())
                                     + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         }
                     } else {
@@ -133,12 +132,12 @@ public class OnEntityDamaged implements Listener {
                             Player player = (Player) event.getEntity();
                             output = ChatColor.AQUA + player.getName() + ChatColor.WHITE + ": " +
                                     ChatColor.RED + "DEAD" + ChatColor.WHITE + "/" +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.MAX_HEALTH).getValue())
                                     + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         } else {
                             output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.WHITE + ": " +
                                     ChatColor.RED + "DEAD" + ChatColor.WHITE + "/" +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.MAX_HEALTH).getValue())
                                     + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         }
                     }
@@ -159,12 +158,12 @@ public class OnEntityDamaged implements Listener {
                             Player player = (Player) event.getEntity();
                             output = ChatColor.AQUA + player.getName() + ChatColor.WHITE + ": " +
                                     ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.WHITE + "/" +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.MAX_HEALTH).getValue())
                                     + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         } else {
                             output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.WHITE + ": " +
                                     ChatColor.GREEN + String.format("%.2f", entity.getHealth()) + ChatColor.WHITE + "/" +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.MAX_HEALTH).getValue())
                                     + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         }
                     } else {
@@ -172,12 +171,12 @@ public class OnEntityDamaged implements Listener {
                             Player player = (Player) event.getEntity();
                             output = ChatColor.AQUA + player.getName() + ChatColor.WHITE + ": " +
                                     ChatColor.RED + "DEAD" + ChatColor.WHITE + "/" +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.MAX_HEALTH).getValue())
                                     + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         } else {
                             output = ChatColor.AQUA + InfiniteFunProject.fixCaps(entity.getType().toString()) + ChatColor.WHITE + ": " +
                                     ChatColor.RED + "DEAD" + ChatColor.WHITE + "/" +
-                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                                    ChatColor.GREEN + String.format("%.2f", entity.getAttribute(Attribute.MAX_HEALTH).getValue())
                                     + ChatColor.WHITE + " (-" + ChatColor.RED + String.format("%.2f", damage) + ChatColor.WHITE + ")";
                         }
                     }
@@ -244,7 +243,6 @@ public class OnEntityDamaged implements Listener {
         ignore.add(EntityType.SNOWBALL);
         ignore.add(EntityType.END_CRYSTAL);
         ignore.add(EntityType.SHULKER_BULLET);
-        ignore.add(EntityType.BOAT);
         ignore.add(EntityType.BLOCK_DISPLAY);
         ignore.add(EntityType.ITEM_DISPLAY);
         ignore.add(EntityType.INTERACTION);

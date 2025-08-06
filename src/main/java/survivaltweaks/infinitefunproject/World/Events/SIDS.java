@@ -19,8 +19,8 @@ public class SIDS implements Listener {
         LivingEntity offspring = event.getEntity();
 
         if(new Random().nextInt(0, 30) == 1) {
-            offspring.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1 * new Random().nextDouble(0.4, 0.75));
-            offspring.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(offspring.getHealth() / 2);
+            offspring.getAttribute(Attribute.SCALE).setBaseValue(1 * new Random().nextDouble(0.4, 0.75));
+            offspring.getAttribute(Attribute.MAX_HEALTH).setBaseValue(offspring.getHealth() / 2);
 
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 if(!offspring.isDead()) {

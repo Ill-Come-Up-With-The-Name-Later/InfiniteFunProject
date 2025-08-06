@@ -22,7 +22,7 @@ public class DivineResurrection implements ActivatedAbility {
         drawCircle(player.getLocation(), radius, Particle.FIREWORK, 90);
 
         ArrayList<Entity> nearby = (ArrayList<Entity>) circularNearbyEntities(player, radius);
-        player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
+        player.setHealth(player.getAttribute(Attribute.MAX_HEALTH).getBaseValue());
         player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 200, 4, false, false, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 100, 0, false, false, false));
 
@@ -30,7 +30,7 @@ public class DivineResurrection implements ActivatedAbility {
             if(entity instanceof Player) {
                 Player other = (Player) entity;
 
-                other.setHealth(other.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
+                other.setHealth(other.getAttribute(Attribute.MAX_HEALTH).getBaseValue());
                 other.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 200, 4, false, false, false));
                 other.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 100, 0, false, false, false));
             }

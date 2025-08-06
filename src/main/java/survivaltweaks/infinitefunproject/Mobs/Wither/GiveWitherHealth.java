@@ -27,8 +27,8 @@ public class GiveWitherHealth implements Listener {
 
             grantImmunity(wither);
 
-            wither.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(335 + (players.size() * 60) + (getLevel() * 5));
-            wither.setHealth(wither.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+            wither.getAttribute(Attribute.MAX_HEALTH).setBaseValue(335 + (players.size() * 60) + (getLevel() * 5));
+            wither.setHealth(wither.getAttribute(Attribute.MAX_HEALTH).getValue());
         }
     }
 }

@@ -44,7 +44,7 @@ public class SoulDrain implements Passive {
 
                         drawCircle(monster, 1.2, Particle.DAMAGE_INDICATOR, 45);
 
-                        monster.damage(monster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.1, player);
+                        monster.damage(monster.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 0.1, player);
                         faceEntityToAnother(monster, player);
                         ArrayList<LivingEntity> hit = createRay(monster, (int) distanceBetween(monster, player) + 1,
                                 false, particles);
@@ -55,8 +55,8 @@ public class SoulDrain implements Passive {
 
                                 if(p.equals(player)) {
                                     player.setHealth(Math.min(player.getHealth() +
-                                                    monster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.025,
-                                            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()));
+                                                    monster.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 0.025,
+                                            player.getAttribute(Attribute.MAX_HEALTH).getBaseValue()));
 
                                     drawCircle(player, 1.2, healParticles, 45);
                                 }

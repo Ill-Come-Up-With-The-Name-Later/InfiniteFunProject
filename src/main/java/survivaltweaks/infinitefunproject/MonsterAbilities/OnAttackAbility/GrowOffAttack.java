@@ -10,7 +10,7 @@ public class GrowOffAttack implements MonsterAbility {
 
     @Override
     public void activate(Monster monster) {
-        monster.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(monster.getAttribute(Attribute.GENERIC_SCALE).getBaseValue() + 0.07);
+        monster.getAttribute(Attribute.SCALE).setBaseValue(monster.getAttribute(Attribute.SCALE).getBaseValue() + 0.07);
     }
 
     @Override

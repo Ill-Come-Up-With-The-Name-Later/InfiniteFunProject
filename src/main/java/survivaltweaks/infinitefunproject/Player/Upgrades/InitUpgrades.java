@@ -169,20 +169,20 @@ public class InitUpgrades {
     }
 
     public static void applyUpgrades(Player player) {
-        //player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(PlayerJoin.getBaseDamage() + (getUpgradeLevel(player, PlayerUpgrade.DAMAGE) * 0.5));
+        //player.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(PlayerJoin.getBaseDamage() + (getUpgradeLevel(player, PlayerUpgrade.DAMAGE) * 0.5));
 
-        player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(4 + (getUpgradeLevel(player, PlayerUpgrade.ATTACK_SPEED) * 0.32));
+        player.getAttribute(Attribute.ATTACK_SPEED).setBaseValue(4 + (getUpgradeLevel(player, PlayerUpgrade.ATTACK_SPEED) * 0.32));
 
-        player.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.ARMOR) * 0.35));
-        player.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.ARMOR) * 0.35));
+        player.getAttribute(Attribute.ARMOR).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.ARMOR) * 0.35));
+        player.getAttribute(Attribute.ARMOR_TOUGHNESS).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.ARMOR) * 0.35));
 
-        player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.KNOCKBACK_RESISTANCE) * 0.02));
-        player.getAttribute(Attribute.GENERIC_EXPLOSION_KNOCKBACK_RESISTANCE).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.KNOCKBACK_RESISTANCE) * 0.02));
+        player.getAttribute(Attribute.KNOCKBACK_RESISTANCE).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.KNOCKBACK_RESISTANCE) * 0.02));
+        player.getAttribute(Attribute.EXPLOSION_KNOCKBACK_RESISTANCE).setBaseValue(0 + (getUpgradeLevel(player, PlayerUpgrade.KNOCKBACK_RESISTANCE) * 0.02));
 
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20 + (getUpgradeLevel(player, PlayerUpgrade.HEALTH) * 0.5));
+        player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(20 + (getUpgradeLevel(player, PlayerUpgrade.HEALTH) * 0.5));
 
-        player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).setBaseValue(4.5 + (getUpgradeLevel(player, PlayerUpgrade.REACH) * 0.2));
-        player.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE).setBaseValue(3 + (getUpgradeLevel(player, PlayerUpgrade.REACH) * 0.2));
+        player.getAttribute(Attribute.BLOCK_INTERACTION_RANGE).setBaseValue(4.5 + (getUpgradeLevel(player, PlayerUpgrade.REACH) * 0.2));
+        player.getAttribute(Attribute.ENTITY_INTERACTION_RANGE).setBaseValue(3 + (getUpgradeLevel(player, PlayerUpgrade.REACH) * 0.2));
 
         if(getUpgradeLevel(player, PlayerUpgrade.DOUBLE_JUMP) > 0) {
             player.setMetadata("DoubleJump", new DoubleJumpMeta());

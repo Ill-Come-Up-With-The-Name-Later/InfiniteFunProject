@@ -21,7 +21,7 @@ public class SetHealthCommand implements CommandExecutor {
 
         int health = Integer.parseInt(strings[0]);
 
-        player.setHealth(Math.min(health, player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()));
+        player.setHealth(Math.min(health, player.getAttribute(Attribute.MAX_HEALTH).getBaseValue()));
         player.sendMessage(ChatColor.GREEN + "Set your health to " + ChatColor.GRAY + health + ChatColor.GREEN + ".");
         return true;
     }

@@ -16,7 +16,7 @@ public class TurnLethal implements Listener {
         if(entity instanceof Rabbit) {
             Rabbit rabbit = (Rabbit) entity;
             rabbit.setRabbitType(Rabbit.Type.THE_KILLER_BUNNY);
-            rabbit.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
+            rabbit.getAttribute(Attribute.MAX_HEALTH).setBaseValue(20);
             rabbit.setHealth(20);
         }
     }

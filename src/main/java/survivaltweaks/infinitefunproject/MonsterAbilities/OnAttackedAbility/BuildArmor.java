@@ -10,10 +10,10 @@ public class BuildArmor implements MonsterAbility {
 
     @Override
     public void activate(Monster monster) {
-        monster.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(Math.min(15,
-                monster.getAttribute(Attribute.GENERIC_ARMOR).getBaseValue() + 1));
-        monster.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).setBaseValue(Math.min(15,
-                monster.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).getBaseValue() + 1));
+        monster.getAttribute(Attribute.ARMOR).setBaseValue(Math.min(15,
+                monster.getAttribute(Attribute.ARMOR).getBaseValue() + 1));
+        monster.getAttribute(Attribute.ARMOR_TOUGHNESS).setBaseValue(Math.min(15,
+                monster.getAttribute(Attribute.ARMOR_TOUGHNESS).getBaseValue() + 1));
     }
 
     @Override

@@ -16,7 +16,7 @@ public class Stomp implements Passive {
 
     @Override
     public void activate(Player player) {
-        double radius = 3 + (2 * player.getAttribute(Attribute.GENERIC_SCALE).getBaseValue());
+        double radius = 3 + (2 * player.getAttribute(Attribute.SCALE).getBaseValue());
         drawCircle(player, radius, Particle.LARGE_SMOKE, 90);
 
         ArrayList<Entity> entities = (ArrayList<Entity>) circularNearbyEntities(player, radius);
@@ -25,7 +25,7 @@ public class Stomp implements Passive {
             if(entity instanceof LivingEntity) {
                 LivingEntity living = (LivingEntity) entity;
 
-                living.damage(player.getAttribute(Attribute.GENERIC_SCALE).getBaseValue() * 30, player);
+                living.damage(player.getAttribute(Attribute.SCALE).getBaseValue() * 30, player);
             }
         }
     }

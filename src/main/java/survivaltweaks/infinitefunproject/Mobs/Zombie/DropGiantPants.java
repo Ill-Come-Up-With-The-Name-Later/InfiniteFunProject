@@ -17,7 +17,7 @@ public class DropGiantPants implements Listener {
         if(entity instanceof Zombie) {
             Zombie zombie = (Zombie) entity;
 
-            if(zombie.getAttribute(Attribute.GENERIC_SCALE).getBaseValue() > 1.5) {
+            if(zombie.getAttribute(Attribute.SCALE).getBaseValue() > 1.5) {
                 event.getDrops().add(ItemManager.giantPants);
             }
         }

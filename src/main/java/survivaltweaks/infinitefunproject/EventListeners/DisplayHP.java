@@ -31,7 +31,7 @@ public class DisplayHP implements Listener {
             LivingEntity livingEntity = (LivingEntity) entity;
 
             int health = (int) livingEntity.getHealth();
-            int maxHealth = (int) livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
+            int maxHealth = (int) livingEntity.getAttribute(Attribute.MAX_HEALTH).getBaseValue();
             String name = livingEntity.getCustomName();
 
             if(name == null) {

@@ -13,7 +13,7 @@ import static survivaltweaks.infinitefunproject.InfiniteFunProject.drawCircle;
 public class TargetedHeal implements AttackAbility {
     @Override
     public void activate(Player player, LivingEntity entity) {
-        entity.setHealth(Math.min(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue(), entity.getHealth() + 8));
+        entity.setHealth(Math.min(entity.getAttribute(Attribute.MAX_HEALTH).getBaseValue(), entity.getHealth() + 8));
 
         drawCircle(entity.getLocation(), 1.3, Particle.HAPPY_VILLAGER, 90);
         entity.getWorld().spawnParticle(Particle.HEART, entity.getLocation().add(new Vector(0, 1, 0)),

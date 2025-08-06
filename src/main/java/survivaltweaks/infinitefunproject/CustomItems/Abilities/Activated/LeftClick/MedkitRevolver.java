@@ -36,9 +36,9 @@ public class MedkitRevolver implements ActivatedAbility {
                 Player other = (Player) entity;
 
                 if(entities.get(other)) {
-                    other.setHealth(Math.min(other.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue(), other.getHealth() + 12));
+                    other.setHealth(Math.min(other.getAttribute(Attribute.MAX_HEALTH).getValue(), other.getHealth() + 12));
                 } else {
-                    other.setHealth(Math.min(other.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue(), other.getHealth() + 6));
+                    other.setHealth(Math.min(other.getAttribute(Attribute.MAX_HEALTH).getValue(), other.getHealth() + 6));
                 }
             } else {
                 if(entities.get(entity) && !hasCooldown(player, TriggeredAbility.CRYSTALLIZE)) {

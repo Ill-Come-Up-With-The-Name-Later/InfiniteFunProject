@@ -19,9 +19,9 @@ public class GainHealth implements MonsterAbility {
     public void activate(Monster monster, LivingEntity entity) {
         drawCircle(monster.getLocation(), 1.5, Particle.SOUL_FIRE_FLAME, 90);
 
-        monster.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(
-                monster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() * 1.025);
-        monster.setHealth(monster.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+        monster.getAttribute(Attribute.MAX_HEALTH).setBaseValue(
+                monster.getAttribute(Attribute.MAX_HEALTH).getValue() * 1.025);
+        monster.setHealth(monster.getAttribute(Attribute.MAX_HEALTH).getValue());
     }
 
     @Override

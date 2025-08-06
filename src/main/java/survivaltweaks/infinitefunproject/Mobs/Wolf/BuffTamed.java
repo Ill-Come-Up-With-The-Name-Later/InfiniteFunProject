@@ -23,12 +23,12 @@ public class BuffTamed implements Listener {
                 Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                     Wolf wolf = (Wolf) entity;
 
-                    wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(1500);
-                    wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(120);
-                    wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(
-                            wolf.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue() * 1.33);
+                    wolf.getAttribute(Attribute.MAX_HEALTH).setBaseValue(1500);
+                    wolf.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(120);
+                    wolf.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(
+                            wolf.getAttribute(Attribute.MOVEMENT_SPEED).getBaseValue() * 1.33);
 
-                    wolf.setHealth(wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
+                    wolf.setHealth(wolf.getAttribute(Attribute.MAX_HEALTH).getBaseValue());
                 }, 1);
             }
         }

@@ -95,7 +95,7 @@ public class DragonAttacks implements Listener {
     private void pickAttack(EnderDragon dragon) {
         int attack = new Random().nextInt(0, 11);
 
-        double dragonHpPercent = (dragon.getHealth() / dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) * 100;
+        double dragonHpPercent = (dragon.getHealth() / dragon.getAttribute(Attribute.MAX_HEALTH).getValue()) * 100;
 
         dragon.setGlowing(true);
         Objects.requireNonNull(dragon.getBossBar()).setColor(BarColor.RED);
@@ -220,8 +220,8 @@ public class DragonAttacks implements Listener {
         setNoLevel(phantom);
         phantom.setCustomName(color("&eChild of the Dragon"));
         phantom.setSize(9);
-        phantom.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(40);
-        phantom.setHealth(phantom.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+        phantom.getAttribute(Attribute.MAX_HEALTH).setBaseValue(40);
+        phantom.setHealth(phantom.getAttribute(Attribute.MAX_HEALTH).getValue());
         phantom.getWorld().spawnParticle(Particle.SMOKE, phantom.getLocation(), 500, 6, 3, 6, 0.3);
         phantom.setTarget(dragon.getTarget());
     }
@@ -338,7 +338,7 @@ public class DragonAttacks implements Listener {
                 setNoLevel(disciple);
                 disciple.setTarget(player);
                 disciple.setCustomName(color("&cDragon's Disciple"));
-                disciple.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(disciple.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue() + 3);
+                disciple.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(disciple.getAttribute(Attribute.ATTACK_DAMAGE).getValue() + 3);
 
                 new BukkitRunnable() {
                     @Override
@@ -351,7 +351,7 @@ public class DragonAttacks implements Listener {
                         setNoLevel(extraDisciple);
                         extraDisciple.setTarget(player);
                         extraDisciple.setCustomName(color("&cDragon's Disciple"));
-                        extraDisciple.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(extraDisciple.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue() + 3);
+                        extraDisciple.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(extraDisciple.getAttribute(Attribute.ATTACK_DAMAGE).getValue() + 3);
                     }
                 }.runTaskLater(plugin, 1200);
             }

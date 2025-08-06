@@ -20,7 +20,7 @@ public class MagicLifesteal implements AttackAbility {
         double damage = event.getDamage();
 
         drawCircle(player, 1.1, Particle.SCULK_SOUL, 45);
-        player.setHealth(Math.min(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue(), player.getHealth() + (damage * 0.1)));
+        player.setHealth(Math.min(player.getAttribute(Attribute.MAX_HEALTH).getBaseValue(), player.getHealth() + (damage * 0.1)));
     }
 
     @Override

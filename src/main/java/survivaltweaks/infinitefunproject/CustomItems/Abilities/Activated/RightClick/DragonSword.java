@@ -29,7 +29,7 @@ public class DragonSword implements ActivatedAbility {
                 Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                     if(entity instanceof LivingEntity) {
                         LivingEntity entity1 = (LivingEntity) entity;
-                        entity1.damage(entity1.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() / 6, player);
+                        entity1.damage(entity1.getAttribute(Attribute.MAX_HEALTH).getBaseValue() / 6, player);
 
                         drawCircle(entity1.getLocation(), 1.2, Particle.DRAGON_BREATH, 90);
                         drawCircle(entity1.getLocation(), 1.2, Particle.WITCH, 90);

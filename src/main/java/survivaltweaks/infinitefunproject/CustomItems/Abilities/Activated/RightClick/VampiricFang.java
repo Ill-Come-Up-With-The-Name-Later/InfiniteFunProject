@@ -20,9 +20,9 @@ public class VampiricFang implements ActivatedAbility {
         int duration = (int) (hpDrain * 20);
         player.setHealth(hpDrain);
 
-        double baseDamage = player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue();
+        double baseDamage = player.getAttribute(Attribute.ATTACK_DAMAGE).getBaseValue();
 
-        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(baseDamage * 5);
+        player.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(baseDamage * 5);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration, 1, false, false, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP_BOOST, duration, 1, false, false, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, duration, 1, false, false, false));
@@ -32,7 +32,7 @@ public class VampiricFang implements ActivatedAbility {
         player.getWorld().spawnParticle(Particle.DAMAGE_INDICATOR, player.getLocation().add(0, 1, 0), 40, 0.3, 0.2, 0.3, 0.01);
 
         Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
-            player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(baseDamage);
+            player.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(baseDamage);
             player.sendMessage(ChatColor.RED + "Your vampiric buff has run out.");
         }, duration);
     }

@@ -40,7 +40,7 @@ public class RevolverRapidShot implements ActivatedAbility {
                     if(entity instanceof Player) {
                         Player other = (Player) entity;
 
-                        other.setHealth(Math.min(other.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue(), other.getHealth() + 8));
+                        other.setHealth(Math.min(other.getAttribute(Attribute.MAX_HEALTH).getValue(), other.getHealth() + 8));
                     } else {
                         entity.damage(6, player);
 

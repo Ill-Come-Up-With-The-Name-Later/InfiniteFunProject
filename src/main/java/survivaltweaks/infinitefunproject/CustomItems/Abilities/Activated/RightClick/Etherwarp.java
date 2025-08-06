@@ -41,7 +41,7 @@ public class Etherwarp implements ActivatedAbility {
 
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 player.setHealth(Math.min(player.getHealth() + (player.getAbsorptionAmount() / 2),
-                        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()));
+                        player.getAttribute(Attribute.MAX_HEALTH).getBaseValue()));
                 player.getWorld().spawnParticle(Particle.HEART, player.getLocation(), 8, 0.2, 0.2, 0.2, 0.03);
             }, 99);
         }

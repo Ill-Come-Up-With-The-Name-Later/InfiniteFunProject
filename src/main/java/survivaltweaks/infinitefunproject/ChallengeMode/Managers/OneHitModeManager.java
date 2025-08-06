@@ -18,8 +18,8 @@ public class OneHitModeManager implements ModeManager {
         player.setMetadata("One Hit", new OneHitMode());
 
         Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
-            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(1);
-            player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
+            player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(1);
+            player.setHealth(player.getAttribute(Attribute.MAX_HEALTH).getBaseValue());
         }, 3);
     }
 

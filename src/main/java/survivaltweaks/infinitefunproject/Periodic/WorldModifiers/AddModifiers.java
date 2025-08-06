@@ -129,7 +129,7 @@ public class AddModifiers implements Listener {
     }
 
     public static void calmBeforeStorm(LivingEntity entity) {
-        entity.setHealth(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.75);
+        entity.setHealth(entity.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 0.75);
         if(entity instanceof Creeper creeper) {
             creeper.setPowered(false);
         }
@@ -156,7 +156,7 @@ public class AddModifiers implements Listener {
     }
 
     public static void slashedHealth(LivingEntity entity) {
-        entity.setHealth(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() / 2);
+        entity.setHealth(entity.getAttribute(Attribute.MAX_HEALTH).getValue() / 2);
     }
 
     public static void empoweredEnemies(LivingEntity entity) {
@@ -209,7 +209,7 @@ public class AddModifiers implements Listener {
             LivingEntity clone = (LivingEntity) entity.getWorld().spawnEntity(entity.getLocation(), entity.getType());
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 clone.setMetadata("ShadowClone", new ShadowCloneMeta());
-                clone.setHealth(clone.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.66);
+                clone.setHealth(clone.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 0.66);
             }, 1);
         }
     }
@@ -331,8 +331,8 @@ public class AddModifiers implements Listener {
         zombie.getEquipment().setLeggings(new ItemStack(Material.AIR));
         zombie.getEquipment().setBoots(new ItemStack(Material.AIR));
 
-        zombie.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(30);
-        zombie.setHealth(zombie.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
+        zombie.getAttribute(Attribute.MAX_HEALTH).setBaseValue(30);
+        zombie.setHealth(zombie.getAttribute(Attribute.MAX_HEALTH).getBaseValue());
 
         zombie.getEquipment().setHelmetDropChance(1);
     }
@@ -397,7 +397,7 @@ public class AddModifiers implements Listener {
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 revived.setMetadata("Revived", new RevivedMeta());
                 drawCircle(revived.getLocation(), 2, Particle.TOTEM_OF_UNDYING, 180);
-                revived.setHealth(revived.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.75);
+                revived.setHealth(revived.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 0.75);
             }, 1);
         }
     }

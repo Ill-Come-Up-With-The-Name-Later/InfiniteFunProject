@@ -47,7 +47,7 @@ public class ResurrectKilled implements Listener {
             Bukkit.getScheduler().runTaskLater(InfiniteFunProject.plugin, () -> {
                 revived.setMetadata("Revived", new RevivedMeta());
                 drawCircle(revived.getLocation(), 2, Particle.TOTEM_OF_UNDYING, 180);
-                revived.setHealth(revived.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() * 0.75);
+                revived.setHealth(revived.getAttribute(Attribute.MAX_HEALTH).getBaseValue() * 0.75);
             }, 10);
         }
     }

@@ -66,7 +66,7 @@ public class DragonSecondaryAttacks implements Listener {
      */
     private void pickAttack(EnderDragon dragon) {
         int attack = new Random().nextInt(0, 7);
-        double dragonHpPercent = (dragon.getHealth() / dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) * 100;
+        double dragonHpPercent = (dragon.getHealth() / dragon.getAttribute(Attribute.MAX_HEALTH).getValue()) * 100;
 
         if(!(dragon.isDead() || dragon.getPhase().equals(EnderDragon.Phase.DYING))) {
             switch (attack) {

@@ -40,7 +40,7 @@ public class ControlEnemies implements ActivatedAbility {
             enemy.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1200, 1, false, false, true));
             enemy.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 1200, 3, false, false, true));
 
-            enemy.setHealth(enemy.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
+            enemy.setHealth(enemy.getAttribute(Attribute.MAX_HEALTH).getBaseValue());
 
             etherealAugmentation(enemy);
 
@@ -69,7 +69,7 @@ public class ControlEnemies implements ActivatedAbility {
 
                     if(enemy.getTarget() == null || enemy.getTarget().isDead()) {
                         ArrayList<Entity> targets = (ArrayList<Entity>)
-                                circularNearbyEntities(enemy, enemy.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).getBaseValue());
+                                circularNearbyEntities(enemy, enemy.getAttribute(Attribute.FOLLOW_RANGE).getBaseValue());
 
                         Optional<Entity> target = targets.stream().filter(x -> x instanceof Enemy && !x.equals(player)
                         && !x.equals(enemy) && !x.hasMetadata("Slave"))

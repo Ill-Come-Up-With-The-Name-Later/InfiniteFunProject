@@ -21,11 +21,11 @@ public class BuffTrialSpawned implements Listener {
             if(entity instanceof LivingEntity) {
                 LivingEntity living = (LivingEntity) entity;
 
-                living.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(living.getHealth() * 1.2);
-                living.setHealth(living.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
+                living.getAttribute(Attribute.MAX_HEALTH).setBaseValue(living.getHealth() * 1.2);
+                living.setHealth(living.getAttribute(Attribute.MAX_HEALTH).getBaseValue());
 
-                living.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(
-                        living.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue() * 1.25);
+                living.getAttribute(Attribute.ATTACK_DAMAGE).setBaseValue(
+                        living.getAttribute(Attribute.ATTACK_DAMAGE).getBaseValue() * 1.25);
 
                 etherealAugmentation(living);
             }

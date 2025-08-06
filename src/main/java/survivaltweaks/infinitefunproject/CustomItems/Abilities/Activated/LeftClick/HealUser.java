@@ -16,7 +16,7 @@ public class HealUser implements ActivatedAbility {
     public void activate(Player player) {
         drawCircle(player, 1.2, Particle.HAPPY_VILLAGER, 90);
 
-        player.setHealth(Math.min(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue(), player.getHealth() + 10));
+        player.setHealth(Math.min(player.getAttribute(Attribute.MAX_HEALTH).getBaseValue(), player.getHealth() + 10));
         player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(new Vector(0, 1, 0)),
                 8, 0.2, 0.2, 0.2, 0.03);
 
