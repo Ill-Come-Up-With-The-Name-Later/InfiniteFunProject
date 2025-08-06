@@ -230,14 +230,14 @@ public class WitherAttacks implements Listener {
         wither.teleport(wither.getLocation().add(new Vector(0, 5, 0)));
 
         new BukkitRunnable() {
-            int radius = 3;
+            double radius = 3;
             @Override
             public void run() {
                 if(wither.isDead()) {
                     cancel();
                     return;
                 }
-                if(wither.getLastDamage() >= (radius * 3)) {
+                if(wither.getLastDamage() >= radius * 2) {
                     cancel();
                     wither.setAI(true);
                     return;
@@ -255,12 +255,12 @@ public class WitherAttacks implements Listener {
 
                 for(Entity e : entities) {
                     if(e instanceof LivingEntity) {
-                        ((LivingEntity) e).damage(calculateBlastDamage(radius), wither);
+                        ((LivingEntity) e).damage(calculateBlastDamage((int) radius), wither);
                     }
                 }
 
-                if(radius <= 45) {
-                    radius++;
+                if(radius <= 30) {
+                    radius += 0.5;
                 }
             }
         }.runTaskTimer(InfiniteFunProject.plugin, 14, 14);
@@ -271,7 +271,7 @@ public class WitherAttacks implements Listener {
      *
      * @param blastRadius: The current radius
      */
-    private double calculateBlastDamage(int blastRadius) {
+    private double calculateBlastDamage(double blastRadius) {
         return evaluateLogIntegral(blastRadius) - evaluateLogIntegral(2.6);
     }
 
