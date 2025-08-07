@@ -1,8 +1,11 @@
 package survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.RightClick;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.SpectralArrow;
 import org.bukkit.util.Vector;
 import survivaltweaks.infinitefunproject.CustomItems.Abilities.Activated.ActivatedAbility;
 import survivaltweaks.infinitefunproject.CustomItems.Metadata.RemoveOnGroundMeta;
@@ -15,7 +18,14 @@ public class TripleShot implements ActivatedAbility {
     @Override
     public void activate(Player player) {
         for(int i = -1; i <= 1; i++) {
-            Arrow arrow = player.launchProjectile(Arrow.class);
+            AbstractArrow arrow;
+
+            if(player.getInventory().contains(Material.SPECTRAL_ARROW)) {
+                arrow = player.launchProjectile(SpectralArrow.class);
+            } else {
+                arrow = player.launchProjectile(Arrow.class);
+            }
+
             arrow.setDamage(12);
             arrow.setPierceLevel(4);
 
